@@ -1,74 +1,142 @@
 <!DOCTYPE html>
+<!-- Informa ao navegador que este documento utiliza a versão mais moderna e padrão do HTML (HTML5) -->
+
 <html lang="pt-BR">
+<!-- Abre a página web principal e define o idioma oficial como português do Brasil (pt-BR) -->
+
 <head>
+    <!-- Abre a "cabeça" do documento. Configurações invisíveis para o usuário, mas essenciais -->
+
     <meta charset="UTF-8">
+    <!-- Define o padrão de codificação (UTF-8), garantindo que acentos (ç, á, ê) apareçam perfeitamente -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Torna o site responsivo, ajustando o tamanho da página para celulares, tablets e computadores -->
+
     <title>Metroform - Trabalhe Conosco</title>
-    <!-- Biblioteca de Ícones Profissionais (FontAwesome) -->
+    <!-- Define o texto que aparece na aba superior do navegador -->
+
+    <!-- Importação da biblioteca FontAwesome para exibir ícones profissionais em vetor -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Conecta o código HTML ao arquivo de estilos personalizados (style.css) -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
-    <!-- Parte do Cabecalho | Menu Principal-->
-     <header class="header-metroform">
+<body>
+    <!-- Abre o CORPO do site. Tudo daqui para frente é o que o usuário realmente enxerga na tela -->
+
+    <!-- ========================================== -->
+    <!-- CABEÇALHO / MENU PRINCIPAL DE NAVEGAÇÃO    -->
+    <!-- ========================================== -->
+    <header class="header-metroform">
+        <!-- Cria o cabeçalho fixo no topo da página -->
+
         <div class="logo">
+            <!-- Cria uma caixinha para organizar a imagem do logotipo da empresa -->
             <a href="#">
+                <!-- Link que, ao ser clicado, recarrega ou leva para o topo da página (#) -->
                 <img src="img/logo.jpg" alt="Logo Metroform">
+                <!-- Insere a imagem da logo com um texto alternativo para acessibilidade -->
             </a>
         </div>
 
         <nav class="nav-links">
+            <!-- Cria a área de navegação principal do menu superior -->
             <a href="#vagas">Vagas Abertas</a>
+            <!-- Link que desliza a tela suavemente até a seção de ID "vagas" -->
             <a href="#cultura">Cultura e Valores</a>
+            <!-- Link que desliza a tela até a seção de ID "cultura" -->
             <a href="#diferenciais">Diferenciais</a>
+            <!-- Link que desliza a tela até a seção de ID "diferenciais" -->
         </nav>
  
-         <!--Parte de acesso-->
         <div class="acesso-buttons">
+            <!-- Cria uma caixinha para agrupar os botões de acesso rápido do canto direito -->
             <a href="#login" class="btn-profissional">Cadastrar-se / Entrar</a>
+            <!-- Botão de login/cadastro do candidato -->
             <a href="#rh" class="btn-recrutador">Acesso RH / Gestor</a>
+            <!-- Botão de acesso administrativo para gestores e recrutadores -->
         </div>
     </header>
 
-     <!-- Destaque visual -->
-      <section class="secao-principal">
+    <!-- ========================================== -->
+    <!-- SEÇÃO PRINCIPAL / BANNER DE DESTAQUE (HERO) -->
+    <!-- ========================================== -->
+    <section class="secao-principal">
+        <!-- Abre a seção principal (banner de destaque com imagem de fundo de obra) -->
+
         <div class="conteudo-principal">
+            <!-- Agrupa os textos e a barra de pesquisa para centralizá-los no meio do banner -->
+
             <h1>Construa Seu Futuro na Metroform</h1>
+            <!-- Cria o título principal em destaque (H1) da página -->
+
             <p>Valorizamos talentos preparados, engajados e prontos para crescer conosco.</p>
+            <!-- Cria um parágrafo descritivo abaixo do título principal -->
+
             <div class="caixa-busca">
+                <!-- Cria a caixinha branca que envolve o campo de pesquisa de vagas -->
                 <input type="text" placeholder="Cargo, setor ou habilidade...">
+                <!-- Campo de texto onde o usuário digita o que deseja pesquisar -->
                 <button class="btn-buscar">Pesquisar</button>
+                <!-- Botão vermelho de confirmação da pesquisa -->
             </div>
         </div>
     </section>
 
-        <!-- Seção de vagas em destaque -->
-         <section id="vagas" class="secao-vagas">
-            <div class="container-vagas">
-                <h2>Oportunidade em Destaque</h2>
-                <p class="subtitulo-vagas"> Encontre a vaga ideal alinhada ao seu perfil e competência</p>
+    <!-- ========================================== -->
+    <!-- SEÇÃO DE OPORTUNIDADES E VAGAS EM DESTAQUE -->
+    <!-- ========================================== -->
+    <section id="vagas" class="secao-vagas">
+        <!-- Abre a seção de Oportunidades, identificada pelo ID "vagas" -->
 
-                <div class="grid-vagas">
+        <div class="container-vagas">
+            <!-- Recipiente que trava a largura máxima (1200px) para o conteúdo não esticar demais -->
+
+            <h2>Oportunidade em Destaque</h2>
+            <!-- Título da seção de vagas -->
+
+            <p class="subtitulo-vagas"> Encontre a vaga ideal alinhada ao seu perfil e competência</p>
+            <!-- Subtítulo explicativo da seção -->
+
+            <div class="grid-vagas">
+                <!-- Grade responsável por alinhar e organizar os cartões de vagas lado a lado -->
 
                 <!-- 1 Primeiro card -->
-                    <div class="card-vaga">
+                <div class="card-vaga">
+                    <!-- Abre o primeiro cartão individual de vaga -->
+
                     <h3>Técnico de Manutenção</h3>
+                    <!-- Exibe o cargo da vaga em destaque -->
+
                     <span class="setor">Setor: Industrial</span>
+                    <!-- Exibe o departamento ou setor da vaga com uma etiqueta -->
+
                     <p class="local">📍 Guarulhos / SP</p>
+                    <!-- Exibe a localização geográfica da vaga -->
+
                     <p class="requisitos"><strong>Requisitos:</strong> Foco em metas e resiliência sob pressão.</p>
+                    <!-- Mostra os requisitos essenciais exigidos -->
+
                     <div class="card-botoes">
+                        <!-- Caixinha interna para organizar os dois botões do cartão lado a lado -->
                         <button class="btn-match">Ver Match</button>
+                        <!-- Botão de compatibilidade (Ver Match) -->
                         <button class="btn-candidatar">Candidatar-se</button>
+                        <!-- Botão principal de inscrição na vaga -->
                     </div>
                 </div>
 
                 <!-- Card 2 -->
                 <div class="card-vaga">
+                    <!-- Abre o segundo cartão individual de vaga -->
+
                     <h3>Analista de Processos</h3>
                     <span class="setor">Setor: Engenharia</span>
                     <p class="local">📍 Guarulhos / SP</p>
                     <p class="requisitos"><strong>Requisitos:</strong> Trabalho em equipe e inovação contínua.</p>
+
                     <div class="card-botoes">
                         <button class="btn-match">Ver Match</button>
                         <button class="btn-candidatar">Candidatar-se</button>
@@ -76,29 +144,51 @@
                 </div>
             </div>
 
+            <!-- Botão Ver Todas as Vagas e Banco de Talentos -->
+            <div class="container-botoes-vagas">
+                <!-- Botão centralizado para expandir e visualizar o catálogo completo de oportunidades -->
+                <a href="#todas-vagas" class="btn-todas-vagas">Ver Todas as Vagas</a>
+            </div>
+
             <div class="centro-banco-talentos">
+                <!-- Link de acesso direto para envio de currículo genérico -->
                 <a href="#banco-geral" class="link-banco">📄 Enviar currículo para o Banco Geral de Talentos</a>
             </div>
         </div>
     </section>
 
-        <!-- Seção de cultura e valores (Sem emojis, com ícones profissionais) -->
-         <section id="cultura" class="secao-cultura">
+    <!-- ========================================== -->
+    <!-- SEÇÃO DE CULTURA E VALORES DA EMPRESA      -->
+    <!-- ========================================== -->
+    <section id="cultura" class="secao-cultura">
+        <!-- Abre a seção de Cultura e Valores -->
+
         <div class="container-cultura">
             <h2>Nossa Cultura e Valores</h2>
+
             <div class="grid-cultura">
+                <!-- Grade que alinha os três pilares culturais de forma fixa -->
+
                 <div class="card-cultura">
+                    <!-- Primeiro pilar cultural -->
                     <i class="fa-solid fa-bullseye"></i>
+                    <!-- Ícone vetorial de alvo (bullseye) -->
                     <h3>Foco em Resultados</h3>
                     <p>Compromisso com a alta performance, excelência e entrega em cada projeto.</p>
                 </div>
+
                 <div class="card-cultura">
+                    <!-- Segundo pilar cultural -->
                     <i class="fa-solid fa-handshake"></i>
+                    <!-- Ícone de aperto de mãos (handshake) -->
                     <h3>Respeito & Parceria</h3>
                     <p>Valorização das pessoas, segurança e colaboração mútua no ambiente de trabalho.</p>
                 </div>
+
                 <div class="card-cultura">
+                    <!-- Terceiro pilar cultural -->
                     <i class="fa-solid fa-lightbulb"></i>
+                    <!-- Ícone de lâmpada (lightbulb) -->
                     <h3>Inovação Contínua</h3>
                     <p>Buscamos sempre evoluir processos e desenvolver soluções inteligentes.</p>
                 </div>
@@ -106,23 +196,38 @@
         </div>
     </section>
 
-    <!-- NOVA SEÇÃO: Diferenciais (Sem emojis, com ícones profissionais) -->
+    <!-- ========================================== -->
+    <!-- SEÇÃO DE DIFERENCIAIS / POR QUE TRABALHAR  -->
+    <!-- ========================================== -->
     <section id="diferenciais" class="secao-diferenciais">
+        <!-- Abre a seção de Diferenciais da empresa -->
+
         <div class="container-diferenciais">
             <h2>Por que construir sua carreira conosco?</h2>
+
             <div class="grid-diferenciais">
+                <!-- Grade que alinha os três diferenciais competitivos -->
+
                 <div class="item-diferencial">
+                    <!-- Primeiro diferencial -->
                     <i class="fa-solid fa-chart-line"></i>
+                    <!-- Ícone de crescimento (chart-line) -->
                     <h3>Plano de Desenvolvimento</h3>
                     <p>Oportunidades reais de crescimento profissional e treinamentos contínuos.</p>
                 </div>
+
                 <div class="item-diferencial">
+                    <!-- Segundo diferencial -->
                     <i class="fa-solid fa-shield-halved"></i>
+                    <!-- Ícone de escudo (shield-halved) -->
                     <h3>Segurança em Primeiro Lugar</h3>
                     <p>Um ambiente estruturado focado na integridade física e psicológica de cada colaborador.</p>
                 </div>
+
                 <div class="item-diferencial">
+                    <!-- Terceiro diferencial -->
                     <i class="fa-solid fa-award"></i>
+                    <!-- Ícone de premiação (award) -->
                     <h3>Reconhecimento</h3>
                     <p>Cultura voltada para valorizar o engajamento, a resiliência e o alto desempenho.</p>
                 </div>
@@ -130,13 +235,20 @@
         </div>
     </section>
 
-    <!-- RODAPÉ -->
+    <!-- ========================================== -->
+    <!-- RODAPÉ DA PÁGINA (FOOTER)                   -->
+    <!-- ========================================== -->
     <footer class="rodape-metroform">
+        <!-- Cria o rodapé da página -->
+
         <div class="conteudo-rodape">
             <p>&copy; 2026 Metroform - Soluções para Construção. Todos os direitos reservados.</p>
+            <!-- Direitos autorais da empresa -->
             <p class="texto-projeto">Desenvolvido como projeto acadêmico de recrutamento e seleção inteligente.</p>
+            <!-- Nota informativa do contexto acadêmico/profissional do projeto -->
         </div>
     </footer>
     
 </body>
 </html>
+<!-- Fecha o corpo do site (body) e encerra o documento HTML (html) -->

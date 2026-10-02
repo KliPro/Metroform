@@ -1,0 +1,241 @@
+/* ========================================== */
+/* ESTILOS EXCLUSIVOS DA PÁGINA DE LOGIN      */
+/* ========================================== */
+
+/* Fundo exclusivo para a página de autenticação */
+.pagina-login {
+    background-color: var(--metroform-gray, #f8f9fa); /* Usa o cinza claro padrão da marca */
+    min-height: 100vh;                               /* Ocupa no mínimo 100% da altura da tela */
+    display: flex;
+    flex-direction: column;
+}
+
+/* ========================================== */
+/* CABEÇALHO PADRONIZADO DA PÁGINA DE LOGIN   */
+/* ========================================== */
+
+/* Configuração base da página de login */
+.pagina-login {
+    background-color: var(--metroform-gray, #f8f9fa);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.header-metroform {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 5%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1000;
+    /* Aplica a listra vermelha fina exatamente no topo do cabeçalho */
+    border-top: 4px solid #8B0000; 
+}
+
+.logo img {
+    height: 52px;
+    width: auto;
+    display: block;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+/* Estilização do botão de voltar */
+.btn-profissional {
+    text-decoration: none;
+    padding: 9px 18px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    border: 1px solid #8B0000;
+    color: #8B0000;
+    background-color: transparent;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-profissional:hover {
+    background-color: #8B0000;
+    color: white;
+}
+
+/* ========================================== */
+/* CONTAINER E CARD DE AUTENTICAÇÃO           */
+/* ========================================== */
+
+.container-autenticacao {
+    flex: 1;                     /* Ocupa o espaço restante da tela verticalmente */
+    display: flex;
+    align-items: center;         /* Centraliza o card verticalmente */
+    justify-content: center;     /* Centraliza o card horizontalmente */
+    padding: 40px 20px;
+}
+
+/* O cartão principal que abriga o formulário */
+.card-autenticacao {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;        /* Bordas bem arredondadas e modernas */
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08); /* Sombra elegante e difusa */
+    width: 100%;
+    max-width: 450px;           /* Trava a largura máxima para não ficar muito largo */
+    border-top: 4px solid var(--metroform-red, #8B0000);
+}
+
+/* Cabeçalho interno do card */
+.auth-cabecalho {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.auth-cabecalho h2 {
+    font-size: 24px;
+    color: var(--metroform-dark, #1a1a1a);
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.auth-cabecalho p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* ========================================== */
+/* ABAS DE ALTERNÂNCIA (ENTRAR / CADASTRAR)   */
+/* ========================================== */
+
+.auth-abas {
+    display: flex;
+    background: #f1f3f5;       /* Fundo cinza suave para a barra de abas */
+    padding: 4px;
+    border-radius: 6px;
+    margin-bottom: 25px;
+}
+
+/* Botões das abas */
+.aba-btn {
+    flex: 1;                   /* Divide o espaço igualmente (50% para cada) */
+    background: transparent;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Estado ativo da aba selecionada */
+.aba-btn.ativo {
+    background: white;
+    color: var(--metroform-red, #8B0000);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* ========================================== */
+/* FORMULÁRIOS E CAMPOS DE ENTRADA            */
+/* ========================================== */
+
+/* Classe para controlar qual formulário aparece */
+.formulario-auth {
+    display: none;             /* Oculto por padrão */
+}
+
+.formulario-auth.ativo-form {
+    display: block;            /* Exibido apenas quando está ativo */
+}
+
+/* Grupo de cada input (rótulo + campo) */
+.grupo-input {
+    margin-bottom: 20px;
+}
+
+.grupo-input label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--metroform-dark, #1a1a1a);
+    margin-bottom: 8px;
+}
+
+/* Caixa que engloba o ícone e o campo de texto */
+.input-com-icone {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilização do ícone dentro do input */
+.input-com-icone i {
+    position: absolute;
+    left: 14px;
+    color: #888;
+    font-size: 14px;
+}
+
+/* Estilo do campo de preenchimento (input) */
+.input-com-icone input {
+    width: 100%;
+    padding: 12px 15px 12px 42px; /* Espaço à esquerda (42px) reservado para o ícone */
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+/* Efeito ao clicar para digitar no input */
+.input-com-icone input:focus {
+    border-color: var(--metroform-red, #8B0000);
+    box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
+}
+
+/* Ações extras (como o link "Esqueceu sua senha") */
+.acoes-extras {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.esqueci-senha {
+    font-size: 13px;
+    color: var(--metroform-red, #8B0000);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.esqueci-senha:hover {
+    text-decoration: underline;
+}
+
+/* ========================================== */
+/* BOTÃO DE SUBMISSÃO                         */
+/* ========================================== */
+
+.btn-submit-auth {
+    width: 100%;
+    background-color: var(--metroform-red, #8B0000);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-submit-auth:hover {
+    background-color: #6b0000;
+}
