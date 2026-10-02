@@ -97,7 +97,6 @@
     padding: 0 20px;
 }
 
-/* Trava de largura para o conteúdo do Hero */
 .conteudo-principal {
     max-width: 900px;
     margin: 0 auto;
@@ -157,7 +156,6 @@
     background-color: var(--metroform-gray);
 }
 
-/* Trava de largura centralizada para a seção de vagas */
 .container-vagas {
     max-width: 1200px;
     margin: 0 auto;
@@ -287,7 +285,7 @@
     color: #6b0000;
 }
 
-/* --- SEÇÃO DE CULTURA E VALORES --- */
+/* --- SEÇÃO DE CULTURA E VALORES (Sempre 3 lado a lado) --- */
 .secao-cultura {
     padding: 70px 5%;
     background-color: #ffffff;
@@ -307,16 +305,15 @@
     font-weight: 700;
 }
 
-/* Força os 3 cards lado a lado de forma fixa e alinhada */
 .grid-cultura {
     display: flex;
     justify-content: space-between;
     gap: 30px;
-    flex-wrap: nowrap; /* Impede que o card caia para a linha de baixo */
+    flex-wrap: nowrap;
 }
 
 .card-cultura {
-    flex: 1; /* Faz com que os três dividam o espaço exatamente igual */
+    flex: 1;
     background: #fafafa;
     padding: 35px 25px;
     border-radius: 8px;
@@ -348,74 +345,12 @@
     line-height: 1.6;
 }
 
-/* --- SEÇÃO DE DIFERENCIAIS --- */
+/* --- SEÇÃO DE DIFERENCIAIS (Sempre 3 lado a lado) --- */
 .secao-diferenciais {
     padding: 70px 5%;
     background-color: #f4f6f8;
 }
 
-.container-diferenciais {
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-}
-
-.container-diferenciais h2 {
-    text-align: center;
-    font-size: 32px;
-    color: var(--metroform-dark);
-    margin-bottom: 45px;
-    font-weight: 700;
-}
-
-/* Força os 3 cards de diferenciais lado a lado de forma fixa e alinhada */
-.grid-diferenciais {
-    display: flex;
-    justify-content: space-between;
-    gap: 30px;
-    flex-wrap: nowrap; /* Impede que o card caia para a linha de baixo */
-}
-
-.item-diferencial {
-    flex: 1; /* Divide o espaço perfeitamente em 3 partes iguais */
-    background: white;
-    padding: 35px 25px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-    transition: transform 0.3s ease;
-}
-
-.item-diferencial:hover {
-    transform: translateY(-3px);
-}
-
-.item-diferencial i {
-    font-size: 30px;
-    color: var(--metroform-red);
-    margin-bottom: 15px;
-    display: block;
-}
-
-.item-diferencial h3 {
-    font-size: 18px;
-    color: var(--metroform-dark);
-    margin-bottom: 10px;
-}
-
-.item-diferencial p {
-    font-size: 14px;
-    color: #666;
-    line-height: 1.5;
-}
-
-/* --- SEÇÃO DE DIFERENCIAIS --- */
-.secao-diferenciais {
-    padding: 70px 5%;
-    background-color: #f4f6f8;
-}
-
-/* Trava de largura centralizada para a seção de diferenciais */
 .container-diferenciais {
     max-width: 1200px;
     margin: 0 auto;
@@ -431,13 +366,14 @@
 }
 
 .grid-diferenciais {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 360px));
-    justify-content: center;
+    display: flex;
+    justify-content: space-between;
     gap: 30px;
+    flex-wrap: nowrap;
 }
 
 .item-diferencial {
+    flex: 1;
     background: white;
     padding: 35px 25px;
     border-radius: 8px;
