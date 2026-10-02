@@ -1,0 +1,489 @@
+/* --- CONFIGURAÇÕES GERAIS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --metroform-red: #8B0000;
+    --metroform-dark: #1a1a1a;
+    --metroform-gray: #f8f9fa;
+}
+
+/* --- CABEÇALHO --- */
+.header-metroform {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-top: 4px solid var(--metroform-red);
+}
+
+.logo img {
+    height: 45px;
+    width: auto;
+    display: block;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 600;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--metroform-red);
+}
+
+.acesso-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.acesso-buttons a {
+    text-decoration: none;
+    padding: 9px 18px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-profissional {
+    border: 1px solid var(--metroform-red);
+    color: var(--metroform-red);
+    background-color: transparent;
+}
+
+.btn-profissional:hover {
+    background-color: var(--metroform-red);
+    color: white;
+}
+
+.btn-recrutador {
+    background-color: var(--metroform-red);
+    color: white;
+    border: 1px solid var(--metroform-red);
+}
+
+.btn-recrutador:hover {
+    background-color: #6b0000;
+}
+
+/* --- SEÇÃO PRINCIPAL (HERO) --- */
+.secao-principal {
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('img/fundo-obra.jpg') no-repeat center center/cover;
+    height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+}
+
+/* Trava de largura para o conteúdo do Hero */
+.conteudo-principal {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.conteudo-principal h1 {
+    font-size: 42px;
+    margin-bottom: 12px;
+    font-weight: 800;
+}
+
+.conteudo-principal p {
+    font-size: 17px;
+    margin-bottom: 35px;
+    color: #ddd;
+}
+
+.caixa-busca {
+    display: flex;
+    background: white;
+    padding: 6px;
+    border-radius: 6px;
+    max-width: 520px;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.caixa-busca input {
+    flex: 1;
+    border: none;
+    padding: 12px 15px;
+    outline: none;
+    font-size: 15px;
+    color: #333;
+    border-radius: 4px;
+}
+
+.btn-buscar {
+    background-color: var(--metroform-red);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-buscar:hover {
+    background-color: #6b0000;
+}
+
+/* --- SEÇÃO DE VAGAS --- */
+.secao-vagas {
+    padding: 70px 5%;
+    background-color: var(--metroform-gray);
+}
+
+/* Trava de largura centralizada para a seção de vagas */
+.container-vagas {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.container-vagas h2 {
+    text-align: center;
+    font-size: 32px;
+    color: var(--metroform-dark);
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.subtitulo-vagas {
+    text-align: center;
+    color: #666;
+    margin-bottom: 45px;
+    font-size: 16px;
+}
+
+.grid-vagas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 480px));
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.card-vaga {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-top: 4px solid var(--metroform-red);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+}
+
+.card-vaga:hover {
+    transform: translateY(-5px);
+}
+
+.card-vaga h3 {
+    font-size: 20px;
+    color: var(--metroform-dark);
+    margin-bottom: 8px;
+}
+
+.card-vaga .setor {
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--metroform-red);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-vaga .local {
+    font-size: 14px;
+    color: #555;
+    margin: 10px 0;
+}
+
+.card-vaga .requisitos {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+.card-botoes {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-match {
+    flex: 1;
+    background-color: #eef1f4;
+    color: #333;
+    border: none;
+    padding: 11px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.3s;
+}
+
+.btn-match:hover {
+    background-color: #dfe3e8;
+}
+
+.btn-candidatar {
+    flex: 1;
+    background-color: var(--metroform-red);
+    color: white;
+    border: none;
+    padding: 11px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.3s;
+}
+
+.btn-candidatar:hover {
+    background-color: #6b0000;
+}
+
+.centro-banco-talentos {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.link-banco {
+    color: var(--metroform-red);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    transition: color 0.3s;
+}
+
+.link-banco:hover {
+    text-decoration: underline;
+    color: #6b0000;
+}
+
+/* --- SEÇÃO DE CULTURA E VALORES --- */
+.secao-cultura {
+    padding: 70px 5%;
+    background-color: #ffffff;
+}
+
+.container-cultura {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.container-cultura h2 {
+    text-align: center;
+    font-size: 32px;
+    color: var(--metroform-dark);
+    margin-bottom: 45px;
+    font-weight: 700;
+}
+
+/* Força os 3 cards lado a lado de forma fixa e alinhada */
+.grid-cultura {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: nowrap; /* Impede que o card caia para a linha de baixo */
+}
+
+.card-cultura {
+    flex: 1; /* Faz com que os três dividam o espaço exatamente igual */
+    background: #fafafa;
+    padding: 35px 25px;
+    border-radius: 8px;
+    border: 1px solid #eaeaea;
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+}
+
+.card-cultura:hover {
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+
+.card-cultura i {
+    font-size: 30px;
+    color: var(--metroform-red);
+    margin-bottom: 15px;
+    display: block;
+}
+
+.card-cultura h3 {
+    font-size: 18px;
+    color: var(--metroform-dark);
+    margin-bottom: 10px;
+}
+
+.card-cultura p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* --- SEÇÃO DE DIFERENCIAIS --- */
+.secao-diferenciais {
+    padding: 70px 5%;
+    background-color: #f4f6f8;
+}
+
+.container-diferenciais {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.container-diferenciais h2 {
+    text-align: center;
+    font-size: 32px;
+    color: var(--metroform-dark);
+    margin-bottom: 45px;
+    font-weight: 700;
+}
+
+/* Força os 3 cards de diferenciais lado a lado de forma fixa e alinhada */
+.grid-diferenciais {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: nowrap; /* Impede que o card caia para a linha de baixo */
+}
+
+.item-diferencial {
+    flex: 1; /* Divide o espaço perfeitamente em 3 partes iguais */
+    background: white;
+    padding: 35px 25px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    transition: transform 0.3s ease;
+}
+
+.item-diferencial:hover {
+    transform: translateY(-3px);
+}
+
+.item-diferencial i {
+    font-size: 30px;
+    color: var(--metroform-red);
+    margin-bottom: 15px;
+    display: block;
+}
+
+.item-diferencial h3 {
+    font-size: 18px;
+    color: var(--metroform-dark);
+    margin-bottom: 10px;
+}
+
+.item-diferencial p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* --- SEÇÃO DE DIFERENCIAIS --- */
+.secao-diferenciais {
+    padding: 70px 5%;
+    background-color: #f4f6f8;
+}
+
+/* Trava de largura centralizada para a seção de diferenciais */
+.container-diferenciais {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.container-diferenciais h2 {
+    text-align: center;
+    font-size: 32px;
+    color: var(--metroform-dark);
+    margin-bottom: 45px;
+    font-weight: 700;
+}
+
+.grid-diferenciais {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 360px));
+    justify-content: center;
+    gap: 30px;
+}
+
+.item-diferencial {
+    background: white;
+    padding: 35px 25px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    transition: transform 0.3s ease;
+}
+
+.item-diferencial:hover {
+    transform: translateY(-3px);
+}
+
+.item-diferencial i {
+    font-size: 30px;
+    color: var(--metroform-red);
+    margin-bottom: 15px;
+    display: block;
+}
+
+.item-diferencial h3 {
+    font-size: 18px;
+    color: var(--metroform-dark);
+    margin-bottom: 10px;
+}
+
+.item-diferencial p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* --- RODAPÉ --- */
+.rodape-metroform {
+    background-color: var(--metroform-dark);
+    color: #fff;
+    text-align: center;
+    padding: 30px 5%;
+}
+
+.rodape-metroform p {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #ccc;
+}
+
+.texto-projeto {
+    font-size: 12px;
+    color: #888;
+}
