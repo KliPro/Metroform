@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<!-- Informa ao navegador que este documento utiliza a versão padrão e moderna do HTML5 -->
+<html lang="pt-BR">
+<head>
+    <!-- Configurações fundamentais da página -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metroform - Painel do RH / Gestor</title>
+    
+    <!-- Importa a biblioteca FontAwesome para exibir ícones gráficos profissionais -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Importa a folha de estilos personalizada para a área de RH -->
+    <link rel="stylesheet" href="rh.css">
+</head>
+<body class="pagina-rh">
+    <!-- Abre o corpo do documento com uma classe específica para o fundo do painel administrativo -->
+
+    <!-- ========================================== -->
+    <!-- CABEÇALHO DO PAINEL ADMINISTRATIVO         -->
+    <!-- ========================================== -->
+    <header class="header-metroform">
+        <!-- Cabeçalho padronizado idêntico ao restante do site -->
+        
+        <div class="logo">
+            <!-- Logotipo da empresa -->
+            <a href="index.html">
+                <img src="img/logo.jpg" alt="Logo Metroform">
+            </a>
+        </div>
+
+        <!-- Perfil do Recrutador logado e botão de sair -->
+        <div class="rh-perfil-topo">
+            <span class="nome-gestor"><i class="fa-solid fa-user-tie"></i> Gestor RH (Metroform)</span>
+            <a href="index.html" class="btn-sair"><i class="fa-solid fa-right-from-bracket"></i> Sair</a>
+        </div>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- CONTEÚDO PRINCIPAL DO PAINEL DE GESTÃO     -->
+    <!-- ========================================== -->
+    <main class="container-rh">
+        
+        <!-- Título e Resumo do Painel -->
+        <div class="rh-cabecalho-secao">
+            <h2>Painel de Controle de Vagas e Candidatos</h2>
+            <p>Gerencie as oportunidades em aberto e acompanhe os candidatos com melhor compatibilidade (Match).</p>
+        </div>
+
+        <!-- Indicadores / Cards de Resumo Rápido -->
+        <div class="rh-cards-metricas">
+            <div class="metrica-card">
+                <i class="fa-solid fa-briefcase"></i>
+                <div>
+                    <h3>04</h3>
+                    <p>Vagas Ativas</p>
+                </div>
+            </div>
+            <div class="metrica-card">
+                <i class="fa-solid fa-users"></i>
+                <div>
+                    <h3>28</h3>
+                    <p>Candidatos Inscritos</p>
+                </div>
+            </div>
+            <div class="metrica-card">
+                <i class="fa-solid fa-star"></i>
+                <div>
+                    <h3>12</h3>
+                    <p>Matches Altos (>85%)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção da Tabela de Gestão de Candidatos -->
+        <div class="rh-tabela-container">
+            <div class="tabela-topo">
+                <h3>Candidatos Recentes no Processo Seletivo</h3>
+                <button class="btn-nova-vaga"><i class="fa-solid fa-plus"></i> Cadastrar Nova Vaga</button>
+            </div>
+
+            <!-- Tabela estruturada de candidatos -->
+            <table class="tabela-gestao">
+                <thead>
+                    <tr>
+                        <th>Candidato(a)</th>
+                        <th>Vaga Desejada</th>
+                        <th>Setor</th>
+                        <th>Compatibilidade (Match)</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Linha 01 da Tabela -->
+                    <tr>
+                        <td>
+                            <div class="info-candidato">
+                                <span class="avatar-inicial">CM</span>
+                                <div>
+                                    <strong>Carlos Moreira</strong>
+                                    <small>carlos.moreira@exemplo.com</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>Técnico de Manutenção</td>
+                        <td>Industrial</td>
+                        <td><span class="badge-match alto">92% - Alto</span></td>
+                        <td>
+                            <!-- Botão que chama a função JavaScript para abrir a modal passando os dados do Carlos -->
+                            <button class="btn-acao visualizar" onclick="abrirModal('Carlos Moreira', 'Técnico de Manutenção', 'Industrial', '92% - Alto', 'Experiência sólida em manutenção corretiva e preventiva de máquinas industriais. Foco em metas e resiliência sob pressão.')" title="Ver Currículo"><i class="fa-solid fa-eye"></i></button>
+                            <button class="btn-acao aprovar" title="Aprovar no Processo"><i class="fa-solid fa-check"></i></button>
+                        </td>
+                    </tr>
+
+                    <!-- Linha 02 da Tabela -->
+                    <tr>
+                        <td>
+                            <div class="info-candidato">
+                                <span class="avatar-inicial">JS</span>
+                                <div>
+                                    <strong>Juliana Souza</strong>
+                                    <small>juliana.souza@exemplo.com</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>Analista de Processos</td>
+                        <td>Engenharia</td>
+                        <td><span class="badge-match medio">78% - Médio</span></td>
+                        <td>
+                            <!-- Botão que abre a modal com os dados da Juliana -->
+                            <button class="btn-acao visualizar" onclick="abrirModal('Juliana Souza', 'Analista de Processos', 'Engenharia', '78% - Médio', 'Formada em Engenharia de Produção, com forte atuação em melhoria contínua de processos e ferramentas de qualidade.')" title="Ver Currículo"><i class="fa-solid fa-eye"></i></button>
+                            <button class="btn-acao aprovar" title="Aprovar no Processo"><i class="fa-solid fa-check"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <!-- ========================================== -->
+    <!-- MODAL FLUTRANTE DE DETALHES DO CURRÍCULO   -->
+    <!-- ========================================== -->
+    <div id="modal-curriculo" class="modal-fundo">
+        <div class="modal-conteudo">
+            <!-- Cabeçalho da Janela Modal -->
+            <div class="modal-cabecalho">
+                <h3>Detalhes do Currículo / Perfil</h3>
+                <button class="btn-fechar" onclick="fecharModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Corpo Dinâmico da Modal onde os dados do candidato aparecem -->
+            <div class="modal-corpo">
+                <p><strong>Candidato(a):</strong> <span id="modal-nome">---</span></p>
+                <p><strong>Vaga Pretendida:</strong> <span id="modal-vaga">---</span></p>
+                <p><strong>Setor:</strong> <span id="modal-setor">---</span></p>
+                <p><strong>Compatibilidade (Match):</strong> <span id="modal-match">---</span></p>
+                <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
+                <p><strong>Resumo Profissional / Habilidades:</strong></p>
+                <p id="modal-resumo" style="color: #666; margin-top: 5px; line-height: 1.5;">---</p>
+            </div>
+
+            <!-- Rodapé da Modal com botões de tomada de decisão do RH -->
+            <div class="modal-rodape">
+                <button class="btn-rejeitar" onclick="fecharModal()">Reprovar</button>
+                <button class="btn-aprovar-modal" onclick="alert('Candidato aprovado para a próxima fase com sucesso!'); fecharModal();">Aprovar Candidato</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+<!-- MODAL DE CADASTRO DE NOVA VAGA PELO RH     -->
+<!-- ========================================== -->
+<div id="modal-nova-vaga" class="modal-fundo">
+    <div class="modal-conteudo">
+        <!-- Cabeçalho da Janela Modal -->
+        <div class="modal-cabecalho">
+            <h3>Cadastrar Nova Oportunidade</h3>
+            <button class="btn-fechar" onclick="fecharModalVaga()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <!-- Formulário de cadastro preenchido pelo gestor -->
+        <div class="modal-corpo">
+            <form id="form-cadastrar-vaga">
+                <div class="grupo-input" style="margin-bottom: 15px;">
+                    <label for="input-titulo-vaga" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Título do Cargo</label>
+                    <input type="text" id="input-titulo-vaga" placeholder="Ex: Desenvolvedor Front-End" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                </div>
+
+                <div class="grupo-input" style="margin-bottom: 15px;">
+                    <label for="input-setor-vaga" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Setor</label>
+                    <input type="text" id="input-setor-vaga" placeholder="Ex: Tecnologia / Engenharia" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                </div>
+
+                <div class="grupo-input" style="margin-bottom: 15px;">
+                    <label for="input-local-vaga" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Localização</label>
+                    <input type="text" id="input-local-vaga" placeholder="Ex: Guarulhos / SP" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                </div>
+
+                <div class="grupo-input" style="margin-bottom: 15px;">
+                    <label for="input-requisitos-vaga" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Requisitos Principais</label>
+                    <input type="text" id="input-requisitos-vaga" placeholder="Ex: Experiência com HTML, CSS e Git." required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                </div>
+
+                <!-- Rodapé com botão de salvar -->
+                <div style="text-align: right; margin-top: 20px;">
+                    <button type="submit" class="btn-aprovar-modal">Publicar Vaga</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    <!-- ========================================== -->
+    <!-- SCRIPT JAVASCRIPT PARA CONTROLAR A MODAL   -->
+    <!-- ========================================== -->
+    <script>
+        /* Funções para abrir e fechar a modal de currículo (já existentes) */
+        function abrirModal(nome, vaga, setor, match, resumo) {
+            document.getElementById('modal-nome').innerText = nome;
+            document.getElementById('modal-vaga').innerText = vaga;
+            document.getElementById('modal-setor').innerText = setor;
+            document.getElementById('modal-match').innerText = match;
+            document.getElementById('modal-resumo').innerText = resumo;
+            document.getElementById('modal-curriculo').style.display = 'flex';
+        }
+
+        function fecharModal() {
+            document.getElementById('modal-curriculo').style.display = 'none';
+        }
+
+        /* --- NOVAS FUNÇÕES PARA O CADASTRO DE VAGAS --- */
+
+        // Seleciona o botão de "Cadastrar Nova Vaga" na tabela para abrir o modal
+        document.querySelector('.btn-nova-vaga').addEventListener('click', function() {
+            document.getElementById('modal-nova-vaga').style.display = 'flex';
+        });
+
+        // Função para fechar o modal de nova vaga
+        function fecharModalVaga() {
+            document.getElementById('modal-nova-vaga').style.display = 'none';
+        }
+
+        // Evento que captura o envio do formulário de nova vaga
+        document.getElementById('form-cadastrar-vaga').addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita que a página recarregue sozinha
+
+            // Pega os valores digitados nos inputs
+            const novaVaga = {
+                titulo: document.getElementById('input-titulo-vaga').value,
+                setor: document.getElementById('input-setor-vaga').value,
+                local: document.getElementById('input-local-vaga').value,
+                requisitos: document.getElementById('input-requisitos-vaga').value
+            };
+
+            // Busca as vagas já salvas no navegador (ou cria uma lista vazia caso não tenha nenhuma)
+            let vagasSalvas = JSON.parse(localStorage.getItem('vagasMetroform')) || [];
+
+            // Adiciona a nova vaga no início da lista
+            vagasSalvas.push(novaVaga);
+
+            // Salva a lista atualizada no armazenamento do navegador (localStorage)
+            localStorage.setItem('vagasMetroform', JSON.stringify(vagasSalvas));
+
+            alert('Vaga cadastrada e publicada na página principal com sucesso!');
+            
+            // Fecha o modal e limpa o formulário
+            fecharModalVaga();
+            document.getElementById('form-cadastrar-vaga').reset();
+        });
+    </script>
+</body>
+</html>
+<!-- Fim do documento HTML do painel de RH com Modal integrada -->

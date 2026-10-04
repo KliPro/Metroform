@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!-- Informa ao navegador que este documento utiliza a versão moderna do HTML5 -->
+<html lang="pt-BR">
+<head>
+    <!-- Configurações básicas de codificação e responsividade -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metroform - Todas as Vagas Abertas</title>
+    
+    <!-- Importa a biblioteca FontAwesome para os ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Importa a folha de estilos principal do site -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- CABEÇALHO PADRONIZADO DA METROFORM         -->
+    <!-- ========================================== -->
+    <header class="header-metroform">
+        <div class="logo">
+            <!-- Logotipo com link de retorno à página inicial -->
+            <a href="index.html">
+                <img src="img/logo.jpg" alt="Logo Metroform">
+            </a>
+        </div>
+        <div>
+            <!-- Botão de voltar ao início padronizado -->
+            <a href="index.html" class="btn-profissional"><i class="fa-solid fa-arrow-left"></i> Voltar ao Início</a>
+        </div>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- CONTEÚDO PRINCIPAL: LISTAGEM DE VAGAS      -->
+    <!-- ========================================== -->
+    <main class="container-rh" style="max-width: 1000px; margin: 40px auto;">
+        
+        <!-- Cabeçalho da Seção -->
+        <div class="rh-cabecalho-secao" style="text-align: center; margin-bottom: 40px;">
+            <h2>Oportunidades em Aberto na Metroform</h2>
+            <p>Explore todas as vagas disponíveis e encontre a que melhor se adapta ao seu perfil profissional.</p>
+        </div>
+
+        <!-- Barra de Filtros Rápidos -->
+        <div class="barra-filtros" style="display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center;">
+            <input type="text" id="filtro-busca" placeholder="Pesquisar por cargo ou palavra-chave..." style="padding: 10px 15px; width: 300px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
+            <select id="filtro-setor" style="padding: 10px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; background: white;">
+                <option value="">Todos os Setores</option>
+                <option value="Industrial">Industrial</option>
+                <option value="Engenharia">Engenharia</option>
+                <option value="Tecnologia">Tecnologia</option>
+            </select>
+        </div>
+
+        <!-- Grade onde as vagas estáticas e dinâmicas serão exibidas -->
+        <div class="grid-vagas-completa" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            
+            <!-- Vaga Exemplo 01 -->
+            <div class="card-vaga" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border-top: 4px solid #8B0000;">
+                <h3 style="font-size: 18px; margin-bottom: 8px; color: #1a1a1a;">Técnico de Manutenção</h3>
+                <span class="setor" style="display: inline-block; background: #f1f3f5; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; color: #555; margin-bottom: 12px;">Setor: Industrial</span>
+                <p class="local" style="font-size: 13px; color: #666; margin-bottom: 10px;">📍 Guarulhos / SP</p>
+                <p class="requisitos" style="font-size: 13px; color: #444; margin-bottom: 20px;"><strong>Requisitos:</strong> Experiência prévia em manutenção de equipamentos industriais e disponibilidade de horários.</p>
+                <div class="card-botoes" style="display: flex; gap: 10px;">
+                    <button class="btn-match" style="flex: 1; padding: 8px; background: transparent; border: 1px solid #8B0000; color: #8B0000; border-radius: 4px; font-weight: bold; cursor: pointer;">Ver Match</button>
+                    <button class="btn-candidatar" style="flex: 1; padding: 8px; background: #8B0000; border: none; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Candidatar-se</button>
+                </div>
+            </div>
+
+            <!-- Vaga Exemplo 02 -->
+            <div class="card-vaga" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border-top: 4px solid #8B0000;">
+                <h3 style="font-size: 18px; margin-bottom: 8px; color: #1a1a1a;">Analista de Processos</h3>
+                <span class="setor" style="display: inline-block; background: #f1f3f5; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; color: #555; margin-bottom: 12px;">Setor: Engenharia</span>
+                <p class="local" style="font-size: 13px; color: #666; margin-bottom: 10px;">📍 Guarulhos / SP</p>
+                <p class="requisitos" style="font-size: 13px; color: #444; margin-bottom: 20px;"><strong>Requisitos:</strong> Superior completo em Engenharia de Produção, domínio de melhoria contínua e Excel avançado.</p>
+                <div class="card-botoes" style="display: flex; gap: 10px;">
+                    <button class="btn-match" style="flex: 1; padding: 8px; background: transparent; border: 1px solid #8B0000; color: #8B0000; border-radius: 4px; font-weight: bold; cursor: pointer;">Ver Match</button>
+                    <button class="btn-candidatar" style="flex: 1; padding: 8px; background: #8B0000; border: none; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Candidatar-se</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- SCRIPT PARA INTEGRAR AS VAGAS DO RH        -->
+    <!-- ========================================== -->
+    <script>
+        /* Carrega automaticamente as vagas criadas pelo RH no localStorage e insere na listagem */
+        window.addEventListener('DOMContentLoaded', function() {
+            const vagasSalvas = JSON.parse(localStorage.getItem('vagasMetroform')) || [];
+            const gridVagas = document.querySelector('.grid-vagas-completa');
+
+            if (vagasSalvas.length > 0 && gridVagas) {
+                vagasSalvas.forEach(function(vaga) {
+                    const card = document.createElement('div');
+                    card.className = 'card-vaga';
+                    card.style.cssText = "background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border-top: 4px solid #8B0000;";
+                    
+                    card.innerHTML = `
+                        <h3 style="font-size: 18px; margin-bottom: 8px; color: #1a1a1a;">${vaga.titulo}</h3>
+                        <span class="setor" style="display: inline-block; background: #f1f3f5; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; color: #555; margin-bottom: 12px;">Setor: ${vaga.setor}</span>
+                        <p class="local" style="font-size: 13px; color: #666; margin-bottom: 10px;">📍 ${vaga.local}</p>
+                        <p class="requisitos" style="font-size: 13px; color: #444; margin-bottom: 20px;"><strong>Requisitos:</strong> ${vaga.requisitos}</p>
+                        <div class="card-botoes" style="display: flex; gap: 10px;">
+                            <button class="btn-match" style="flex: 1; padding: 8px; background: transparent; border: 1px solid #8B0000; color: #8B0000; border-radius: 4px; font-weight: bold; cursor: pointer;">Ver Match</button>
+                            <button class="btn-candidatar" onclick="alert('Redirecionando para candidatura da vaga: ${vaga.titulo}')" style="flex: 1; padding: 8px; background: #8B0000; border: none; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Candidatar-se</button>
+                        </div>
+                    `;
+                    gridVagas.appendChild(card);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

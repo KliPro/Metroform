@@ -147,7 +147,7 @@
             <!-- Botão Ver Todas as Vagas e Banco de Talentos -->
             <div class="container-botoes-vagas">
                 <!-- Botão centralizado para expandir e visualizar o catálogo completo de oportunidades -->
-                <a href="#todas-vagas" class="btn-todas-vagas">Ver Todas as Vagas</a>
+                <a href="vagas.html" class="btn-todas-vagas">Ver Todas as Vagas</a>
             </div>
 
             <div class="centro-banco-talentos">
@@ -236,11 +236,10 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- RODAPÉ DA PÁGINA (FOOTER)                   -->
+    <!-- RODAPÉ DA PÁGINA (FOOTER)                  -->
     <!-- ========================================== -->
     <footer class="rodape-metroform">
         <!-- Cria o rodapé da página -->
-
         <div class="conteudo-rodape">
             <p>&copy; 2026 Metroform - Soluções para Construção. Todos os direitos reservados.</p>
             <!-- Direitos autorais da empresa -->
@@ -249,6 +248,48 @@
         </div>
     </footer>
     
+    <!-- ========================================== -->
+    <!-- SCRIPT PARA CARREGAR VAGAS COM LIMITE NA HOME -->
+    <!-- ========================================== -->
+   <script>
+    window.addEventListener('DOMContentLoaded', function() {
+        /* Busca todas as vagas salvas pelo RH no navegador */
+        const vagasSalvas = JSON.parse(localStorage.getItem('vagasMetroform')) || [];
+        const gridVagas = document.querySelector('.grid-vagas');
+
+        if (gridVagas) {
+            /* Limpa qualquer conteúdo estático anterior para evitar excessos */
+            gridVagas.innerHTML = '';
+
+            /* Se houver vagas salvas, pega no máximo 3 */
+            const vagasParaExibir = vagasSalvas.length > 0 ? vagasSalvas.slice(0, 3) : [];
+
+            if (vagasParaExibir.length > 0) {
+                vagasParaExibir.forEach(function(vaga) {
+                    const card = document.createElement('div');
+                    card.className = 'card-vaga';
+
+                    card.innerHTML = `
+                        <h3>${vaga.titulo}</h3>
+                        <span class="setor">Setor: ${vaga.setor}</span>
+                        <p class="local">📍 ${vaga.local}</p>
+                        <p class="requisitos"><strong>Requisitos:</strong> ${vaga.requisitos}</p>
+                        <div class="card-botoes">
+                            <button class="btn-match">Ver Match</button>
+                            <button class="btn-candidatar" onclick="alert('Redirecionando para a candidatura da vaga: ${vaga.titulo}')">Candidatar-se</button>
+                        </div>
+                    `;
+
+                    gridVagas.appendChild(card);
+                });
+            } else {
+                /* Caso não haja vagas cadastradas ainda */
+                gridVagas.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: #666;">Nenhuma vaga em destaque no momento. Clique em "Ver Todas as Vagas" para explorar.</p>';
+            }
+        }
+    });
+</script>
+
 </body>
 </html>
 <!-- Fecha o corpo do site (body) e encerra o documento HTML (html) -->
