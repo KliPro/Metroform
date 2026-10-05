@@ -239,3 +239,8 @@
 .btn-submit-auth:hover {
     background-color: #6b0000;
 }
+
+/* Classe utilitária para ocultar elementos (como abas inativas) */
+.oculto {
+    display: none !important;
+}

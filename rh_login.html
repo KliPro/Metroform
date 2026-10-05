@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metroform - Acesso Restrito ao RH</title>
+    <!-- Importa o FontAwesome para os ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Importa a folha de estilos principal e do login -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="rh_login.css">
+</head>
+<body class="pagina-login-rh">
+
+    <!-- CABEÇALHO PADRÃO DO SITE -->
+    <header class="header-metroform">
+        <div class="logo">
+            <a href="index.html">
+                <img src="img/logo.jpg" alt="Logo Metroform">
+            </a>
+        </div>
+        <div>
+            <a href="index.html" class="btn-profissional"><i class="fa-solid fa-arrow-left"></i> Voltar ao Início</a>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO CENTRALIZADO -->
+    <main class="login-conteudo-principal">
+        <div class="card-login-rh">
+            
+            <div class="login-cabecalho">
+                <i class="fa-solid fa-lock"></i>
+                <h2>Portal do Gestor - RH</h2>
+                <p>Acesso restrito a colaboradores autorizados da Metroform.</p>
+            </div>
+
+            <!-- Formulário de Autenticação -->
+            <form id="form-login-rh">
+    <div class="grupo-input-login">
+        <label for="email-rh">E-mail Corporativo</label>
+        <input type="email" id="email-rh" value="rh@metroform.com" required>
+    </div>
+
+    <div class="grupo-input-login">
+        <label for="senha-rh">Palavra-passe</label>
+        <input type="password" id="senha-rh" value="123456" required>
+    </div>
+
+    <button type="submit" class="btn-entrar-rh">
+        Entrar no Painel
+    </button>
+</form>
+
+            <div class="login-rodape">
+                <a href="index.html">Precisa de ajuda? Contacte o suporte</a>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Script simplificado para acesso direto durante o desenvolvimento -->
+<script>
+    document.getElementById('form-login-rh').addEventListener('submit', function(e) {
+        e.preventDefault(); // Evita recarregar a página
+
+        // Define a sessão do RH como verdadeira imediatamente
+        localStorage.setItem('rhLogado', 'true');
+        
+        // Redireciona instantaneamente para o painel administrativo
+        window.location.href = "rh.html";
+    });
+</script>
+
+    
+
+</body>
+</html>

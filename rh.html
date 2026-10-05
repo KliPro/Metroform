@@ -215,60 +215,67 @@
     <!-- SCRIPT JAVASCRIPT PARA CONTROLAR A MODAL   -->
     <!-- ========================================== -->
     <script>
-        /* Funções para abrir e fechar a modal de currículo (já existentes) */
-        function abrirModal(nome, vaga, setor, match, resumo) {
-            document.getElementById('modal-nome').innerText = nome;
-            document.getElementById('modal-vaga').innerText = vaga;
-            document.getElementById('modal-setor').innerText = setor;
-            document.getElementById('modal-match').innerText = match;
-            document.getElementById('modal-resumo').innerText = resumo;
-            document.getElementById('modal-curriculo').style.display = 'flex';
-        }
+    /* Verifica se o gestor realizou o login na sessão atual */
+    if (localStorage.getItem('rhLogado') !== 'true') {
+        alert('Acesso restrito! Por favor, faça login com as credenciais do RH.');
+        window.location.href = 'rh_login.html';
+    }
 
-        function fecharModal() {
-            document.getElementById('modal-curriculo').style.display = 'none';
-        }
+    /* Funções para abrir e fechar a modal de currículo (já existentes) */
+    function abrirModal(nome, vaga, setor, match, resumo) {
+        document.getElementById('modal-nome').innerText = nome;
+        document.getElementById('modal-vaga').innerText = vaga;
+        document.getElementById('modal-setor').innerText = setor;
+        document.getElementById('modal-match').innerText = match;
+        document.getElementById('modal-resumo').innerText = resumo;
+        document.getElementById('modal-curriculo').style.display = 'flex';
+    }
 
-        /* --- NOVAS FUNÇÕES PARA O CADASTRO DE VAGAS --- */
+    function fecharModal() {
+        document.getElementById('modal-curriculo').style.display = 'none';
+    }
 
-        // Seleciona o botão de "Cadastrar Nova Vaga" na tabela para abrir o modal
-        document.querySelector('.btn-nova-vaga').addEventListener('click', function() {
-            document.getElementById('modal-nova-vaga').style.display = 'flex';
-        });
+    /* --- NOVAS FUNÇÕES PARA O CADASTRO DE VAGAS --- */
 
-        // Função para fechar o modal de nova vaga
-        function fecharModalVaga() {
-            document.getElementById('modal-nova-vaga').style.display = 'none';
-        }
+    // Seleciona o botão de "Cadastrar Nova Vaga" na tabela para abrir o modal
+    document.querySelector('.btn-nova-vaga').addEventListener('click', function() {
+        document.getElementById('modal-nova-vaga').style.display = 'flex';
+    });
 
-        // Evento que captura o envio do formulário de nova vaga
-        document.getElementById('form-cadastrar-vaga').addEventListener('submit', function(e) {
-            e.preventDefault(); // Evita que a página recarregue sozinha
+    // Função para fechar o modal de nova vaga
+    function fecharModalVaga() {
+        document.getElementById('modal-nova-vaga').style.display = 'none';
+    }
 
-            // Pega os valores digitados nos inputs
-            const novaVaga = {
-                titulo: document.getElementById('input-titulo-vaga').value,
-                setor: document.getElementById('input-setor-vaga').value,
-                local: document.getElementById('input-local-vaga').value,
-                requisitos: document.getElementById('input-requisitos-vaga').value
-            };
+    // Evento que captura o envio do formulário de nova vaga
+    document.getElementById('form-cadastrar-vaga').addEventListener('submit', function(e) {
+        e.preventDefault(); // Evita que a página recarregue sozinha
 
-            // Busca as vagas já salvas no navegador (ou cria uma lista vazia caso não tenha nenhuma)
-            let vagasSalvas = JSON.parse(localStorage.getItem('vagasMetroform')) || [];
+        // Pega os valores digitados nos inputs
+        const novaVaga = {
+            titulo: document.getElementById('input-titulo-vaga').value,
+            setor: document.getElementById('input-setor-vaga').value,
+            local: document.getElementById('input-local-vaga').value,
+            requisitos: document.getElementById('input-requisitos-vaga').value
+        };
 
-            // Adiciona a nova vaga no início da lista
-            vagasSalvas.push(novaVaga);
+        // Busca as vagas já salvas no navegador (ou cria uma lista vazia caso não tenha nenhuma)
+        let vagasSalvas = JSON.parse(localStorage.getItem('vagasMetroform')) || [];
 
-            // Salva a lista atualizada no armazenamento do navegador (localStorage)
-            localStorage.setItem('vagasMetroform', JSON.stringify(vagasSalvas));
+        // Adiciona a nova vaga no início da lista
+        vagasSalvas.push(novaVaga);
 
-            alert('Vaga cadastrada e publicada na página principal com sucesso!');
-            
-            // Fecha o modal e limpa o formulário
-            fecharModalVaga();
-            document.getElementById('form-cadastrar-vaga').reset();
-        });
-    </script>
+        // Salva a lista atualizada no armazenamento do navegador (localStorage)
+        localStorage.setItem('vagasMetroform', JSON.stringify(vagasSalvas));
+
+        alert('Vaga cadastrada e publicada na página principal com sucesso!');
+        
+        // Fecha o modal e limpa o formulário
+        fecharModalVaga();
+        document.getElementById('form-cadastrar-vaga').reset();
+    });
+</script>
+
 </body>
 </html>
 <!-- Fim do documento HTML do painel de RH com Modal integrada -->
