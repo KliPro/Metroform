@@ -153,6 +153,112 @@
                 formLogin.classList.add('oculto');
             }
         }
+
+        // Função para enviar os dados de cadastro para o servidor backend (Node.js + MySQL)
+    document.getElementById('form-cadastro').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    // Recolhe os valores usando os IDs corretos do seu HTML
+    const dadosCandidato = {
+        nome: document.getElementById('nome-cadastro').value,
+        email: document.getElementById('email-cadastro').value,
+        senha: document.getElementById('senha-cadastro').value
+    };
+
+    try {
+        // Envia para o servidor backend Node.js
+        const resposta = await fetch('http://localhost:3000/api/candidatos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dadosCandidato)
+        });
+
+        const resultado = await resposta.json();
+
+        if (resposta.ok) {
+            alert(resultado.mensagem);
+            document.getElementById('form-cadastro').reset(); // Limpa o formulário após o sucesso
+        } else {
+            alert(resultado.erro);
+        }
+    } catch (erro) {
+        console.error('Erro de conexão:', erro);
+        alert('Não foi possível conectar ao servidor backend.');
+    }
+});
+
+    // Função para alternar as abas (se já tiver esta)
+function mudarAba(tipo) {
+    // ... código de alternar abas ...
+}
+
+// ==========================================
+// 1. CÓDIGO DE CADASTRO
+// ==========================================
+document.getElementById('form-cadastro').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const dadosCandidato = {
+        nome: document.getElementById('nome-cadastro').value,
+        email: document.getElementById('email-cadastro').value,
+        senha: document.getElementById('senha-cadastro').value
+    };
+
+    try {
+        const resposta = await fetch('http://localhost:3000/api/candidatos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dadosCandidato)
+        });
+
+        const resultado = await resposta.json();
+
+        if (resposta.ok) {
+            alert(resultado.mensagem);
+            document.getElementById('form-cadastro').reset();
+        } else {
+            alert(resultado.erro);
+        }
+    } catch (erro) {
+        console.error('Erro de conexão:', erro);
+        alert('Não foi possível conectar ao servidor backend.');
+    }
+});
+
+// ==========================================
+// 2. CÓDIGO DE LOGIN (NOVO)
+// ==========================================
+document.getElementById('form-login').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const dadosLogin = {
+        email: document.getElementById('email-login').value,
+        senha: document.getElementById('senha-login').value
+    };
+
+    try {
+        const resposta = await fetch('http://localhost:3000/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dadosLogin)
+        });
+
+        const resultado = await resposta.json();
+
+        if (resposta.ok) {
+            alert(resultado.mensagem + " Bem-vindo(a), " + resultado.candidato.nome + "!");
+            document.getElementById('form-login').reset();
+        } else {
+            alert(resultado.erro);
+        }
+    } catch (erro) {
+        console.error('Erro de conexão:', erro);
+        alert('Não foi possível conectar ao servidor backend.');
+    }
+});
+
     </script>
 </body>
 </html>

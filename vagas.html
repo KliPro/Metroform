@@ -87,31 +87,50 @@
     <!-- SCRIPT PARA INTEGRAR AS VAGAS DO RH        -->
     <!-- ========================================== -->
     <script>
-        /* Carrega automaticamente as vagas criadas pelo RH no localStorage e insere na listagem */
-        window.addEventListener('DOMContentLoaded', function() {
-            const vagasSalvas = JSON.parse(localStorage.getItem('vagasMetroform')) || [];
-            const gridVagas = document.querySelector('.grid-vagas-completa');
+    // Função para carregar as vagas diretamente da base de dados MySQL via backend Node.js
+    async function carregarVagasDoBanco() {
+        try {
+            const resposta = await fetch('http://localhost:3000/api/vagas');
+            const vagas = await resposta.json();
 
-            if (vagasSalvas.length > 0 && gridVagas) {
-                vagasSalvas.forEach(function(vaga) {
-                    const card = document.createElement('div');
-                    card.className = 'card-vaga';
-                    card.style.cssText = "background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border-top: 4px solid #8B0000;";
-                    
-                    card.innerHTML = `
-                        <h3 style="font-size: 18px; margin-bottom: 8px; color: #1a1a1a;">${vaga.titulo}</h3>
-                        <span class="setor" style="display: inline-block; background: #f1f3f5; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; color: #555; margin-bottom: 12px;">Setor: ${vaga.setor}</span>
-                        <p class="local" style="font-size: 13px; color: #666; margin-bottom: 10px;">📍 ${vaga.local}</p>
-                        <p class="requisitos" style="font-size: 13px; color: #444; margin-bottom: 20px;"><strong>Requisitos:</strong> ${vaga.requisitos}</p>
-                        <div class="card-botoes" style="display: flex; gap: 10px;">
-                            <button class="btn-match" style="flex: 1; padding: 8px; background: transparent; border: 1px solid #8B0000; color: #8B0000; border-radius: 4px; font-weight: bold; cursor: pointer;">Ver Match</button>
-                            <button class="btn-candidatar" onclick="alert('Redirecionando para candidatura da vaga: ${vaga.titulo}')" style="flex: 1; padding: 8px; background: #8B0000; border: none; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Candidatar-se</button>
-                        </div>
-                    `;
-                    gridVagas.appendChild(card);
-                });
+            const gridVagas = document.querySelector('.grid-vagas-completa');
+            if (!gridVagas) return;
+
+            // Limpa as vagas estáticas de exemplo se quiser, ou mantém. 
+            // Vamos limpar para exibir apenas as vindas do banco de dados:
+            gridVagas.innerHTML = '';
+
+            if (vagas.length === 0) {
+                gridVagas.innerHTML = '<p>Não há vagas disponíveis no momento.</p>';
+                return;
             }
-        });
-    </script>
+
+            // Cria os cartões dinamicamente para cada vaga do MySQL
+            vagas.forEach(vaga => {
+                const card = document.createElement('div');
+                card.className = 'card-vaga';
+                card.style.cssText = "background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border-top: 4px solid #8B0000;";
+
+                card.innerHTML = `
+                    <h3 style="font-size: 18px; margin-bottom: 8px; color: #1a1a1a;">${vaga.titulo}</h3>
+                    <span class="setor" style="display: inline-block; background: #f1f3f5; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; color: #555; margin-bottom: 12px;">Setor: ${vaga.setor}</span>
+                    <p class="local" style="font-size: 13px; color: #666; margin-bottom: 10px;">📍 ${vaga.localizacao}</p>
+                    <p class="requisitos" style="font-size: 13px; color: #444; margin-bottom: 20px;"><strong>Requisitos:</strong> ${vaga.requisitos}</p>
+                    <div class="card-botoes" style="display: flex; gap: 10px;">
+                        <button class="btn-match" style="flex: 1; padding: 8px; background: transparent; border: 1px solid #8B0000; color: #8B0000; border-radius: 4px; font-weight: bold; cursor: pointer;">Ver Detalhes</button>
+                        <button class="btn-candidatar" onclick="alert('Candidatura realizada para a vaga: ${vaga.titulo}')" style="flex: 1; padding: 8px; background: #8B0000; border: none; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Candidatar-se</button>
+                    </div>
+                `;
+                gridVagas.appendChild(card);
+            });
+
+        } catch (erro) {
+            console.error('Erro ao carregar as vagas do servidor:', erro);
+        }
+    }
+
+    // Executa a função assim que a página é totalmente carregada
+    document.addEventListener('DOMContentLoaded', carregarVagasDoBanco);
+</script>
 </body>
 </html>
