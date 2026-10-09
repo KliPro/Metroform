@@ -130,107 +130,71 @@
     <!-- SCRIPT SIMPLES PARA ALTERNAR AS ABAS      -->
     <!-- ========================================== -->
     <script>
-        /* Função JavaScript para alternar visualmente entre a tela de Login e a tela de Cadastro */
-        function mudarAba(tipo) {
-            const btnLogin = document.querySelector('.auth-abas button:nth-child(1)');
-            const btnCadastro = document.querySelector('.auth-abas button:nth-child(2)');
-            const formLogin = document.getElementById('form-login');
-            const formCadastro = document.getElementById('form-cadastro');
+    /* Função JavaScript para alternar visualmente entre a tela de Login e a tela de Cadastro */
+    function mudarAba(tipo) {
+        const btnLogin = document.querySelector('.auth-abas button:nth-child(1)');
+        const btnCadastro = document.querySelector('.auth-abas button:nth-child(2)');
+        const formLogin = document.getElementById('form-login');
+        const formCadastro = document.getElementById('form-cadastro');
 
-            if (tipo === 'login') {
-                btnLogin.classList.add('ativo');
-                btnCadastro.classList.remove('ativo');
+        if (tipo === 'login') {
+            if (btnLogin) btnLogin.classList.add('ativo');
+            if (btnCadastro) btnCadastro.classList.remove('ativo');
+            if (formLogin) {
                 formLogin.classList.remove('oculto');
                 formLogin.classList.add('ativo-form');
+            }
+            if (formCadastro) {
                 formCadastro.classList.remove('ativo-form');
                 formCadastro.classList.add('oculto');
-            } else {
-                btnCadastro.classList.add('ativo');
-                btnLogin.classList.remove('ativo');
+            }
+        } else {
+            if (btnCadastro) btnCadastro.classList.add('ativo');
+            if (btnLogin) btnLogin.classList.remove('ativo');
+            if (formCadastro) {
                 formCadastro.classList.remove('oculto');
                 formCadastro.classList.add('ativo-form');
+            }
+            if (formLogin) {
                 formLogin.classList.remove('ativo-form');
                 formLogin.classList.add('oculto');
             }
         }
+    }
 
-        // Função para enviar os dados de cadastro para o servidor backend (Node.js + MySQL)
+    // 1. CÓDIGO DE CADASTRO
     document.getElementById('form-cadastro').addEventListener('submit', async function(e) {
-    e.preventDefault();
+        e.preventDefault();
 
-    // Recolhe os valores usando os IDs corretos do seu HTML
-    const dadosCandidato = {
-        nome: document.getElementById('nome-cadastro').value,
-        email: document.getElementById('email-cadastro').value,
-        senha: document.getElementById('senha-cadastro').value
-    };
+        const dadosCandidato = {
+            nome: document.getElementById('nome-cadastro').value,
+            email: document.getElementById('email-cadastro').value,
+            senha: document.getElementById('senha-cadastro').value
+        };
 
-    try {
-        // Envia para o servidor backend Node.js
-        const resposta = await fetch('http://localhost:3000/api/candidatos', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dadosCandidato)
-        });
+        try {
+            const resposta = await fetch('http://localhost:3000/api/candidatos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dadosCandidato)
+            });
 
-        const resultado = await resposta.json();
+            const resultado = await resposta.json();
 
-        if (resposta.ok) {
-            alert(resultado.mensagem);
-            document.getElementById('form-cadastro').reset(); // Limpa o formulário após o sucesso
-        } else {
-            alert(resultado.erro);
+            if (resposta.ok) {
+                alert(resultado.mensagem);
+                document.getElementById('form-cadastro').reset();
+            } else {
+                alert(resultado.erro);
+            }
+        } catch (erro) {
+            console.error('Erro de conexão:', erro);
+            alert('Não foi possível conectar ao servidor backend.');
         }
-    } catch (erro) {
-        console.error('Erro de conexão:', erro);
-        alert('Não foi possível conectar ao servidor backend.');
-    }
-});
+    });
 
-    // Função para alternar as abas (se já tiver esta)
-function mudarAba(tipo) {
-    // ... código de alternar abas ...
-}
-
-// ==========================================
-// 1. CÓDIGO DE CADASTRO
-// ==========================================
-document.getElementById('form-cadastro').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const dadosCandidato = {
-        nome: document.getElementById('nome-cadastro').value,
-        email: document.getElementById('email-cadastro').value,
-        senha: document.getElementById('senha-cadastro').value
-    };
-
-    try {
-        const resposta = await fetch('http://localhost:3000/api/candidatos', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(dadosCandidato)
-        });
-
-        const resultado = await resposta.json();
-
-        if (resposta.ok) {
-            alert(resultado.mensagem);
-            document.getElementById('form-cadastro').reset();
-        } else {
-            alert(resultado.erro);
-        }
-    } catch (erro) {
-        console.error('Erro de conexão:', erro);
-        alert('Não foi possível conectar ao servidor backend.');
-    }
-});
-
-// ==========================================
-// 2. CÓDIGO DE LOGIN (NOVO)
-// ==========================================
-document.getElementById('form-login').addEventListener('submit', async function(e) {
+    // 2. CÓDIGO DE LOGIN
+    document.getElementById('form-login').addEventListener('submit', async function(e) {
     e.preventDefault();
 
     const dadosLogin = {
@@ -248,8 +212,11 @@ document.getElementById('form-login').addEventListener('submit', async function(
         const resultado = await resposta.json();
 
         if (resposta.ok) {
-            alert(resultado.mensagem + " Bem-vindo(a), " + resultado.candidato.nome + "!");
-            document.getElementById('form-login').reset();
+            // Guarda os dados do candidato no navegador para usar na página de perfil
+            localStorage.setItem('candidatoLogado', JSON.stringify(resultado.candidato));
+            
+            // Redireciona diretamente para a página de perfil
+            window.location.href = 'perfil.html';
         } else {
             alert(resultado.erro);
         }
@@ -257,9 +224,9 @@ document.getElementById('form-login').addEventListener('submit', async function(
         console.error('Erro de conexão:', erro);
         alert('Não foi possível conectar ao servidor backend.');
     }
-});
+    });
+</script>
 
-    </script>
 </body>
 </html>
 <!-- Fim do documento HTML da tela de autenticação -->

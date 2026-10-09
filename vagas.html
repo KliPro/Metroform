@@ -96,8 +96,7 @@
             const gridVagas = document.querySelector('.grid-vagas-completa');
             if (!gridVagas) return;
 
-            // Limpa as vagas estáticas de exemplo se quiser, ou mantém. 
-            // Vamos limpar para exibir apenas as vindas do banco de dados:
+            // Limpa as vagas estáticas para exibir apenas as vindas do banco de dados:
             gridVagas.innerHTML = '';
 
             if (vagas.length === 0) {
@@ -118,7 +117,7 @@
                     <p class="requisitos" style="font-size: 13px; color: #444; margin-bottom: 20px;"><strong>Requisitos:</strong> ${vaga.requisitos}</p>
                     <div class="card-botoes" style="display: flex; gap: 10px;">
                         <button class="btn-match" style="flex: 1; padding: 8px; background: transparent; border: 1px solid #8B0000; color: #8B0000; border-radius: 4px; font-weight: bold; cursor: pointer;">Ver Detalhes</button>
-                        <button class="btn-candidatar" onclick="alert('Candidatura realizada para a vaga: ${vaga.titulo}')" style="flex: 1; padding: 8px; background: #8B0000; border: none; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Candidatar-se</button>
+                        <button class="btn-candidatar" onclick="candidatarVaga(${vaga.id_vaga})" style="flex: 1; padding: 8px; background: #8B0000; border: none; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Candidatar-se</button>
                     </div>
                 `;
                 gridVagas.appendChild(card);
@@ -131,6 +130,40 @@
 
     // Executa a função assim que a página é totalmente carregada
     document.addEventListener('DOMContentLoaded', carregarVagasDoBanco);
+
+    // Função responsável por enviar a candidatura para o backend
+    async function candidatarVaga(idVaga) {
+        const candidato = JSON.parse(localStorage.getItem('candidatoLogado'));
+
+        if (!candidato) {
+            alert('Você precisa estar logado para se candidatar a uma vaga.');
+            window.location.href = 'login.html';
+            return;
+        }
+
+        try {
+            const resposta = await fetch('http://localhost:3000/api/candidaturas', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    id_candidato: candidato.id || candidato.id_candidato,
+                    id_vaga: idVaga
+                })
+            });
+
+            const resultado = await resposta.json();
+
+            if (resposta.ok) {
+                alert(resultado.mensagem);
+                window.location.href = 'perfil.html'; // Redireciona para o perfil para ver a candidatura listada
+            } else {
+                alert(resultado.erro || 'Erro ao efetuar a candidatura.');
+            }
+        } catch (erro) {
+            console.error('Erro de conexão:', erro);
+            alert('Não foi possível conectar ao servidor.');
+        }
+    }
 </script>
 </body>
 </html>

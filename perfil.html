@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metroform - Meu Perfil</title>
+    <link rel="stylesheet" href="perfil.css"> <!-- Ou o seu ficheiro CSS unificado -->
+</head>
+<body>
+    <header class="header-metroform">
+        <div class="logo">
+            <a href="vagas.html">
+                <img src="img/logo.jpg" alt="Logo Metroform">
+            </a>
+        </div>
+        
+        <!-- Utiliza a classe .btn-profissional para manter exatamente o mesmo padrão do botão -->
+        <button onclick="logout()" class="btn-profissional">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair da Conta
+        </button>
+    </header>
+
+    <main class="container-perfil">
+        <!-- Cartão de Informações e Edição de Perfil -->
+        <section class="card-info-usuario">
+            <div class="perfil-cabecalho">
+                <div class="avatar-container">
+                    <img id="foto-preview" src="img/default-avatar.png" alt="Foto de Perfil" class="foto-perfil">
+                </div>
+                <div>
+                    <h2><span id="nome-exibir">Utilizador</span></h2>
+                    <p><strong>E-mail:</strong> <span id="email-exibir">-</span></p>
+                    <p><strong>Telefone:</strong> <span id="telefone-exibir">Não informado</span></p>
+                </div>
+            </div>
+            
+            <div class="resumo-profissional">
+                <h4>Resumo Profissional</h4>
+                <p id="resumo-exibir">Adicione um resumo sobre a sua experiência profissional...</p>
+            </div>
+
+            <button onclick="abrirModalEdicao()" class="btn-profissional">Editar Perfil</button>
+        </section>
+
+        <!-- Cartão de Currículo -->
+        <section class="card-curriculo">
+            <h3>Meu Currículo</h3>
+            <div id="status-curriculo">
+                <p>Nenhum currículo em PDF enviado.</p>
+            </div>
+        </section>
+
+        <!-- Cartão de Candidaturas -->
+        <section class="card-candidaturas">
+            <h3>Minhas Candidaturas</h3>
+            <div id="lista-candidaturas">
+                <p>A carregar candidaturas...</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Recupera os dados do candidato logado
+        const candidato = JSON.parse(localStorage.getItem('candidatoLogado'));
+
+        if (!candidato) {
+            alert('Você precisa estar logado para aceder a esta página.');
+            window.location.href = 'login.html';
+        } else {
+            // Preenche os dados no HTML
+            document.getElementById('nome-usuario').textContent = candidato.nome;
+            document.getElementById('email-usuario').textContent = candidato.email;
+            
+            // Carrega as candidaturas do utilizador
+            carregarCandidaturas(candidato.id);
+        }
+
+        async function carregarCandidaturas(idCandidato) {
+            const containerLista = document.getElementById('lista-candidaturas');
+
+            try {
+                const resposta = await fetch(`http://localhost:3000/api/candidaturas/${idCandidato}`);
+                const candidaturas = await resposta.json();
+
+                if (resposta.ok) {
+                    if (candidaturas.length === 0) {
+                        containerLista.innerHTML = '<p>Ainda não se candidatou a nenhuma vaga.</p>';
+                        return;
+                    }
+
+                    let html = '<ul class="lista-vagas-perfil">';
+                    candidaturas.forEach(cand => {
+                        html += `
+                            <li class="item-candidatura">
+                                <h4>${cand.titulo}</h4>
+                                <p><strong>Setor:</strong> ${cand.setor} | <strong>Local:</strong> ${cand.localizacao}</p>
+                                <p><strong>Estado:</strong> <span class="status">${cand.status_candidatura}</span></p>
+                                <p><small>Candidatura feita em: ${new Date(cand.data_candidatura).toLocaleDateString('pt-BR')}</small></p>
+                            </li>
+                        `;
+                    });
+                    html += '</ul>';
+                    containerLista.innerHTML = html;
+                } else {
+                    containerLista.innerHTML = '<p>Erro ao carregar candidaturas.</p>';
+                }
+            } catch (erro) {
+                console.error('Erro de conexão:', erro);
+                containerLista.innerHTML = '<p>Não foi possível conectar ao servidor.</p>';
+            }
+        }
+
+        // Função de Terminar Sessão
+        function logout() {
+            localStorage.removeItem('candidatoLogado');
+            window.location.href = 'login.html';
+        }
+        // Funções para abrir e fechar o Modal
+function abrirModalEdicao() {
+    // Preenche os campos do modal com os dados atuais salvos no localStorage
+    document.getElementById('edit-nome').value = candidato.nome || '';
+    document.getElementById('edit-telefone').value = candidato.telefone || '';
+    document.getElementById('edit-resumo').value = candidato.resumo || '';
+    
+    document.getElementById('modal-edicao').classList.remove('oculto');
+}
+
+function fecharModalEdicao() {
+    document.getElementById('modal-edicao').classList.add('oculto');
+}
+
+// Envio do formulário de edição para o backend
+document.getElementById('form-editar-perfil').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('nome', document.getElementById('edit-nome').value);
+    formData.append('telefone', document.getElementById('edit-telefone').value);
+    formData.append('resumo', document.getElementById('edit-resumo').value);
+    
+    const fotoFile = document.getElementById('edit-foto').files[0];
+    if (fotoFile) formData.append('foto', fotoFile);
+
+    const curriculoFile = document.getElementById('edit-curriculo').files[0];
+    if (curriculoFile) formData.append('curriculo', curriculoFile);
+
+    try {
+        const resposta = await fetch(`http://localhost:3000/api/candidatos/${candidato.id_candidato || candidato.id}`, {
+            method: 'PUT',
+            body: formData // O multer processa multipart/form-data automaticamente
+        });
+
+        const resultado = await resposta.json();
+
+        if (resposta.ok) {
+            alert(resultado.mensagem);
+            // Atualiza os dados no localStorage e recarrega a página
+            candidato.nome = document.getElementById('edit-nome').value;
+            candidato.telefone = document.getElementById('edit-telefone').value;
+            candidato.resumo = document.getElementById('edit-resumo').value;
+            localStorage.setItem('candidatoLogado', JSON.stringify(candidato));
+            
+            location.reload();
+        } else {
+            alert(resultado.erro || 'Erro ao atualizar perfil.');
+        }
+    } catch (erro) {
+        console.error('Erro de conexão:', erro);
+        alert('Não foi possível conectar ao servidor para atualizar.');
+    }
+});
+    </script>
+
+    <!-- MODAL DE EDIÇÃO DE PERFIL -->
+<div id="modal-edicao" class="modal-overlay oculto">
+    <div class="modal-conteudo">
+        <h3>Editar Meu Perfil</h3>
+        <form id="form-editar-perfil" enctype="multipart/form-data">
+            <div class="grupo-input">
+                <label for="edit-nome">Nome Completo</label>
+                <input type="text" id="edit-nome" required>
+            </div>
+            
+            <div class="grupo-input">
+                <label for="edit-telefone">Telefone</label>
+                <input type="text" id="edit-telefone" placeholder="(11) 99999-9999">
+            </div>
+
+            <div class="grupo-input">
+                <label for="edit-resumo">Resumo Profissional</label>
+                <textarea id="edit-resumo" rows="4" placeholder="Conte um pouco sobre a sua experiência..."></textarea>
+            </div>
+
+            <div class="grupo-input">
+                <label for="edit-foto">Foto de Perfil (Imagem)</label>
+                <input type="file" id="edit-foto" accept="image/*">
+            </div>
+
+            <div class="grupo-input">
+                <label for="edit-curriculo">Currículo em PDF</label>
+                <input type="file" id="edit-curriculo" accept=".pdf">
+            </div>
+
+            <div class="modal-botoes">
+                <button type="button" onclick="fecharModalEdicao()" class="btn-cancelar">Cancelar</button>
+                <button type="submit" class="btn-profissional">Salvar Alterações</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
