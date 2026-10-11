@@ -1,20 +1,13 @@
 <!DOCTYPE html>
 <!-- Informa ao navegador que este documento utiliza a versão mais moderna e padrão do HTML (HTML5) -->
-
 <html lang="pt-BR">
 <!-- Abre a página web principal e define o idioma oficial como português do Brasil (pt-BR) -->
 
 <head>
     <!-- Abre a "cabeça" do documento. Configurações invisíveis para o usuário, mas essenciais -->
-
     <meta charset="UTF-8">
-    <!-- Define o padrão de codificação (UTF-8), garantindo que acentos (ç, á, ê) apareçam perfeitamente -->
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Torna o site responsivo, ajustando o tamanho da página para celulares, tablets e computadores -->
-
     <title>Metroform - Trabalhe Conosco</title>
-    <!-- Define o texto que aparece na aba superior do navegador -->
 
     <!-- Importação da biblioteca FontAwesome para exibir ícones profissionais em vetor -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -30,57 +23,35 @@
     <!-- CABEÇALHO / MENU PRINCIPAL DE NAVEGAÇÃO    -->
     <!-- ========================================== -->
     <header class="header-metroform">
-        <!-- Cria o cabeçalho fixo no topo da página -->
-
         <div class="logo">
-            <!-- Cria uma caixinha para organizar a imagem do logotipo da empresa -->
             <a href="#">
-                <!-- Link que, ao ser clicado, recarrega ou leva para o topo da página (#) -->
                 <img src="img/logo.jpg" alt="Logo Metroform">
-                <!-- Insere a imagem da logo com um texto alternativo para acessibilidade -->
             </a>
         </div>
 
         <nav class="nav-links">
-            <!-- Cria a área de navegação principal do menu superior -->
             <a href="#vagas">Vagas Abertas</a>
-            <!-- Link que desliza a tela suavemente até a seção de ID "vagas" -->
             <a href="#cultura">Cultura e Valores</a>
-            <!-- Link que desliza a tela até a seção de ID "cultura" -->
             <a href="#diferenciais">Diferenciais</a>
-            <!-- Link que desliza a tela até a seção de ID "diferenciais" -->
         </nav>
  
        <div class="acesso-buttons">
-        <!-- Redireciona o candidato para a tela de login/cadastro correta -->
-        <a href="login.html" class="btn-profissional">Cadastrar-se / Entrar</a>
-    
-        <!-- Redireciona o gestor para o portal restrito do RH -->
-        <a href="rh_login.html" class="btn-profissional">Acesso RH/Gestor</a>
-        </div>
-        </header>
+            <a href="login.html" class="btn-profissional">Cadastrar-se / Entrar</a>
+            <a href="rh_login.html" class="btn-profissional">Acesso RH/Gestor</a>
+       </div>
+    </header>
 
     <!-- ========================================== -->
     <!-- SEÇÃO PRINCIPAL / BANNER DE DESTAQUE (HERO) -->
     <!-- ========================================== -->
     <section class="secao-principal">
-        <!-- Abre a seção principal (banner de destaque com imagem de fundo de obra) -->
-
         <div class="conteudo-principal">
-            <!-- Agrupa os textos e a barra de pesquisa para centralizá-los no meio do banner -->
-
             <h1>Construa Seu Futuro na Metroform</h1>
-            <!-- Cria o título principal em destaque (H1) da página -->
-
             <p>Valorizamos talentos preparados, engajados e prontos para crescer conosco.</p>
-            <!-- Cria um parágrafo descritivo abaixo do título principal -->
 
             <div class="caixa-busca">
-                <!-- Cria a caixinha branca que envolve o campo de pesquisa de vagas -->
-                <input type="text" placeholder="Cargo, setor ou habilidade...">
-                <!-- Campo de texto onde o usuário digita o que deseja pesquisar -->
-                <button class="btn-buscar">Pesquisar</button>
-                <!-- Botão vermelho de confirmação da pesquisa -->
+                <input type="text" id="input-busca" placeholder="Cargo, setor ou habilidade...">
+                <button class="btn-buscar" id="btn-pesquisar">Pesquisar</button>
             </div>
         </div>
     </section>
@@ -89,69 +60,21 @@
     <!-- SEÇÃO DE OPORTUNIDADES E VAGAS EM DESTAQUE -->
     <!-- ========================================== -->
     <section id="vagas" class="secao-vagas">
-        <!-- Abre a seção de Oportunidades, identificada pelo ID "vagas" -->
-
         <div class="container-vagas">
-            <!-- Recipiente que trava a largura máxima (1200px) para o conteúdo não esticar demais -->
-
             <h2>Oportunidade em Destaque</h2>
-            <!-- Título da seção de vagas -->
+            <p class="subtitulo-vagas">Encontre a vaga ideal alinhada ao seu perfil e competência</p>
 
-            <p class="subtitulo-vagas"> Encontre a vaga ideal alinhada ao seu perfil e competência</p>
-            <!-- Subtítulo explicativo da seção -->
-
-            <div class="grid-vagas">
-                <!-- Grade responsável por alinhar e organizar os cartões de vagas lado a lado -->
-
-                <!-- 1 Primeiro card -->
-                <div class="card-vaga">
-                    <!-- Abre o primeiro cartão individual de vaga -->
-
-                    <h3>Técnico de Manutenção</h3>
-                    <!-- Exibe o cargo da vaga em destaque -->
-
-                    <span class="setor">Setor: Industrial</span>
-                    <!-- Exibe o departamento ou setor da vaga com uma etiqueta -->
-
-                    <p class="local">📍 Guarulhos / SP</p>
-                    <!-- Exibe a localização geográfica da vaga -->
-
-                    <p class="requisitos"><strong>Requisitos:</strong> Foco em metas e resiliência sob pressão.</p>
-                    <!-- Mostra os requisitos essenciais exigidos -->
-
-                    <div class="card-botoes">
-                        <!-- Caixinha interna para organizar os dois botões do cartão lado a lado -->
-                        <button class="btn-match">Ver Match</button>
-                        <!-- Botão de compatibilidade (Ver Match) -->
-                        <button class="btn-candidatar">Candidatar-se</button>
-                        <!-- Botão principal de inscrição na vaga -->
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="card-vaga">
-                    <!-- Abre o segundo cartão individual de vaga -->
-
-                    <h3>Analista de Processos</h3>
-                    <span class="setor">Setor: Engenharia</span>
-                    <p class="local">📍 Guarulhos / SP</p>
-                    <p class="requisitos"><strong>Requisitos:</strong> Trabalho em equipe e inovação contínua.</p>
-
-                    <div class="card-botoes">
-                        <button class="btn-match">Ver Match</button>
-                        <button class="btn-candidatar">Candidatar-se</button>
-                    </div>
-                </div>
+            <!-- Grade onde as vagas do banco de dados serão injetadas dinamicamente -->
+            <div class="grid-vagas" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <!-- Preenchido via JavaScript -->
             </div>
 
             <!-- Botão Ver Todas as Vagas e Banco de Talentos -->
             <div class="container-botoes-vagas">
-                <!-- Botão centralizado para expandir e visualizar o catálogo completo de oportunidades -->
                 <a href="vagas.html" class="btn-todas-vagas">Ver Todas as Vagas</a>
             </div>
 
             <div class="centro-banco-talentos">
-                <!-- Link de acesso direto para envio de currículo genérico -->
                 <a href="#banco-geral" class="link-banco">📄 Enviar currículo para o Banco Geral de Talentos</a>
             </div>
         </div>
@@ -161,34 +84,24 @@
     <!-- SEÇÃO DE CULTURA E VALORES DA EMPRESA      -->
     <!-- ========================================== -->
     <section id="cultura" class="secao-cultura">
-        <!-- Abre a seção de Cultura e Valores -->
-
         <div class="container-cultura">
             <h2>Nossa Cultura e Valores</h2>
 
             <div class="grid-cultura">
-                <!-- Grade que alinha os três pilares culturais de forma fixa -->
-
                 <div class="card-cultura">
-                    <!-- Primeiro pilar cultural -->
                     <i class="fa-solid fa-bullseye"></i>
-                    <!-- Ícone vetorial de alvo (bullseye) -->
                     <h3>Foco em Resultados</h3>
                     <p>Compromisso com a alta performance, excelência e entrega em cada projeto.</p>
                 </div>
 
                 <div class="card-cultura">
-                    <!-- Segundo pilar cultural -->
                     <i class="fa-solid fa-handshake"></i>
-                    <!-- Ícone de aperto de mãos (handshake) -->
                     <h3>Respeito & Parceria</h3>
                     <p>Valorização das pessoas, segurança e colaboração mútua no ambiente de trabalho.</p>
                 </div>
 
                 <div class="card-cultura">
-                    <!-- Terceiro pilar cultural -->
                     <i class="fa-solid fa-lightbulb"></i>
-                    <!-- Ícone de lâmpada (lightbulb) -->
                     <h3>Inovação Contínua</h3>
                     <p>Buscamos sempre evoluir processos e desenvolver soluções inteligentes.</p>
                 </div>
@@ -200,34 +113,24 @@
     <!-- SEÇÃO DE DIFERENCIAIS / POR QUE TRABALHAR  -->
     <!-- ========================================== -->
     <section id="diferenciais" class="secao-diferenciais">
-        <!-- Abre a seção de Diferenciais da empresa -->
-
         <div class="container-diferenciais">
             <h2>Por que construir sua carreira conosco?</h2>
 
             <div class="grid-diferenciais">
-                <!-- Grade que alinha os três diferenciais competitivos -->
-
                 <div class="item-diferencial">
-                    <!-- Primeiro diferencial -->
                     <i class="fa-solid fa-chart-line"></i>
-                    <!-- Ícone de crescimento (chart-line) -->
                     <h3>Plano de Desenvolvimento</h3>
                     <p>Oportunidades reais de crescimento profissional e treinamentos contínuos.</p>
                 </div>
 
                 <div class="item-diferencial">
-                    <!-- Segundo diferencial -->
                     <i class="fa-solid fa-shield-halved"></i>
-                    <!-- Ícone de escudo (shield-halved) -->
                     <h3>Segurança em Primeiro Lugar</h3>
                     <p>Um ambiente estruturado focado na integridade física e psicológica de cada colaborador.</p>
                 </div>
 
                 <div class="item-diferencial">
-                    <!-- Terceiro diferencial -->
                     <i class="fa-solid fa-award"></i>
-                    <!-- Ícone de premiação (award) -->
                     <h3>Reconhecimento</h3>
                     <p>Cultura voltada para valorizar o engajamento, a resiliência e o alto desempenho.</p>
                 </div>
@@ -235,61 +138,171 @@
         </div>
     </section>
 
+    <!-- MODAL DE VER MATCH -->
+    <div id="modal-match" class="modal-overlay oculto" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: none; justify-content: center; align-items: center; z-index: 2000;">
+        <div class="modal-conteudo" style="background-color: #ffffff; padding: 30px; border-radius: 10px; width: 100%; max-width: 450px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); border-top: 4px solid #8B0000; box-sizing: border-box; text-align: center;">
+            <h3 style="color: #8B0000; margin-top: 0; margin-bottom: 15px;"><i class="fa-solid fa-chart-pie"></i> Análise de Compatibilidade (Match)</h3>
+            
+            <div id="match-resultado" style="margin: 20px 0; font-size: 1.1rem; color: #333;">
+                <!-- O conteúdo da análise será injetado aqui -->
+            </div>
+
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 25px;">
+                <button type="button" onclick="fecharModalMatch()" class="btn-profissional" style="background-color: #666; border: none; padding: 10px 20px; border-radius: 5px; color: white; cursor: pointer; font-weight: bold;">Fechar</button>
+                <button type="button" id="btn-candidatar-match" class="btn-profissional" style="background-color: #8B0000; border: none; padding: 10px 20px; border-radius: 5px; color: white; cursor: pointer; font-weight: bold;">Candidatar-me Agora</button>
+            </div>
+        </div>
+    </div>
+
     <!-- ========================================== -->
     <!-- RODAPÉ DA PÁGINA (FOOTER)                  -->
     <!-- ========================================== -->
     <footer class="rodape-metroform">
-        <!-- Cria o rodapé da página -->
         <div class="conteudo-rodape">
             <p>&copy; 2026 Metroform - Soluções para Construção. Todos os direitos reservados.</p>
-            <!-- Direitos autorais da empresa -->
             <p class="texto-projeto">Desenvolvido como projeto acadêmico de recrutamento e seleção inteligente.</p>
-            <!-- Nota informativa do contexto acadêmico/profissional do projeto -->
         </div>
     </footer>
     
     <!-- ========================================== -->
-    <!-- SCRIPT PARA CARREGAR VAGAS COM LIMITE NA HOME -->
+    <!-- SCRIPTS DE INTEGRAÇÃO COM O BANCO E BUSCA  -->
     <!-- ========================================== -->
-   <script>
-    window.addEventListener('DOMContentLoaded', function() {
-        /* Busca todas as vagas salvas pelo RH no navegador */
-        const vagasSalvas = JSON.parse(localStorage.getItem('vagasMetroform')) || [];
-        const gridVagas = document.querySelector('.grid-vagas');
+    <script>
+        // Carrega as vagas em destaque diretamente da API/MySQL na página inicial
+        async function carregarVagasHome() {
+            try {
+                const resposta = await fetch('http://localhost:3000/api/vagas');
+                const vagas = await resposta.json();
 
-        if (gridVagas) {
-            /* Limpa qualquer conteúdo estático anterior para evitar excessos */
-            gridVagas.innerHTML = '';
+                const gridVagas = document.querySelector('.grid-vagas');
+                if (!gridVagas) return;
 
-            /* Se houver vagas salvas, pega no máximo 3 */
-            const vagasParaExibir = vagasSalvas.length > 0 ? vagasSalvas.slice(0, 3) : [];
+                gridVagas.innerHTML = '';
 
-            if (vagasParaExibir.length > 0) {
-                vagasParaExibir.forEach(function(vaga) {
+                if (vagas.length === 0) {
+                    gridVagas.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: #666;">Não há vagas disponíveis no momento.</p>';
+                    return;
+                }
+
+                // Exibe até 3 vagas em destaque na página inicial
+                const vagasDestaque = vagas.slice(0, 3);
+
+                vagasDestaque.forEach(vaga => {
                     const card = document.createElement('div');
                     card.className = 'card-vaga';
+                    card.style.cssText = "background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border-top: 4px solid #8B0000;";
 
                     card.innerHTML = `
-                        <h3>${vaga.titulo}</h3>
-                        <span class="setor">Setor: ${vaga.setor}</span>
-                        <p class="local">📍 ${vaga.local}</p>
-                        <p class="requisitos"><strong>Requisitos:</strong> ${vaga.requisitos}</p>
-                        <div class="card-botoes">
-                            <button class="btn-match">Ver Match</button>
-                            <button class="btn-candidatar" onclick="alert('Redirecionando para a candidatura da vaga: ${vaga.titulo}')">Candidatar-se</button>
+                        <h3 style="font-size: 18px; margin-bottom: 8px; color: #1a1a1a;">${vaga.titulo}</h3>
+                        <span class="setor" style="display: inline-block; background: #f1f3f5; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; color: #555; margin-bottom: 12px;">Setor: ${vaga.setor}</span>
+                        <p class="local" style="font-size: 13px; color: #666; margin-bottom: 10px;">📍 ${vaga.localizacao}</p>
+                        <p class="requisitos" style="font-size: 13px; color: #444; margin-bottom: 20px;"><strong>Requisitos:</strong> ${vaga.requisitos}</p>
+                        <div class="card-botoes" style="display: flex; gap: 10px;">
+                            <button class="btn-match" onclick="analisarMatch('${vaga.titulo}', '${vaga.setor}', '${vaga.requisitos}', ${vaga.id_vaga})" style="flex: 1; padding: 8px; background: transparent; border: 1px solid #8B0000; color: #8B0000; border-radius: 4px; font-weight: bold; cursor: pointer;">Ver Match</button>
+                            <button class="btn-candidatar" onclick="candidatarVagaHome(${vaga.id_vaga})" style="flex: 1; padding: 8px; background: #8B0000; border: none; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Candidatar-se</button>
                         </div>
                     `;
-
                     gridVagas.appendChild(card);
                 });
-            } else {
-                /* Caso não haja vagas cadastradas ainda */
-                gridVagas.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: #666;">Nenhuma vaga em destaque no momento. Clique em "Ver Todas as Vagas" para explorar.</p>';
+
+            } catch (erro) {
+                console.error('Erro ao carregar vagas na home:', erro);
             }
         }
-    });
-</script>
 
+        document.addEventListener('DOMContentLoaded', carregarVagasHome);
+
+        // Redireciona para a página de vagas ao tentar candidatar-se na home
+        function candidatarVagaHome(idVaga) {
+            const candidato = JSON.parse(localStorage.getItem('candidatoLogado'));
+            if (!candidato) {
+                alert('Você precisa estar logado para se candidatar a uma vaga.');
+                window.location.href = 'login.html';
+                return;
+            }
+            window.location.href = 'vagas.html';
+        }
+
+        // Função de Match na página inicial
+        function analisarMatch(tituloVaga, setorVaga, requisitosVaga, idVaga) {
+            const candidato = JSON.parse(localStorage.getItem('candidatoLogado'));
+
+            if (!candidato) {
+                alert('Faça login para verificar o seu nível de match com as vagas.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const resumoCandidato = candidato.resumo ? candidato.resumo.toLowerCase() : '';
+            let pontuacaoMatch = 50; 
+            let analiseTexto = "O seu perfil demonstra potencial para integrar esta equipa.";
+
+            if (resumoCandidato.length > 10) pontuacaoMatch += 20;
+
+            const reqs = requisitosVaga ? requisitosVaga.toLowerCase() : '';
+            if (resumoCandidato.includes(setorVaga.toLowerCase()) || reqs.split(' ').some(palavra => palavra.length > 3 && resumoCandidato.includes(palavra))) {
+                pontuacaoMatch += 25;
+                analiseTexto = "Excelente alinhamento! As competências descritas no seu resumo coincidem com os requisitos exigidos.";
+            } else if (resumoCandidato === '') {
+                pontuacaoMatch = 40;
+                analiseTexto = "O seu resumo profissional está vazio. Preencha o seu perfil para aumentar a precisão!";
+            }
+
+            if (pontuacaoMatch > 98) pontuacaoMatch = 98;
+            if (pontuacaoMatch < 55 && resumoCandidato !== '') pontuacaoMatch = 65;
+
+            const containerResultado = document.getElementById('match-resultado');
+            if (containerResultado) {
+                containerResultado.innerHTML = `
+                    <div style="font-size: 2.5rem; font-weight: bold; color: ${pontuacaoMatch >= 75 ? '#2b8a3e' : '#d97706'}; margin-bottom: 10px;">
+                        ${pontuacaoMatch}% de Match
+                    </div>
+                    <p style="font-weight: bold; color: #444; margin-bottom: 8px;">Vaga: ${tituloVaga}</p>
+                    <p style="font-size: 0.95rem; color: #666; line-height: 1.4;">${analiseTexto}</p>
+                `;
+            }
+
+            const btnCandidatarMatch = document.getElementById('btn-candidatar-match');
+            if (btnCandidatarMatch) {
+                btnCandidatarMatch.onclick = function() {
+                    fecharModalMatch();
+                    window.location.href = 'vagas.html';
+                };
+            }
+
+            const modal = document.getElementById('modal-match');
+            if (modal) {
+                modal.style.display = 'flex';
+                modal.classList.remove('oculto');
+            }
+        }
+
+        function fecharModalMatch() {
+            const modal = document.getElementById('modal-match');
+            if (modal) {
+                modal.style.display = 'none';
+                modal.classList.add('oculto');
+            }
+        }
+
+        // Função de Pesquisa Global na Home
+        function realizarPesquisa() {
+            const input = document.getElementById('input-busca');
+            const termo = input.value.trim();
+
+            if (termo) {
+                window.location.href = `vagas.html?busca=${encodeURIComponent(termo)}`;
+            } else {
+                window.location.href = 'vagas.html';
+            }
+        }
+
+        document.getElementById('btn-pesquisar').addEventListener('click', realizarPesquisa);
+        document.getElementById('input-busca').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                realizarPesquisa();
+            }
+        });
+    </script>
 </body>
 </html>
-<!-- Fecha o corpo do site (body) e encerra o documento HTML (html) -->
