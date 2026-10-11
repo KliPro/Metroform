@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metroform - Meu Perfil</title>
-    <link rel="stylesheet" href="perfil.css"> <!-- Ou o seu ficheiro CSS unificado -->
+    <!-- Importação da biblioteca FontAwesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="perfil.css">
 </head>
 <body>
     <header class="header-metroform">
@@ -14,7 +16,6 @@
             </a>
         </div>
         
-        <!-- Utiliza a classe .btn-profissional para manter exatamente o mesmo padrão do botão -->
         <button onclick="logout()" class="btn-profissional">
             <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair da Conta
         </button>
@@ -50,33 +51,76 @@
             </div>
         </section>
 
-        <!-- Cartão de Candidaturas -->
-        <section class="card-candidaturas">
-            <h3>Minhas Candidaturas</h3>
-            <div id="lista-candidaturas">
-                <p>A carregar candidaturas...</p>
+        <!-- Cartão de Minhas Candidaturas (Integrado com MySQL) -->
+        <section class="card-candidaturas" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border-top: 4px solid #8B0000; margin-top: 20px;">
+            <h3 style="color: #8B0000; margin-bottom: 15px;"><i class="fa-solid fa-briefcase"></i> Minhas Candidaturas</h3>
+            <div id="grid-candidaturas" style="display: flex; flex-direction: column; gap: 15px;">
+                <p style="color: #666;">A carregar candidaturas...</p>
             </div>
         </section>
     </main>
 
+    <!-- MODAL DE EDIÇÃO DE PERFIL -->
+    <div id="modal-edicao" class="modal-overlay oculto" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: none; justify-content: center; align-items: center; z-index: 2000;">
+        <div class="modal-conteudo" style="background-color: #ffffff; padding: 30px; border-radius: 10px; width: 100%; max-width: 450px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); border-top: 4px solid #8B0000; box-sizing: border-box;">
+            <h3 style="color: #8B0000; margin-top: 0; margin-bottom: 15px;">Editar Meu Perfil</h3>
+            <form id="form-editar-perfil" enctype="multipart/form-data">
+                <div class="grupo-input" style="margin-bottom: 15px;">
+                    <label for="edit-nome" style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px;">Nome Completo</label>
+                    <input type="text" id="edit-nome" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                </div>
+                
+                <div class="grupo-input" style="margin-bottom: 15px;">
+                    <label for="edit-telefone" style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px;">Telefone</label>
+                    <input type="text" id="edit-telefone" placeholder="(11) 99999-9999" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                </div>
+
+                <div class="grupo-input" style="margin-bottom: 15px;">
+                    <label for="edit-resumo" style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px;">Resumo Profissional</label>
+                    <textarea id="edit-resumo" rows="4" placeholder="Conte um pouco sobre a sua experiência..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;"></textarea>
+                </div>
+
+                <div class="grupo-input" style="margin-bottom: 15px;">
+                    <label for="edit-foto" style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px;">Foto de Perfil (Imagem)</label>
+                    <input type="file" id="edit-foto" accept="image/*">
+                </div>
+
+                <div class="grupo-input" style="margin-bottom: 20px;">
+                    <label for="edit-curriculo" style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px;">Currículo em PDF</label>
+                    <input type="file" id="edit-curriculo" accept=".pdf">
+                </div>
+
+                <div class="modal-botoes" style="display: flex; gap: 10px;">
+                    <button type="button" onclick="fecharModalEdicao()" class="btn-cancelar" style="flex: 1; padding: 10px; background: #666; border: none; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Cancelar</button>
+                    <button type="submit" class="btn-profissional" style="flex: 1; padding: 10px; background: #8B0000; border: none; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- SCRIPTS DE GESTÃO DO PERFIL E CANDIDATURAS -->
     <script>
-        // Recupera os dados do candidato logado
         const candidato = JSON.parse(localStorage.getItem('candidatoLogado'));
 
         if (!candidato) {
             alert('Você precisa estar logado para aceder a esta página.');
             window.location.href = 'login.html';
         } else {
-            // Preenche os dados no HTML
-            document.getElementById('nome-usuario').textContent = candidato.nome;
-            document.getElementById('email-usuario').textContent = candidato.email;
-            
-            // Carrega as candidaturas do utilizador
-            carregarCandidaturas(candidato.id);
+            // Preenche os dados do utilizador no cabeçalho do perfil
+            document.getElementById('nome-exibir').textContent = candidato.nome || 'Utilizador';
+            document.getElementById('email-exibir').textContent = candidato.email || '-';
+            document.getElementById('telefone-exibir').textContent = candidato.telefone || 'Não informado';
+            if (candidato.resumo) {
+                document.getElementById('resumo-exibir').textContent = candidato.resumo;
+            }
+
+            // Carrega as candidaturas do utilizador a partir da base de dados MySQL
+            const idCandidato = candidato.id || candidato.id_candidato;
+            carregarCandidaturas(idCandidato);
         }
 
         async function carregarCandidaturas(idCandidato) {
-            const containerLista = document.getElementById('lista-candidaturas');
+            const containerLista = document.getElementById('grid-candidaturas');
 
             try {
                 const resposta = await fetch(`http://localhost:3000/api/candidaturas/${idCandidato}`);
@@ -84,130 +128,96 @@
 
                 if (resposta.ok) {
                     if (candidaturas.length === 0) {
-                        containerLista.innerHTML = '<p>Ainda não se candidatou a nenhuma vaga.</p>';
+                        containerLista.innerHTML = '<p style="color: #666; font-size: 14px;">Ainda não se candidatou a nenhuma vaga. Explore as oportunidades disponíveis!</p>';
                         return;
                     }
 
-                    let html = '<ul class="lista-vagas-perfil">';
-                    candidaturas.forEach(cand => {
-                        html += `
-                            <li class="item-candidatura">
-                                <h4>${cand.titulo}</h4>
-                                <p><strong>Setor:</strong> ${cand.setor} | <strong>Local:</strong> ${cand.localizacao}</p>
-                                <p><strong>Estado:</strong> <span class="status">${cand.status_candidatura}</span></p>
-                                <p><small>Candidatura feita em: ${new Date(cand.data_candidatura).toLocaleDateString('pt-BR')}</small></p>
-                            </li>
+                    containerLista.innerHTML = '';
+                    candidaturas.forEach(item => {
+                        const cardItem = document.createElement('div');
+                        cardItem.style.cssText = "padding: 15px; border: 1px solid #eee; border-radius: 6px; background: #fdfdfd; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;";
+
+                        cardItem.innerHTML = `
+                            <div>
+                                <h4 style="margin: 0 0 5px 0; color: #1a1a1a; font-size: 16px;">${item.titulo}</h4>
+                                <span style="font-size: 12px; color: #555; background: #f1f3f5; padding: 3px 8px; border-radius: 4px; font-weight: bold;">Setor: ${item.setor}</span>
+                                <p style="margin: 5px 0 0 0; font-size: 13px; color: #666;">📍 ${item.localizacao}</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <span style="display: inline-block; background: #e6fcf5; color: #0ca678; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold;">Candidatura Realizada</span>
+                                <br><small style="color: #888; font-size: 11px;">Data: ${new Date(item.data_candidatura).toLocaleDateString('pt-BR')}</small>
+                            </div>
                         `;
+                        containerLista.appendChild(cardItem);
                     });
-                    html += '</ul>';
-                    containerLista.innerHTML = html;
                 } else {
-                    containerLista.innerHTML = '<p>Erro ao carregar candidaturas.</p>';
+                    containerLista.innerHTML = '<p style="color: #d97706;">Erro ao carregar as candidaturas.</p>';
                 }
             } catch (erro) {
                 console.error('Erro de conexão:', erro);
-                containerLista.innerHTML = '<p>Não foi possível conectar ao servidor.</p>';
+                containerLista.innerHTML = '<p style="color: #d97706;">Não foi possível conectar ao servidor.</p>';
             }
         }
 
-        // Função de Terminar Sessão
         function logout() {
             localStorage.removeItem('candidatoLogado');
             window.location.href = 'login.html';
         }
-        // Funções para abrir e fechar o Modal
-function abrirModalEdicao() {
-    // Preenche os campos do modal com os dados atuais salvos no localStorage
-    document.getElementById('edit-nome').value = candidato.nome || '';
-    document.getElementById('edit-telefone').value = candidato.telefone || '';
-    document.getElementById('edit-resumo').value = candidato.resumo || '';
-    
-    document.getElementById('modal-edicao').classList.remove('oculto');
-}
 
-function fecharModalEdicao() {
-    document.getElementById('modal-edicao').classList.add('oculto');
-}
-
-// Envio do formulário de edição para o backend
-document.getElementById('form-editar-perfil').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.append('nome', document.getElementById('edit-nome').value);
-    formData.append('telefone', document.getElementById('edit-telefone').value);
-    formData.append('resumo', document.getElementById('edit-resumo').value);
-    
-    const fotoFile = document.getElementById('edit-foto').files[0];
-    if (fotoFile) formData.append('foto', fotoFile);
-
-    const curriculoFile = document.getElementById('edit-curriculo').files[0];
-    if (curriculoFile) formData.append('curriculo', curriculoFile);
-
-    try {
-        const resposta = await fetch(`http://localhost:3000/api/candidatos/${candidato.id_candidato || candidato.id}`, {
-            method: 'PUT',
-            body: formData // O multer processa multipart/form-data automaticamente
-        });
-
-        const resultado = await resposta.json();
-
-        if (resposta.ok) {
-            alert(resultado.mensagem);
-            // Atualiza os dados no localStorage e recarrega a página
-            candidato.nome = document.getElementById('edit-nome').value;
-            candidato.telefone = document.getElementById('edit-telefone').value;
-            candidato.resumo = document.getElementById('edit-resumo').value;
-            localStorage.setItem('candidatoLogado', JSON.stringify(candidato));
+        function abrirModalEdicao() {
+            document.getElementById('edit-nome').value = candidato.nome || '';
+            document.getElementById('edit-telefone').value = candidato.telefone || '';
+            document.getElementById('edit-resumo').value = candidato.resumo || '';
             
-            location.reload();
-        } else {
-            alert(resultado.erro || 'Erro ao atualizar perfil.');
+            const modal = document.getElementById('modal-edicao');
+            modal.style.display = 'flex';
+            modal.classList.remove('oculto');
         }
-    } catch (erro) {
-        console.error('Erro de conexão:', erro);
-        alert('Não foi possível conectar ao servidor para atualizar.');
-    }
-});
-    </script>
 
-    <!-- MODAL DE EDIÇÃO DE PERFIL -->
-<div id="modal-edicao" class="modal-overlay oculto">
-    <div class="modal-conteudo">
-        <h3>Editar Meu Perfil</h3>
-        <form id="form-editar-perfil" enctype="multipart/form-data">
-            <div class="grupo-input">
-                <label for="edit-nome">Nome Completo</label>
-                <input type="text" id="edit-nome" required>
-            </div>
+        function fecharModalEdicao() {
+            const modal = document.getElementById('modal-edicao');
+            modal.style.display = 'none';
+            modal.classList.add('oculto');
+        }
+
+        document.getElementById('form-editar-perfil').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData();
+            formData.append('nome', document.getElementById('edit-nome').value);
+            formData.append('telefone', document.getElementById('edit-telefone').value);
+            formData.append('resumo', document.getElementById('edit-resumo').value);
             
-            <div class="grupo-input">
-                <label for="edit-telefone">Telefone</label>
-                <input type="text" id="edit-telefone" placeholder="(11) 99999-9999">
-            </div>
+            const fotoFile = document.getElementById('edit-foto').files[0];
+            if (fotoFile) formData.append('foto', fotoFile);
 
-            <div class="grupo-input">
-                <label for="edit-resumo">Resumo Profissional</label>
-                <textarea id="edit-resumo" rows="4" placeholder="Conte um pouco sobre a sua experiência..."></textarea>
-            </div>
+            const curriculoFile = document.getElementById('edit-curriculo').files[0];
+            if (curriculoFile) formData.append('curriculo', curriculoFile);
 
-            <div class="grupo-input">
-                <label for="edit-foto">Foto de Perfil (Imagem)</label>
-                <input type="file" id="edit-foto" accept="image/*">
-            </div>
+            try {
+                const resposta = await fetch(`http://localhost:3000/api/candidatos/${candidato.id_candidato || candidato.id}`, {
+                    method: 'PUT',
+                    body: formData
+                });
 
-            <div class="grupo-input">
-                <label for="edit-curriculo">Currículo em PDF</label>
-                <input type="file" id="edit-curriculo" accept=".pdf">
-            </div>
+                const resultado = await resposta.json();
 
-            <div class="modal-botoes">
-                <button type="button" onclick="fecharModalEdicao()" class="btn-cancelar">Cancelar</button>
-                <button type="submit" class="btn-profissional">Salvar Alterações</button>
-            </div>
-        </form>
-    </div>
-</div>
-
+                if (resposta.ok) {
+                    alert(resultado.mensagem);
+                    candidato.nome = document.getElementById('edit-nome').value;
+                    candidato.telefone = document.getElementById('edit-telefone').value;
+                    candidato.resumo = document.getElementById('edit-resumo').value;
+                    localStorage.setItem('candidatoLogado', JSON.stringify(candidato));
+                    
+                    location.reload();
+                } else {
+                    alert(resultado.erro || 'Erro ao atualizar perfil.');
+                }
+            } catch (erro) {
+                console.error('Erro de conexão:', erro);
+                alert('Não foi possível conectar ao servidor para atualizar.');
+            }
+        });
+    </script>
 </body>
 </html>
