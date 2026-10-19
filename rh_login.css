@@ -182,3 +182,9 @@ body.pagina-login-rh {
     padding: 20px;
     box-sizing: border-box;
 }
+
+/* Ajuste fino para os botões de alternância de abas no login do RH */
+.card-login-rh [style*="display: flex"] button {
+    font-size: 14px;
+    letter-spacing: 0.3px;
+}
