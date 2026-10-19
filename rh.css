@@ -404,3 +404,73 @@
 .btn-aprovar-modal:hover {
     background-color: #218838;
 }
+
+/* ========================================== */
+/* ESTILOS DA SEÇÃO DE BANCO DE TALENTOS NO RH  */
+/* ========================================== */
+
+.painel-banco-talentos {
+    margin-top: 40px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid #7A0000;
+}
+
+.painel-banco-talentos h3 {
+    color: #7A0000;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.25rem;
+}
+
+.painel-banco-talentos p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+/* Tabela de Talentos */
+.painel-banco-talentos table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.painel-banco-talentos th {
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 12px 15px;
+    font-weight: bold;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.painel-banco-talentos td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    color: #444;
+}
+
+/* Efeito ao passar o rato nas linhas da tabela */
+.painel-banco-talentos tbody tr:hover {
+    background-color: #fdfdfd;
+}
+
+/* Botão de Ver PDF */
+.painel-banco-talentos a.btn-ver-pdf {
+    background: #7A0000;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: bold;
+    display: inline-block;
+    transition: background 0.2s;
+}
+
+.painel-banco-talentos a.btn-ver-pdf:hover {
+    background: #5c0000;
+}

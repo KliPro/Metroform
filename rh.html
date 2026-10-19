@@ -20,16 +20,12 @@
     <!-- CABEÇALHO DO PAINEL ADMINISTRATIVO         -->
     <!-- ========================================== -->
     <header class="header-metroform">
-        <!-- Cabeçalho padronizado idêntico ao restante do site -->
-        
         <div class="logo">
-            <!-- Logotipo da empresa -->
             <a href="index.html">
                 <img src="img/logo.jpg" alt="Logo Metroform">
             </a>
         </div>
 
-        <!-- Perfil do Recrutador logado e botão de sair -->
         <div class="rh-perfil-topo">
             <span class="nome-gestor"><i class="fa-solid fa-user-tie"></i> Gestor RH (Metroform)</span>
             <a href="index.html" class="btn-sair"><i class="fa-solid fa-right-from-bracket"></i> Sair</a>
@@ -106,7 +102,6 @@
                         <td>Industrial</td>
                         <td><span class="badge-match alto">92% - Alto</span></td>
                         <td>
-                            <!-- Botão que chama a função JavaScript para abrir a modal passando os dados do Carlos -->
                             <button class="btn-acao visualizar" onclick="abrirModal('Carlos Moreira', 'Técnico de Manutenção', 'Industrial', '92% - Alto', 'Experiência sólida em manutenção corretiva e preventiva de máquinas industriais. Foco em metas e resiliência sob pressão.')" title="Ver Currículo"><i class="fa-solid fa-eye"></i></button>
                             <button class="btn-acao aprovar" title="Aprovar no Processo"><i class="fa-solid fa-check"></i></button>
                         </td>
@@ -127,7 +122,6 @@
                         <td>Engenharia</td>
                         <td><span class="badge-match medio">78% - Médio</span></td>
                         <td>
-                            <!-- Botão que abre a modal com os dados da Juliana -->
                             <button class="btn-acao visualizar" onclick="abrirModal('Juliana Souza', 'Analista de Processos', 'Engenharia', '78% - Médio', 'Formada em Engenharia de Produção, com forte atuação em melhoria contínua de processos e ferramentas de qualidade.')" title="Ver Currículo"><i class="fa-solid fa-eye"></i></button>
                             <button class="btn-acao aprovar" title="Aprovar no Processo"><i class="fa-solid fa-check"></i></button>
                         </td>
@@ -136,20 +130,46 @@
             </table>
         </div>
 
+        <!-- ========================================== -->
+        <!-- SEÇÃO: BANCO GERAL DE TALENTOS (DENTRO DA MAIN) -->
+        <!-- ========================================== -->
+        <div class="rh-tabela-container" style="margin-top: 40px;">
+            <div class="tabela-topo">
+                <div>
+                    <h3 style="margin: 0; color: #7A0000;"><i class="fa-solid fa-users-viewfinder"></i> Currículos - Banco Geral de Talentos</h3>
+                    <p style="margin: 5px 0 0 0; color: #666; font-size: 0.9rem;">Profissionais que enviaram o currículo espontaneamente pelo site.</p>
+                </div>
+            </div>
+
+            <table class="tabela-gestao">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Nome</th>
+                        <th style="width: 22%;">E-mail</th>
+                        <th style="width: 15%;">Telefone</th>
+                        <th style="width: 23%;">Resumo</th>
+                        <th style="width: 10%; text-align: center;">Currículo</th>
+                        <th style="width: 10%;">Data</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-banco-talentos">
+                    <!-- Os dados preenchidos via JavaScript entram aqui automaticamente -->
+                </tbody>
+            </table>
+        </div>
+
     </main>
 
     <!-- ========================================== -->
-    <!-- MODAL FLUTRANTE DE DETALHES DO CURRÍCULO   -->
+    <!-- MODAL FLUTUANTE DE DETALHES DO CURRÍCULO   -->
     <!-- ========================================== -->
     <div id="modal-curriculo" class="modal-fundo">
         <div class="modal-conteudo">
-            <!-- Cabeçalho da Janela Modal -->
             <div class="modal-cabecalho">
                 <h3>Detalhes do Currículo / Perfil</h3>
                 <button class="btn-fechar" onclick="fecharModal()"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
-            <!-- Corpo Dinâmico da Modal onde os dados do candidato aparecem -->
             <div class="modal-corpo">
                 <p><strong>Candidato(a):</strong> <span id="modal-nome">---</span></p>
                 <p><strong>Vaga Pretendida:</strong> <span id="modal-vaga">---</span></p>
@@ -160,7 +180,6 @@
                 <p id="modal-resumo" style="color: #666; margin-top: 5px; line-height: 1.5;">---</p>
             </div>
 
-            <!-- Rodapé da Modal com botões de tomada de decisão do RH -->
             <div class="modal-rodape">
                 <button class="btn-rejeitar" onclick="fecharModal()">Reprovar</button>
                 <button class="btn-aprovar-modal" onclick="alert('Candidato aprovado para a próxima fase com sucesso!'); fecharModal();">Aprovar Candidato</button>
@@ -169,113 +188,131 @@
     </div>
 
     <!-- ========================================== -->
-<!-- MODAL DE CADASTRO DE NOVA VAGA PELO RH     -->
-<!-- ========================================== -->
-<div id="modal-nova-vaga" class="modal-fundo">
-    <div class="modal-conteudo">
-        <!-- Cabeçalho da Janela Modal -->
-        <div class="modal-cabecalho">
-            <h3>Cadastrar Nova Oportunidade</h3>
-            <button class="btn-fechar" onclick="fecharModalVaga()"><i class="fa-solid fa-xmark"></i></button>
-        </div>
+    <!-- MODAL DE CADASTRO DE NOVA VAGA PELO RH     -->
+    <!-- ========================================== -->
+    <div id="modal-nova-vaga" class="modal-fundo">
+        <div class="modal-conteudo">
+            <div class="modal-cabecalho">
+                <h3>Cadastrar Nova Oportunidade</h3>
+                <button class="btn-fechar" onclick="fecharModalVaga()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
 
-        <!-- Formulário de cadastro preenchido pelo gestor -->
-        <div class="modal-corpo">
-            <form id="form-cadastrar-vaga">
-                <div class="grupo-input" style="margin-bottom: 15px;">
-                    <label for="input-titulo-vaga" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Título do Cargo</label>
-                    <input type="text" id="input-titulo-vaga" placeholder="Ex: Desenvolvedor Front-End" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
-                </div>
+            <div class="modal-corpo">
+                <form id="form-cadastrar-vaga">
+                    <div class="grupo-input" style="margin-bottom: 15px;">
+                        <label for="input-titulo-vaga" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Título do Cargo</label>
+                        <input type="text" id="input-titulo-vaga" placeholder="Ex: Desenvolvedor Front-End" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                    </div>
 
-                <div class="grupo-input" style="margin-bottom: 15px;">
-                    <label for="input-setor-vaga" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Setor</label>
-                    <input type="text" id="input-setor-vaga" placeholder="Ex: Tecnologia / Engenharia" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
-                </div>
+                    <div class="grupo-input" style="margin-bottom: 15px;">
+                        <label for="input-setor-vaga" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Setor</label>
+                        <input type="text" id="input-setor-vaga" placeholder="Ex: Tecnologia / Engenharia" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                    </div>
 
-                <div class="grupo-input" style="margin-bottom: 15px;">
-                    <label for="input-local-vaga" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Localização</label>
-                    <input type="text" id="input-local-vaga" placeholder="Ex: Guarulhos / SP" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
-                </div>
+                    <div class="grupo-input" style="margin-bottom: 15px;">
+                        <label for="input-local-vaga" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Localização</label>
+                        <input type="text" id="input-local-vaga" placeholder="Ex: Guarulhos / SP" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                    </div>
 
-                <div class="grupo-input" style="margin-bottom: 15px;">
-                    <label for="input-requisitos-vaga" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Requisitos Principais</label>
-                    <input type="text" id="input-requisitos-vaga" placeholder="Ex: Experiência com HTML, CSS e Git." required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
-                </div>
+                    <div class="grupo-input" style="margin-bottom: 15px;">
+                        <label for="input-requisitos-vaga" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Requisitos Principais</label>
+                        <input type="text" id="input-requisitos-vaga" placeholder="Ex: Experiência com HTML, CSS e Git." required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                    </div>
 
-                <!-- Rodapé com botão de salvar -->
-                <div style="text-align: right; margin-top: 20px;">
-                    <button type="submit" class="btn-aprovar-modal">Publicar Vaga</button>
-                </div>
-            </form>
+                    <div style="text-align: right; margin-top: 20px;">
+                        <button type="submit" class="btn-aprovar-modal">Publicar Vaga</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
     <!-- ========================================== -->
-    <!-- SCRIPT JAVASCRIPT PARA CONTROLAR A MODAL   -->
+    <!-- SCRIPTS JAVASCRIPT                         -->
     <!-- ========================================== -->
     <script>
-    /* Verifica se o gestor realizou o login na sessão atual */
-    if (localStorage.getItem('rhLogado') !== 'true') {
-        alert('Acesso restrito! Por favor, faça login com as credenciais do RH.');
-        window.location.href = 'rh_login.html';
-    }
+        if (localStorage.getItem('rhLogado') !== 'true') {
+            alert('Acesso restrito! Por favor, faça login com as credenciais do RH.');
+            window.location.href = 'rh_login.html';
+        }
 
-    /* Funções para abrir e fechar a modal de currículo (já existentes) */
-    function abrirModal(nome, vaga, setor, match, resumo) {
-        document.getElementById('modal-nome').innerText = nome;
-        document.getElementById('modal-vaga').innerText = vaga;
-        document.getElementById('modal-setor').innerText = setor;
-        document.getElementById('modal-match').innerText = match;
-        document.getElementById('modal-resumo').innerText = resumo;
-        document.getElementById('modal-curriculo').style.display = 'flex';
-    }
+        function abrirModal(nome, vaga, setor, match, resumo) {
+            document.getElementById('modal-nome').innerText = nome;
+            document.getElementById('modal-vaga').innerText = vaga;
+            document.getElementById('modal-setor').innerText = setor;
+            document.getElementById('modal-match').innerText = match;
+            document.getElementById('modal-resumo').innerText = resumo;
+            document.getElementById('modal-curriculo').style.display = 'flex';
+        }
 
-    function fecharModal() {
-        document.getElementById('modal-curriculo').style.display = 'none';
-    }
+        function fecharModal() {
+            document.getElementById('modal-curriculo').style.display = 'none';
+        }
 
-    /* --- NOVAS FUNÇÕES PARA O CADASTRO DE VAGAS --- */
+        document.querySelector('.btn-nova-vaga').addEventListener('click', function() {
+            document.getElementById('modal-nova-vaga').style.display = 'flex';
+        });
 
-    // Seleciona o botão de "Cadastrar Nova Vaga" na tabela para abrir o modal
-    document.querySelector('.btn-nova-vaga').addEventListener('click', function() {
-        document.getElementById('modal-nova-vaga').style.display = 'flex';
-    });
+        function fecharModalVaga() {
+            document.getElementById('modal-nova-vaga').style.display = 'none';
+        }
 
-    // Função para fechar o modal de nova vaga
-    function fecharModalVaga() {
-        document.getElementById('modal-nova-vaga').style.display = 'none';
-    }
+        document.getElementById('form-cadastrar-vaga').addEventListener('submit', function(e) {
+            e.preventDefault();
 
-    // Evento que captura o envio do formulário de nova vaga
-    document.getElementById('form-cadastrar-vaga').addEventListener('submit', function(e) {
-        e.preventDefault(); // Evita que a página recarregue sozinha
+            const novaVaga = {
+                titulo: document.getElementById('input-titulo-vaga').value,
+                setor: document.getElementById('input-setor-vaga').value,
+                local: document.getElementById('input-local-vaga').value,
+                requisitos: document.getElementById('input-requisitos-vaga').value
+            };
 
-        // Pega os valores digitados nos inputs
-        const novaVaga = {
-            titulo: document.getElementById('input-titulo-vaga').value,
-            setor: document.getElementById('input-setor-vaga').value,
-            local: document.getElementById('input-local-vaga').value,
-            requisitos: document.getElementById('input-requisitos-vaga').value
-        };
+            let vagasSalvas = JSON.parse(localStorage.getItem('vagasMetroform')) || [];
+            vagasSalvas.push(novaVaga);
+            localStorage.setItem('vagasMetroform', JSON.stringify(vagasSalvas));
 
-        // Busca as vagas já salvas no navegador (ou cria uma lista vazia caso não tenha nenhuma)
-        let vagasSalvas = JSON.parse(localStorage.getItem('vagasMetroform')) || [];
+            alert('Vaga cadastrada e publicada na página principal com sucesso!');
+            fecharModalVaga();
+            document.getElementById('form-cadastrar-vaga').reset();
+        });
 
-        // Adiciona a nova vaga no início da lista
-        vagasSalvas.push(novaVaga);
+        async function carregarBancoTalentosRH() {
+            try {
+                const resposta = await fetch('http://localhost:3000/api/banco-talentos');
+                const talentos = await resposta.json();
 
-        // Salva a lista atualizada no armazenamento do navegador (localStorage)
-        localStorage.setItem('vagasMetroform', JSON.stringify(vagasSalvas));
+                const tbody = document.getElementById('tabela-banco-talentos');
+                if (!tbody) return;
 
-        alert('Vaga cadastrada e publicada na página principal com sucesso!');
-        
-        // Fecha o modal e limpa o formulário
-        fecharModalVaga();
-        document.getElementById('form-cadastrar-vaga').reset();
-    });
-</script>
+                tbody.innerHTML = '';
 
+                if (talentos.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 20px; color: #666;">Nenhum currículo encontrado no banco de talentos.</td></tr>';
+                    return;
+                }
+
+                talentos.forEach(talento => {
+                    const tr = document.createElement('tr');
+
+                    tr.innerHTML = `
+                        <td style="font-weight: bold; color: #333;">${talento.nome}</td>
+                        <td style="color: #555;">${talento.email}</td>
+                        <td style="color: #555;">${talento.telefone || 'Não informado'}</td>
+                        <td style="color: #666; font-size: 0.9rem;">${talento.resumo || 'Sem resumo'}</td>
+                        <td style="text-align: center;">
+                            <a href="http://localhost:3000/uploads/${talento.curriculo_pdf}" target="_blank" style="background: #7A0000; color: white; padding: 6px 12px; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: bold; display: inline-block;">Ver PDF</a>
+                        </td>
+                        <td style="color: #666; font-size: 0.9rem;">${new Date(talento.data_envio).toLocaleDateString('pt-BR')}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+            } catch (erro) {
+                console.error('Erro ao carregar banco de talentos para o RH:', erro);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', carregarBancoTalentosRH);
+    </script>
 </body>
 </html>
-<!-- Fim do documento HTML do painel de RH com Modal integrada -->
