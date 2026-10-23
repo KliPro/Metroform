@@ -1,465 +1,87 @@
-/* ========================================== */
-/* ESTILOS EXCLUSIVOS DO PAINEL DO RH         */
-/* ========================================== */
-
-/* Fundo geral da página administrativa em tom cinza claro corporativo */
-.pagina-rh {
-    background-color: var(--metroform-gray, #f8f9fa);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    padding: 0;
-}
-
-/* ========================================== */
-/* CABEÇALHO PADRONIZADO DA ÁREA DE RH        */
-/* ========================================== */
-
-.header-metroform {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 22px 5%;
-    background-color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    position: relative;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 1000;
-    border-top: 4px solid #8B0000; /* Listra vermelha oficial no topo */
-}
-
-.logo img {
-    height: 52px;
-    width: auto;
-    display: block;
-    image-rendering: -webkit-optimize-contrast;
-}
-
-/* Área que exibe o perfil do gestor logado e o botão de saída */
-.rh-perfil-topo {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.nome-gestor {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--metroform-dark, #1a1a1a);
-}
-
-.nome-gestor i {
-    color: #8B0000;
-    margin-right: 5px;
-}
-
-/* Botão de sair do sistema */
-.btn-sair {
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-size: 13px;
-    font-weight: bold;
-    border: 1px solid #8B0000;
-    color: #8B0000;
-    background-color: transparent;
-    transition: all 0.3s ease;
-}
-
-.btn-sair:hover {
-    background-color: #8B0000;
-    color: white;
-}
-
-/* ========================================== */
-/* CONTAINER PRINCIPAL DO PAINEL              */
-/* ========================================== */
-
-.container-rh {
-    max-width: 1200px;
-    width: 100%;
-    margin: 40px auto;
-    padding: 0 5%;
-    box-sizing: border-box;
-    flex: 1;
-}
-
-/* Cabeçalho da seção interna */
-.rh-cabecalho-secao {
-    margin-bottom: 30px;
-}
-
-.rh-cabecalho-secao h2 {
-    font-size: 26px;
-    color: var(--metroform-dark, #1a1a1a);
-    margin-bottom: 6px;
-    font-weight: 700;
-}
-
-.rh-cabecalho-secao p {
-    font-size: 14px;
-    color: #666;
-}
-
-/* ========================================== */
-/* CARDS DE MÉTRICAS E INDICADORES RÁPIDOS    */
-/* ========================================== */
-
-.rh-cards-metricas {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
-    margin-bottom: 40px;
-}
-
-.metrica-card {
-    background: white;
-    padding: 20px 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    border-left: 4px solid #8B0000; /* Detalhe lateral em destaque */
-}
-
-.metrica-card i {
-    font-size: 28px;
-    color: #8B0000;
-    background: rgba(139, 0, 0, 0.08);
-    padding: 15px;
-    border-radius: 8px;
-}
-
-.metrica-card h3 {
-    font-size: 24px;
-    color: var(--metroform-dark, #1a1a1a);
-    font-weight: 700;
-    margin-bottom: 2px;
-}
-
-.metrica-card p {
-    font-size: 13px;
-    color: #666;
-    font-weight: 500;
-}
-
-/* ========================================== */
-/* TABELA DE GESTÃO DE CANDIDATOS             */
-/* ========================================== */
-
-.rh-tabela-container {
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-}
-
-.tabela-topo {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.tabela-topo h3 {
-    font-size: 18px;
-    color: var(--metroform-dark, #1a1a1a);
-    font-weight: 700;
-}
-
-/* Botão para cadastrar nova vaga */
-.btn-nova-vaga {
-    background-color: #8B0000;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.btn-nova-vaga:hover {
-    background-color: #6b0000;
-}
-
-/* Estruturação da tabela HTML */
-.tabela-gestao {
-    width: 100%;
-    border-collapse: collapse; /* Une as bordas da tabela */
-    text-align: left;
-}
-
-.tabela-gestao th {
-    background-color: #f1f3f5;
-    color: #444;
-    padding: 12px 15px;
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.tabela-gestao td {
-    padding: 15px;
-    border-bottom: 1px solid #eaeaea;
-    font-size: 14px;
-    color: #333;
-    vertical-align: middle;
-}
-
-/* Estilo do avatar e informações do candidato */
-.info-candidato {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.avatar-inicial {
-    width: 38px;
-    height: 38px;
-    background-color: rgba(139, 0, 0, 0.1);
-    color: #8B0000;
-    font-weight: bold;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%; /* Deixa o círculo perfeito */
-}
-
-.info-candidato strong {
-    display: block;
-    color: var(--metroform-dark, #1a1a1a);
-    font-size: 14px;
-}
-
-.info-candidato small {
-    color: #777;
-    font-size: 12px;
-}
-
-/* Distintivos (Badges) de Compatibilidade / Match */
-.badge-match {
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-    display: inline-block;
-}
-
-.badge-match.alto {
-    background-color: #d4edda;
-    color: #155724; /* Verde para match alto */
-}
-
-.badge-match.medio {
-    background-color: #fff3cd;
-    color: #856404; /* Amarelo/Laranja para match médio */
-}
-
-/* Botões de ação rápida na tabela (Ver e Aprovar) */
-.btn-acao {
-    background: #f1f3f5;
-    border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s;
-    color: #555;
-    margin-right: 5px;
-}
-
-.btn-acao.visualizar:hover {
-    background-color: #007bff;
-    color: white;
-}
-
-.btn-acao.aprovar:hover {
-    background-color: #28a745;
-    color: white;
-}
-
-/* ========================================== */
-/* ESTILOS DA JANELA MODAL DE CURRÍCULO       */
-/* ========================================== */
-
-/* Fundo escurecido translúcido que cobre a tela inteira quando a modal abre */
-.modal-fundo {
-    display: none;             /* Oculto por padrão até que o usuário clique em ver currículo */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Preto com 50% de transparência */
-    z-index: 2000;             /* Garante que fique acima de todos os elementos da página */
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-/* Caixa centralizada da Modal */
-.modal-conteudo {
-    background: white;
-    width: 100%;
-    max-width: 500px;
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    animation: fadeInModal 0.3s ease; /* Efeito suave de aparição */
-}
-
-/* Animação suave para a modal surgir */
-@keyframes fadeInModal {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Cabeçalho da modal */
-.modal-cabecalho {
-    background-color: var(--metroform-dark, #1a1a1a);
-    color: white;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-cabecalho h3 {
-    font-size: 16px;
-    font-weight: 600;
-}
-
-/* Botão de fechar (X) */
-.btn-fechar {
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-/* Corpo interno da modal */
-.modal-corpo {
-    padding: 20px;
-    font-size: 14px;
-    color: #333;
-}
-
-.modal-corpo p {
-    margin-bottom: 10px;
-}
-
-/* Rodapé da modal com botões de decisão */
-.modal-rodape {
-    background-color: #f8f9fa;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    border-top: 1px solid #eaeaea;
-}
-
-/* Botão de reprovar */
-.btn-rejeitar {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-size: 13px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.btn-rejeitar:hover {
-    background-color: #bd2130;
-}
-
-/* Botão de aprovar na modal */
-.btn-aprovar-modal {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-size: 13px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.btn-aprovar-modal:hover {
-    background-color: #218838;
-}
-
-/* ========================================== */
-/* ESTILOS DA SEÇÃO DE BANCO DE TALENTOS NO RH  */
-/* ========================================== */
-
-.painel-banco-talentos {
+/* Adicione estas classes no seu arquivo rh.css para manter tudo limpo */
+.secao-banco-talentos-rh {
     margin-top: 40px;
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    border-top: 4px solid #7A0000;
 }
 
-.painel-banco-talentos h3 {
+.titulo-banco-rh h3 {
+    margin: 0;
     color: #7A0000;
-    margin-top: 0;
-    margin-bottom: 8px;
-    font-size: 1.25rem;
 }
 
-.painel-banco-talentos p {
+.titulo-banco-rh p {
+    margin: 5px 0 0 0;
     color: #666;
     font-size: 0.9rem;
-    margin-bottom: 20px;
 }
 
-/* Tabela de Talentos */
-.painel-banco-talentos table {
+.col-nome { width: 20%; }
+.col-email { width: 22%; }
+.col-tel { width: 15%; }
+.col-resumo { width: 23%; }
+.col-curriculo { width: 10%; text-align: center; }
+.col-data { width: 10%; }
+
+.modal-divisor {
+    margin: 15px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.modal-texto-resumo {
+    color: #666;
+    margin-top: 5px;
+    line-height: 1.5;
+}
+
+.grupo-input {
+    margin-bottom: 15px;
+}
+
+.grupo-input label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.grupo-input input {
     width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-    font-size: 0.95rem;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
-.painel-banco-talentos th {
-    background-color: #f8f9fa;
-    color: #333;
-    padding: 12px 15px;
+.grupo-botoes-form {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.tabela-vazia-msg {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.td-nome {
     font-weight: bold;
-    border-bottom: 2px solid #dee2e6;
+    color: #333;
 }
 
-.painel-banco-talentos td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #eee;
-    color: #444;
+.td-email, .td-tel {
+    color: #555;
 }
 
-/* Efeito ao passar o rato nas linhas da tabela */
-.painel-banco-talentos tbody tr:hover {
-    background-color: #fdfdfd;
+.td-resumo {
+    color: #666;
+    font-size: 0.9rem;
 }
 
-/* Botão de Ver PDF */
-.painel-banco-talentos a.btn-ver-pdf {
+.td-acao-pdf {
+    text-align: center;
+}
+
+.btn-ver-pdf {
     background: #7A0000;
     color: white;
     padding: 6px 12px;
@@ -468,9 +90,9 @@
     font-size: 0.85rem;
     font-weight: bold;
     display: inline-block;
-    transition: background 0.2s;
 }
 
-.painel-banco-talentos a.btn-ver-pdf:hover {
-    background: #5c0000;
+.td-data {
+    color: #666;
+    font-size: 0.9rem;
 }

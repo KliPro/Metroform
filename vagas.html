@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<!-- Informa ao navegador que este documento utiliza a versão moderna do HTML5 -->
 <html lang="pt-BR">
 <head>
-    <!-- Configurações básicas de codificação e responsividade -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metroform - Todas as Vagas Abertas</title>
@@ -10,8 +8,9 @@
     <!-- Importa a biblioteca FontAwesome para os ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Importa a folha de estilos principal do site -->
+    <!-- Importa as folhas de estilo -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="vagas.css">
 </head>
 <body>
 
@@ -20,13 +19,11 @@
     <!-- ========================================== -->
     <header class="header-metroform">
         <div class="logo">
-            <!-- Logotipo com link de retorno à página inicial -->
             <a href="index.html">
                 <img src="img/logo.jpg" alt="Logo Metroform">
             </a>
         </div>
         <div>
-            <!-- Botão de voltar ao início padronizado -->
             <a href="index.html" class="btn-profissional"><i class="fa-solid fa-arrow-left"></i> Voltar ao Início</a>
         </div>
     </header>
@@ -34,18 +31,18 @@
     <!-- ========================================== -->
     <!-- CONTEÚDO PRINCIPAL: LISTAGEM DE VAGAS      -->
     <!-- ========================================== -->
-    <main class="container-rh" style="max-width: 1000px; margin: 40px auto;">
+    <main class="container-vagas-pagina">
         
         <!-- Cabeçalho da Seção -->
-        <div class="rh-cabecalho-secao" style="text-align: center; margin-bottom: 40px;">
+        <div class="vagas-cabecalho-secao">
             <h2>Oportunidades em Aberto na Metroform</h2>
             <p>Explore todas as vagas disponíveis e encontre a que melhor se adapta ao seu perfil profissional.</p>
         </div>
 
         <!-- Barra de Filtros Rápidos -->
-        <div class="barra-filtros" style="display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center;">
-            <input type="text" id="filtro-busca" placeholder="Pesquisar por cargo ou palavra-chave..." style="padding: 10px 15px; width: 300px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
-            <select id="filtro-setor" style="padding: 10px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; background: white;">
+        <div class="barra-filtros">
+            <input type="text" id="filtro-busca" placeholder="Pesquisar por cargo ou palavra-chave...">
+            <select id="filtro-setor">
                 <option value="">Todos os Setores</option>
                 <option value="Industrial">Industrial</option>
                 <option value="Engenharia">Engenharia</option>
@@ -54,204 +51,52 @@
         </div>
 
         <!-- Grade onde as vagas estáticas e dinâmicas serão exibidas -->
-        <div class="grid-vagas-completa" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-    
-    <!-- Vaga Exemplo 01 -->
-    <div class="card-vaga" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border-top: 4px solid #8B0000;">
-        <h3 style="font-size: 18px; margin-bottom: 8px; color: #1a1a1a;">Técnico de Manutenção</h3>
-        <span class="setor" style="display: inline-block; background: #f1f3f5; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; color: #555; margin-bottom: 12px;">Setor: Industrial</span>
-        <p class="local" style="font-size: 13px; color: #666; margin-bottom: 10px;">📍 Guarulhos / SP</p>
-        <p class="requisitos" style="font-size: 13px; color: #444; margin-bottom: 20px;"><strong>Requisitos:</strong> Experiência prévia em manutenção de equipamentos industriais e disponibilidade de horários.</p>
-        <div class="card-botoes" style="display: flex; gap: 10px;">
-            <button class="btn-match" onclick="analisarMatch('Técnico de Manutenção', 'Industrial', 'Experiência prévia em manutenção de equipamentos industriais e disponibilidade de horários.', 1)" style="flex: 1; padding: 8px; background: transparent; border: 1px solid #8B0000; color: #8B0000; border-radius: 4px; font-weight: bold; cursor: pointer;">Ver Match</button>
-            <button class="btn-candidatar" onclick="candidatarVaga(1)" style="flex: 1; padding: 8px; background: #8B0000; border: none; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Candidatar-se</button>
-        </div>
-    </div>
+        <div class="grid-vagas-completa">
+            
+            <!-- Vaga Exemplo 01 -->
+            <div class="card-vaga">
+                <h3>Técnico de Manutenção</h3>
+                <span class="setor">Setor: Industrial</span>
+                <p class="local">📍 Guarulhos / SP</p>
+                <p class="requisitos"><strong>Requisitos:</strong> Experiência prévia em manutenção de equipamentos industriais e disponibilidade de horários.</p>
+                <div class="card-botoes">
+                    <button class="btn-match" onclick="analisarMatch('Técnico de Manutenção', 'Industrial', 'Experiência prévia em manutenção de equipamentos industriais e disponibilidade de horários.', 1)">Ver Match</button>
+                    <button class="btn-candidatar" onclick="candidatarVaga(1)">Candidatar-se</button>
+                </div>
+            </div>
 
-    <!-- Vaga Exemplo 02 -->
-    <div class="card-vaga" style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border-top: 4px solid #8B0000;">
-        <h3 style="font-size: 18px; margin-bottom: 8px; color: #1a1a1a;">Analista de Processos</h3>
-        <span class="setor" style="display: inline-block; background: #f1f3f5; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; color: #555; margin-bottom: 12px;">Setor: Engenharia</span>
-        <p class="local" style="font-size: 13px; color: #666; margin-bottom: 10px;">📍 Guarulhos / SP</p>
-        <p class="requisitos" style="font-size: 13px; color: #444; margin-bottom: 20px;"><strong>Requisitos:</strong> Superior completo em Engenharia de Produção, domínio de melhoria contínua e Excel avançado.</p>
-        <div class="card-botoes" style="display: flex; gap: 10px;">
-            <button class="btn-match" onclick="analisarMatch('Analista de Processos', 'Engenharia', 'Superior completo em Engenharia de Produção, domínio de melhoria contínua e Excel avançado.', 2)" style="flex: 1; padding: 8px; background: transparent; border: 1px solid #8B0000; color: #8B0000; border-radius: 4px; font-weight: bold; cursor: pointer;">Ver Match</button>
-            <button class="btn-candidatar" onclick="candidatarVaga(2)" style="flex: 1; padding: 8px; background: #8B0000; border: none; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Candidatar-se</button>
-        </div>
-    </div>
+            <!-- Vaga Exemplo 02 -->
+            <div class="card-vaga">
+                <h3>Analista de Processos</h3>
+                <span class="setor">Setor: Engenharia</span>
+                <p class="local">📍 Guarulhos / SP</p>
+                <p class="requisitos"><strong>Requisitos:</strong> Superior completo em Engenharia de Produção, domínio de melhoria contínua e Excel avançado.</p>
+                <div class="card-botoes">
+                    <button class="btn-match" onclick="analisarMatch('Analista de Processos', 'Engenharia', 'Superior completo em Engenharia de Produção, domínio de melhoria contínua e Excel avançado.', 2)">Ver Match</button>
+                    <button class="btn-candidatar" onclick="candidatarVaga(2)">Candidatar-se</button>
+                </div>
+            </div>
 
-</div>
+        </div>
     </main>
 
     <!-- MODAL DE VER MATCH -->
-<div id="modal-match" class="modal-overlay oculto" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: flex; justify-content: center; align-items: center; z-index: 2000;">
-    <div class="modal-conteudo" style="background-color: #ffffff; padding: 30px; border-radius: 10px; width: 100%; max-width: 450px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); border-top: 4px solid #8B0000; box-sizing: border-box; text-align: center;">
-        <h3 style="color: #8B0000; margin-top: 0; margin-bottom: 15px;"><i class="fa-solid fa-chart-pie"></i> Análise de Compatibilidade (Match)</h3>
-        
-        <div id="match-resultado" style="margin: 20px 0; font-size: 1.1rem; color: #333;">
-            <!-- O conteúdo da análise será injetado aqui via JavaScript -->
-        </div>
+    <div id="modal-match" class="modal-overlay oculto">
+        <div class="modal-conteudo-match">
+            <h3><i class="fa-solid fa-chart-pie"></i> Análise de Compatibilidade (Match)</h3>
+            
+            <div id="match-resultado">
+                <!-- O conteúdo da análise será injetado aqui via JavaScript -->
+            </div>
 
-        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 25px;">
-            <button type="button" onclick="fecharModalMatch()" class="btn-profissional" style="background-color: #666; border: none; padding: 10px 20px; border-radius: 5px; color: white; cursor: pointer; font-weight: bold;">Fechar</button>
-            <button type="button" id="btn-candidatar-match" class="btn-profissional" style="background-color: #8B0000; border: none; padding: 10px 20px; border-radius: 5px; color: white; cursor: pointer; font-weight: bold;">Candidatar-me Agora</button>
+            <div class="modal-botoes-match">
+                <button type="button" onclick="fecharModalMatch()" class="btn-profissional btn-cinza">Fechar</button>
+                <button type="button" id="btn-candidatar-match" class="btn-profissional btn-vermelho">Candidatar-me Agora</button>
+            </div>
         </div>
     </div>
-</div>
 
-    <script>
-    // Função para carregar as vagas diretamente da base de dados MySQL e aplicar o filtro de busca
-    async function carregarVagasDoBanco() {
-        try {
-            const resposta = await fetch('http://localhost:3000/api/vagas');
-            let vagas = await resposta.json();
-
-            const gridVagas = document.querySelector('.grid-vagas-completa');
-            if (!gridVagas) return;
-
-            // 1. Captura o termo de busca enviado pela URL (ex: ?busca=tecnico)
-            const urlParams = new URLSearchParams(window.location.search);
-            const termoBusca = urlParams.get('busca') ? urlParams.get('busca').toLowerCase().trim() : '';
-
-            // 2. Se houver um termo de pesquisa, filtra a lista de vagas recebida do banco
-            if (termoBusca) {
-                vagas = vagas.filter(vaga => 
-                    vaga.titulo.toLowerCase().includes(termoBusca) || 
-                    vaga.setor.toLowerCase().includes(termoBusca) || 
-                    (vaga.requisitos && vaga.requisitos.toLowerCase().includes(termoBusca)) ||
-                    (vaga.localizacao && vaga.localizacao.toLowerCase().includes(termoBusca))
-                );
-            }
-
-            // Limpa o grid antes de preencher
-            gridVagas.innerHTML = '';
-
-            if (vagas.length === 0) {
-                gridVagas.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: #666; font-size: 16px; padding: 20px;">Não foram encontradas vagas para "${termoBusca}".</p>`;
-                return;
-            }
-
-            // Cria os cartões dinamicamente para cada vaga filtrada do MySQL
-            vagas.forEach(vaga => {
-                const card = document.createElement('div');
-                card.className = 'card-vaga';
-                card.style.cssText = "background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border-top: 4px solid #8B0000;";
-
-            card.innerHTML = `
-                <h3 style="font-size: 18px; margin-bottom: 8px; color: #1a1a1a;">${vaga.titulo}</h3>
-                <span class="setor" style="display: inline-block; background: #f1f3f5; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; color: #555; margin-bottom: 12px;">Setor: ${vaga.setor}</span>
-                <p class="local" style="font-size: 13px; color: #666; margin-bottom: 10px;">📍 ${vaga.localizacao}</p>
-                <p class="requisitos" style="font-size: 13px; color: #444; margin-bottom: 20px;"><strong>Requisitos:</strong> ${vaga.requisitos}</p>
-                <div class="card-botoes" style="display: flex; gap: 10px;">
-                     <button class="btn-match" onclick="analisarMatch('${vaga.titulo}', '${vaga.setor}', '${vaga.requisitos}', ${vaga.id_vaga})" style="flex: 1; padding: 8px; background: transparent; border: 1px solid #8B0000; color: #8B0000; border-radius: 4px; font-weight: bold; cursor: pointer;">Ver Match</button>
-                     <button class="btn-candidatar" onclick="candidatarVaga(${vaga.id_vaga})" style="flex: 1; padding: 8px; background: #8B0000; border: none; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Candidatar-se</button>
-                 </div>
-            `;
-            gridVagas.appendChild(card);
-        });
-
-        } catch (erro) {
-            console.error('Erro ao carregar as vagas do servidor:', erro);
-        }
-    }
-
-    // Executa a função assim que a página é totalmente carregada
-    document.addEventListener('DOMContentLoaded', carregarVagasDoBanco);
-
-    // Função responsável por enviar a candidatura para o backend
-    async function candidatarVaga(idVaga) {
-        const candidato = JSON.parse(localStorage.getItem('candidatoLogado'));
-
-        if (!candidato) {
-            alert('Você precisa estar logado para se candidatar a uma vaga.');
-            window.location.href = 'login.html';
-            return;
-        }
-
-        try {
-            const resposta = await fetch('http://localhost:3000/api/candidaturas', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    id_candidato: candidato.id || candidato.id_candidato,
-                    id_vaga: idVaga
-                })
-            });
-
-            const resultado = await resposta.json();
-
-            if (resposta.ok) {
-                alert(resultado.mensagem);
-                window.location.href = 'perfil.html'; // Redireciona para o perfil para ver a candidatura listada
-            } else {
-                alert(resultado.erro || 'Erro ao efetuar a candidatura.');
-            }
-        } catch (erro) {
-            console.error('Erro de conexão:', erro);
-            alert('Não foi possível conectar ao servidor.');
-        }
-    }
-    // Função para calcular a compatibilidade do candidato com a vaga
-    function analisarMatch(tituloVaga, setorVaga, requisitosVaga, idVaga) {
-    const candidato = JSON.parse(localStorage.getItem('candidatoLogado'));
-
-    if (!candidato) {
-        alert('Faça login para verificar o seu nível de match com as vagas.');
-        window.location.href = 'login.html';
-        return;
-    }
-
-    const resumoCandidato = candidato.resumo ? candidato.resumo.toLowerCase() : '';
-    
-    // Algoritmo simples de cálculo de compatibilidade baseado em palavras-chave do resumo
-    let pontuacaoMatch = 50; // Base inicial de compatibilidade
-    let analiseTexto = "O seu perfil demonstra potencial para integrar esta equipa.";
-
-    if (resumoCandidato.length > 10) {
-        pontuacaoMatch += 20;
-    }
-
-    // Verifica se há semelhanças entre o setor/requisitos e o resumo do candidato
-    const reqs = requisitosVaga.toLowerCase();
-    if (resumoCandidato.includes(setorVaga.toLowerCase()) || reqs.split(' ').some(palavra => palavra.length > 3 && resumoCandidato.includes(palavra))) {
-        pontuacaoMatch += 25;
-        analiseTexto = "Excelente alinhamento! As competências descritas no seu resumo coincidem com os requisitos exigidos para esta vaga.";
-    } else if (resumoCandidato === '') {
-        pontuacaoMatch = 40;
-        analiseTexto = "O seu resumo profissional está vazio. Preencha o seu perfil para aumentar a precisão do Match!";
-    }
-
-    // Garante que a percentagem fica num intervalo realista (ex: 55% a 98%)
-    if (pontuacaoMatch > 98) pontuacaoMatch = 98;
-    if (pontuacaoMatch < 55 && resumoCandidato !== '') pontuacaoMatch = 65;
-
-    // Exibe os resultados no modal
-    const containerResultado = document.getElementById('match-resultado');
-    containerResultado.innerHTML = `
-        <div style="font-size: 2.5rem; font-weight: bold; color: ${pontuacaoMatch >= 75 ? '#2b8a3e' : '#d97706'}; margin-bottom: 10px;">
-            ${pontuacaoMatch}% de Match
-        </div>
-        <p style="font-weight: bold; color: #444; margin-bottom: 8px;">Vaga: ${tituloVaga}</p>
-        <p style="font-size: 0.95rem; color: #666; line-height: 1.4;">${analiseTexto}</p>
-    `;
-
-    // Configura o botão de candidatura rápida dentro do modal
-    document.getElementById('btn-candidatar-match').onclick = function() {
-        fecharModalMatch();
-        candidatarVaga(idVaga);
-    };
-
-    // Abre o modal (removendo a classe que o oculta, ou ajustando o display)
-    const modal = document.getElementById('modal-match');
-    modal.classList.remove('oculto');
-    modal.style.display = 'flex';
-}
-
-function fecharModalMatch() {
-    const modal = document.getElementById('modal-match');
-    modal.classList.add('oculto');
-    modal.style.display = 'none';
-}
-</script>
+    <!-- Script externo de vagas -->
+    <script src="vagas.js"></script>
 </body>
 </html>

@@ -1,206 +1,154 @@
-/* ========================================== */
-/* CONFIGURAÇÕES GERAIS E VARIÁVEIS DO SITE   */
-/* ========================================== */
 
-/* Torna a rolagem da página suave e animada ao clicar nos links do menu superior */
+/* CONFIGURAÇÕES GERAIS E VARIÁVEIS DO SITE   */
+
+/* Torna a rolagem da página suave e animada ao clicar nos links de âncora do menu superior */
 html {
     scroll-behavior: smooth;
 }
 
-/* Seletor universal (*): Aplica a regra para todos os elementos da página */
+/* Seletor universal (*): Aplica as regras de reset para todos os elementos da página */
 * {
-    margin: 0;      /* Remove as margens padrão indesejadas do navegador */
-    padding: 0;      /* Remove os preenchimentos padrão */
-    box-sizing: border-box; /* Garante que bordas e preenchimentos não aumentem o tamanho real das caixas */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Define a fonte padrão limpa e moderna */
+    margin: 0;       /* Remove as margens padrão indesejadas de todos os elementos */
+    padding: 0;      /* Remove os preenchimentos internos padrão */
+    box-sizing: border-box; /* Garante que bordas e paddings não aumentem o tamanho real programado das caixas */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Define a tipografia padrão limpa e moderna */
 }
 
-/* Raiz (:root): Armazena as cores oficiais da marca para reutilizar em todo o código */
+/* Raiz (:root): Armazena as cores oficiais da identidade visual da marca para reutilizar em todo o código */
 :root {
     --metroform-red: #8B0000;   /* Cor primária: Vermelho/Vinho corporativo da Metroform */
-    --metroform-dark: #1a1a1a;  /* Cor escura: Tons de cinza bem escuro para textos e rodapé */
-    --metroform-gray: #f8f9fa;  /* Cor de fundo leve: Cinza claro para destacar seções */
+    --metroform-dark: #1a1a1a;  /* Cor escura: Tons de cinza bem escuro para textos e fundos de rodapé */
+    --metroform-gray: #f8f9fa;  /* Cor de fundo leve: Cinza claro neutro para destacar seções */
 }
 
-/* ========================================== */
-/* ESTILOS DO CABEÇALHO (HEADER)              */
-/* ========================================== */
+/* ESTILOS DO CABEÇALHO (HEADER) */
 
-/* --- CABEÇALHO --- */
+/* Estilização da barra de cabeçalho superior fixa */
 .header-metroform {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 22px 5%; /* Aumentamos de 15px para 22px para dar mais altura e elegância ao cabeçalho */
-    background-color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-top: 4px solid var(--metroform-red);
+    display: flex; /* Utiliza Flexbox para alinhar os itens horizontalmente */
+    justify-content: space-between; /* Separa a logo à esquerda e os botões/links à direita */
+    align-items: center; /* Centraliza os elementos verticalmente no cabeçalho */
+    padding: 30px 5%; /* Define o espaçamento interno superior/inferior (22px) e lateral (5%) */
+    background-color: #ffffff; /* Fundo totalmente branco */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06); /* Aplica uma sombra suave abaixo do cabeçalho */
+    position: sticky; /* Mantém o cabeçalho fixo no topo conforme o usuário rola a página */
+    top: 0; /* Posiciona colado no topo absoluto da tela */
+    z-index: 1000; /* Garante que o cabeçalho fique sobreposto aos outros elementos da página */
+    border-top: 4px solid var(--metroform-red); /* Detalhe visual de uma linha vermelha no topo da barra */
 }
 
+/* Estilização da imagem da logo dentro do cabeçalho */
 .logo img {
-    height: 52px;   /* Aumentamos levemente de 45px para 52px para dar mais destaque */
-    width: auto;
-    display: block;
-    image-rendering: -webkit-optimize-contrast; /* Melhora a nitidez e o contraste de imagens redimensionadas */
+    height: 52px; /* Define a altura fixa da logo */
+    width: auto; /* Mantém a proporção correta da largura automaticamente */
+    display: block; /* Remove espaços indesejados abaixo da imagem */
+    image-rendering: -webkit-optimize-contrast; /* Otimiza a nitidez e contraste da imagem redimensionada */
 }
 
-/* Área dos links de navegação do menu */
+/* Container que agrupa os links do menu de navegação */
 .nav-links {
-    display: flex; /* Alinha os links do menu lado a lado */
-    gap: 25px;  /* Espaçamento uniforme de 25 pixels entre cada link */
+    display: flex; /* Alinha os links lado a lado */
+    gap: 40px; /* Define um espaçamento uniforme de 25 pixels entre cada link */
 }
 
-/* Estilização dos textos dos links do menu */
+/* Estilização visual dos links textuais do menu */
 .nav-links a {
-    text-decoration: none; /* Remove o sublinhado padrão dos links */
-    color: #444;    /* Cor cinza escura elegante para os textos */
-    font-weight: 600;   /* Deixa o texto semi-negrito */
-    font-size: 14px;    /* Tamanho de letra confortável */
-    transition: color 0.3s; /* Cria um efeito de transição suave ao mudar de cor */
+    text-decoration: none; /* Remove o sublinhado padrão de links */
+    color: black; /* Cor cinza escura elegante para os textos */
+    font-weight: 600; /* Deixa a fonte com espessura semi-negrito */
+    font-size: 13px; /* Tamanho de texto confortável para leitura */
+    transition: color 0.3s; /* Adiciona uma transição suave na mudança de cor */
 }
 
-/* Efeito ao passar o mouse por cima dos links do menu */
+/* Efeito visual ao passar o mouse por cima dos links do menu */
 .nav-links a:hover {
-    color: var(--metroform-red); /* O link muda para a cor vermelha oficial da marca */
+    color: var(--metroform-red); /* O texto muda para a cor vermelha oficial da marca */
 }
 
-/* Área que agrupa os botões de acesso do canto direito */
+/* Container que agrupa os botões de ação rápida à direita do cabeçalho */
 .acesso-buttons {
-    display: flex;  /* Alinha os dois botões lado a lado */
-    align-items: center; /* Centraliza verticalmente */
-    gap: 12px;     /* Espaço de 12 pixels entre um botão e outro */
+    display: flex; /* Alinha os botões lado a lado */
+    align-items: center; /* Centraliza os botões verticalmente */
+    gap: 12px; /* Espaço de 12 pixels entre os botões */
 }
 
-/* Estilização base para os botões do cabeçalho */
-.acesso-buttons a {
-    text-decoration: none;
-    padding: 9px 18px;   /* Espaçamento interno (altura e largura do botão) */
-    border-radius: 4px;  /* Arredonda levemente as pontas dos botões */
-    font-size: 13px;     /* Tamanho da fonte do botão */
-    font-weight: bold;   /* Texto em negrito */
-    transition: all 0.3s ease; /* Transição suave para efeitos de hover */
+/* Estilização base compartilhada entre botões e links de acesso no cabeçalho */
+.acesso-buttons button, .acesso-buttons a {
+    text-decoration: none; /* Remove sublinhado se for tag <a> */
+    padding: 10px 20px; /* Espaçamento interno (altura e largura do botão) */
+    border-radius: 8px; /* Arredonda levemente os cantos */
+    font-size: 13px; /* Tamanho da fonte do botão */
+    font-weight: bold; /* Deixa o texto em negrito */
+    cursor: pointer; /* Muda o cursor do mouse para a mãozinha ao passar por cima */
+    transition: all 0.3s ease; /* Suaviza todas as animações de mudança */
 }
 
-/* Estilo do botão de Cadastro/Entrar (Estilo com borda vazada) */
+/* Estilização do botão com borda vazada (Estilo profissional) */
 .btn-profissional {
-    border: 1px solid var(--metroform-red); /* Borda vermelha */
-    color: var(--metroform-red);  /* Texto vermelho */
-    background-color: transparent;  /* Fundo transparente */
+    border: 1px solid var(--metroform-red); /* Borda sólida na cor vermelha da marca */
+    color: var(--metroform-red); /* Texto interno na cor vermelha */
+    background-color: transparent; /* Fundo transparente */
 }
 
-/* Efeito ao passar o mouse no botão de Cadastro */
+/* Efeito ao passar o mouse sobre o botão profissional */
 .btn-profissional:hover {
-    background-color: var(--metroform-red); /* Preenche o fundo de vermelho */
-    color: white;  /* Texto fica branco */
+    background-color: var(--metroform-red); /* Preenche todo o fundo com a cor vermelha */
+    color: white; /* Torna o texto interno branco para contrastar */
 }
 
-/* Estilo do botão de Acesso RH (Estilo sólido preenchido) */
-.btn-recrutador {
-    background-color: var(--metroform-red); /* Fundo vermelho */
-    color: white;/* Texto branco */
-    border: 1px solid var(--metroform-red);
-}
-
-/* Efeito ao passar o mouse no botão de RH */
-.btn-recrutador:hover {
-    background-color: #6b0000; /* Vermelho mais escuro para indicar clique */
-}
-
-/* ========================================== */
 /* SEÇÃO PRINCIPAL / BANNER DE DESTAQUE (HERO)*/
-/* ========================================== */
 
+/* Estilização do banner principal de destaque no topo da página */
 .secao-principal {
-    /* Cria um fundo com imagem de obra escurecida por cima para destacar os textos */
-    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('img/fundo-obra.jpg') no-repeat center center/cover;
-    height: 75vh; /* O banner ocupa 75% da altura visível da tela */
-    display: flex; /* Alinha o conteúdo ao centro */
-    align-items: center;
-    justify-content: center;
-    text-align: center; /* Centraliza todos os textos */
-    color: white; /* Textos em branco para contrastar com o fundo escuro */
-    padding: 0 20px;
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('img/banner.jpg') no-repeat center center/cover; /* Aplica um filtro escuro translúcido sobre a imagem de fundo de obra */
+    height: 90vh; /* O banner ocupa 75% da altura total visível da tela */
+    display: flex; /* Alinha o conteúdo interno com Flexbox */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    text-align: center; /* Centraliza todo o texto */
+    color: white; /* Define a cor padrão dos textos como branca */
+    padding: 0 20px; /* Margem de segurança lateral de 20px */
 }
 
-/* Trava de largura máxima para o texto do banner não esticar demais em telas grandes */
+/* Container que limita a largura máxima do texto dentro do banner */
 .conteudo-principal {
-    max-width: 900px;
-    margin: 0 auto;
-    width: 100%;
+    max-width: 900px; /* Largura máxima para o texto não esticar demais em telas grandes */
+    margin: 0 auto; /* Centraliza o bloco na horizontal */
+    width: 100%; /* Ocupa 100% do espaço disponível até o limite do max-width */
 }
 
-/* Estilo do Título Principal (H1) */
+/* Estilização do título principal (H1) do banner */
 .conteudo-principal h1 {
-    font-size: 42px; /* Letra grande e de forte impacto */
-    margin-bottom: 12px; /* Espaço abaixo do título */
-    font-weight: 800; /* Negrito bem forte */
+    font-size: 42px; /* Tamanho de letra grande e de forte impacto visual */
+    margin-bottom: 12px; /* Espaçamento inferior em relação ao parágrafo */
+    font-weight: 800; /* Negrito bem encorpado */
 }
 
-/* Estilo do parágrafo descritivo do banner */
+/* Estilização do parágrafo descritivo abaixo do título principal */
 .conteudo-principal p {
-    font-size: 17px;
-    margin-bottom: 35px;
-    color: #ddd; /* Cinza claro suave */
-}
-
-/* Caixa branca arredondada que envolve o campo de pesquisa */
-.caixa-busca {
-    display: flex;
-    background: white;
-    padding: 6px;
-    border-radius: 6px;
-    max-width: 520px; /* Limita a largura máxima da barra de pesquisa */
-    margin: 0 auto;  /* Centraliza na tela */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Sombra elegante ao redor da barra */
-}
-
-/* Campo de input onde o usuário digita a busca */
-.caixa-busca input {
-    flex: 1; /* Ocupa todo o espaço disponível na barra */
-    border: none; /* Remove a borda padrão feia do navegador */
-    padding: 12px 15px;
-    outline: none; /* Remove a linha azul ao clicar dentro */
-    font-size: 15px;
-    color: #333;
-    border-radius: 4px;
-}
-
-/* Botão de pesquisar dentro da barra */
-.btn-buscar {
-    background-color: var(--metroform-red);
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.btn-buscar:hover {
-    background-color: #6b0000;
+    font-size: 17px; /* Tamanho confortável para leitura */
+    margin-bottom: 35px; /* Espaçamento inferior */
+    color: #ddd; /* Cor cinza claro suave */
 }
 
 /* ========================================== */
 /* SEÇÃO DE OPORTUNIDADES E VAGAS             */
 /* ========================================== */
 
+/* Estilização da seção de listagem de vagas */
 .secao-vagas {
-    padding: 70px 5%; /* Espaçamento interno em cima/baixo e laterais */
-    background-color: var(--metroform-gray); /* Fundo cinza claro para destacar das outras seções */
+    padding: 70px 5%; /* Espaçamento interno grande em cima/baixo e nas laterais */
+    background-color: var(--metroform-gray); /* Fundo cinza claro para diferenciar visualmente das outras seções */
 }
 
-/* Recipiente que trava a largura máxima da seção de vagas em 1200px */
+/* Container que centraliza e limita a largura máxima da seção de vagas em 1200px */
 .container-vagas {
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
 }
 
-/* Título da seção de vagas */
+/* Título principal da seção de vagas */
 .container-vagas h2 {
     text-align: center;
     font-size: 32px;
@@ -209,168 +157,79 @@ html {
     font-weight: 700;
 }
 
-/* Subtítulo da seção de vagas */
+/* Subtítulo descritivo da seção de vagas */
 .subtitulo-vagas {
     text-align: center;
-    color: #666;
+    color: #666; /* Cinza médio */
     margin-bottom: 45px;
     font-size: 16px;
 }
 
-/* Grade de cartões de vagas (responsiva) */
-.grid-vagas {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 480px)); /* Organiza os cards com limite de tamanho */
-    justify-content: center;
-    gap: 30px;         /* Espaço entre os cartões */
-    margin-bottom: 30px;
-}
-
-/* Estilo individual de cada cartão de vaga */
-.card-vaga {
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Sombra suave nos cards */
-    border-top: 4px solid var(--metroform-red); /* Detalhe vermelho no topo do cartão */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Empurra os botões sempre para o rodapé do card */
-    transition: transform 0.3s ease;
-}
-
-/* Efeito de leve elevação ao passar o mouse no card de vaga */
-.card-vaga:hover {
-    transform: translateY(-5px);
-}
-
-.card-vaga h3 {
-    font-size: 20px;
-    color: var(--metroform-dark);
-    margin-bottom: 8px;
-}
-
-/* Etiqueta de setor da vaga */
-.card-vaga .setor {
-    font-size: 12px;
-    font-weight: bold;
-    color: var(--metroform-red);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.card-vaga .local {
-    font-size: 14px;
-    color: #555;
-    margin: 10px 0;
-}
-
-.card-vaga .requisitos {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 25px;
-    line-height: 1.4;
-}
-
-/* Caixa que agrupa os botões de Match e Candidatura */
-.card-botoes {
-    display: flex;
-    gap: 12px;
-}
-
-/* Botão secundário "Ver Match" */
-.btn-match {
-    flex: 1;
-    background-color: #eef1f4; /* Cinza claro neutro */
-    color: #333;
-    border: none;
-    padding: 11px;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 13px;
-    transition: background 0.3s;
-}
-
-.btn-match:hover {
-    background-color: #dfe3e8;
-}
-
-/* Botão principal "Candidatar-se" */
-.btn-candidatar {
-    flex: 1;
-    background-color: var(--metroform-red);
-    color: white;
-    border: none;
-    padding: 11px;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 13px;
-    transition: background 0.3s;
-}
-
-.btn-candidatar:hover {
-    background-color: #6b0000;
-}
-
-/* Centralização do botão "Ver Todas as Vagas" */
+/* Container do botão para ver todas as vagas */
 .container-botoes-vagas {
-    text-align: center;
+    text-align: center; /* Centraliza o botão */
     margin-bottom: 15px;
 }
 
+/* Estilização do botão com borda escura "Ver Todas as Vagas" */
 .btn-todas-vagas {
     display: inline-block;
     background-color: transparent;
     color: var(--metroform-dark);
-    border: 2px solid var(--metroform-dark);
+    border: 2px solid var(--metroform-dark); /* Borda sólida na cor escura */
     padding: 10px 25px;
     border-radius: 4px;
     font-weight: bold;
     text-decoration: none;
     font-size: 14px;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; /* Transição suave para o efeito de hover */
 }
 
+/* Efeito ao passar o mouse no botão "Ver Todas as Vagas" */
 .btn-todas-vagas:hover {
-    background-color: var(--metroform-dark);
-    color: white;
+    background-color: var(--metroform-dark); /* Inverte preenchendo o fundo de escuro */
+    color: white; /* Texto fica branco */
 }
 
+/* Container centralizado para o link de envio de currículo espontâneo */
 .centro-banco-talentos {
     text-align: center;
     margin-top: 15px;
 }
 
+/* Estilização do link para o banco geral de talentos */
 .link-banco {
-    color: var(--metroform-red);
+    color: var(--metroform-red); /* Cor vermelha oficial */
     text-decoration: none;
     font-weight: bold;
     font-size: 15px;
     transition: color 0.3s;
 }
 
+/* Efeito ao passar o mouse sobre o link do banco de talentos */
 .link-banco:hover {
-    text-decoration: underline;
-    color: #6b0000;
+    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+    color: #6b0000; /* Tom de vermelho mais escuro */
 }
 
 /* ========================================== */
 /* SEÇÃO DE CULTURA E VALORES                 */
 /* ========================================== */
 
+/* Estilização da seção de cultura da empresa */
 .secao-cultura {
     padding: 70px 5%;
     background-color: #ffffff; /* Fundo totalmente branco */
 }
 
+/* Container de largura máxima para a seção de cultura */
 .container-cultura {
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
 }
 
+/* Título da seção de cultura */
 .container-cultura h2 {
     text-align: center;
     font-size: 32px;
@@ -379,63 +238,70 @@ html {
     font-weight: 700;
 }
 
-/* Organiza os 3 cards culturais lado a lado de forma fixa e alinhada */
+/* Grade Flexbox para organizar os 3 cartões de cultura lado a lado */
 .grid-cultura {
     display: flex;
-    justify-content: space-between;
-    gap: 30px;
-    flex-wrap: nowrap; /* Impede estritamente que os cards caiam para a linha de baixo */
+    justify-content: space-between; /* Distribui os espaços uniformemente entre os cards */
+    gap: 30px; /* Espaço de 30px entre os cartões */
+    flex-wrap: nowrap; /* Impede que os cartões quebrem de linha em telas grandes */
 }
 
+/* Estilização individual de cada cartão cultural */
 .card-cultura {
-    flex: 1; /* Faz com que os três cartões dividam o espaço de forma igual */
-    background: #fafafa;
-    padding: 35px 25px;
-    border-radius: 8px;
-    border: 1px solid #eaeaea; /* Borda bem sutil */
+    flex: 1; /* Faz com que os três cartões dividam o espaço de forma perfeitamente igual */
+    background: #fafafa; /* Fundo cinza bem claro */
+    padding: 35px 25px; /* Espaçamento interno do cartão */
+    border-radius: 8px; /* Arredonda os cantos */
+    border: 1px solid #eaeaea; /* Borda sutil ao redor do card */
     text-align: center;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease; /* Transição suave para o efeito de sombra no hover */
 }
 
+/* Efeito de elevação da sombra ao passar o mouse no cartão cultural */
 .card-cultura:hover {
-    box-shadow: 0 6px 15px rgba(0,0,0,0.08); /* Sombra maior ao passar o mouse */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08); /* Sombra mais marcada e elegante */
 }
 
-/* Estilização dos ícones da cultura */
+/* Estilização dos ícones vetoriais dentro dos cards culturais */
 .card-cultura i {
-    font-size: 30px;
-    color: var(--metroform-red);
-    margin-bottom: 15px;
+    font-size: 30px; /* Tamanho grande para destacar o ícone */
+    color: var(--metroform-red); /* Cor vermelha da marca */
+    margin-bottom: 15px; /* Espaço abaixo do ícone */
     display: block;
 }
 
+/* Título de cada item cultural */
 .card-cultura h3 {
     font-size: 18px;
     color: var(--metroform-dark);
     margin-bottom: 10px;
 }
 
+/* Parágrafo descritivo do cartão cultural */
 .card-cultura p {
     font-size: 14px;
     color: #666;
-    line-height: 1.6;
+    line-height: 1.6; /* Altura de linha aprimorada para leitura confortável */
 }
 
 /* ========================================== */
 /* SEÇÃO DE DIFERENCIAIS                      */
 /* ========================================== */
 
+/* Estilização da seção de diferenciais competitivos */
 .secao-diferenciais {
     padding: 70px 5%;
-    background-color: #f4f6f8; /* Fundo cinza bem suave */
+    background-color: #f4f6f8; /* Fundo cinza suave diferenciado */
 }
 
+/* Container de largura máxima para a seção de diferenciais */
 .container-diferenciais {
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
 }
 
+/* Título da seção de diferenciais */
 .container-diferenciais h2 {
     text-align: center;
     font-size: 32px;
@@ -444,7 +310,7 @@ html {
     font-weight: 700;
 }
 
-/* Organiza os 3 cards de diferenciais lado a lado de forma fixa e alinhada */
+/* Grade Flexbox para organizar os 3 itens de diferenciais lado a lado */
 .grid-diferenciais {
     display: flex;
     justify-content: space-between;
@@ -452,21 +318,23 @@ html {
     flex-wrap: nowrap;
 }
 
+/* Estilização individual de cada bloco de diferencial */
 .item-diferencial {
-    flex: 1; /* Divide o espaço perfeitamente em 3 partes iguais */
-    background: white;
+    flex: 1; /* Divide o espaço igualmente em 3 partes */
+    background: white; /* Fundo branco em destaque sobre o cinza da seção */
     padding: 35px 25px;
     border-radius: 8px;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-    transition: transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03); /* Sombra muito sutil */
+    transition: transform 0.3s ease; /* Transição suave para o efeito de deslocamento */
 }
 
+/* Efeito de leve movimento para cima ao passar o mouse no diferencial */
 .item-diferencial:hover {
-    transform: translateY(-3px);
+    transform: translateY(-3px); /* Move o card 3 pixels para cima */
 }
 
-/* Estilização dos ícones dos diferenciais */
+/* Estilização dos ícones dentro dos diferenciais */
 .item-diferencial i {
     font-size: 30px;
     color: var(--metroform-red);
@@ -474,12 +342,14 @@ html {
     display: block;
 }
 
+/* Título de cada diferencial */
 .item-diferencial h3 {
     font-size: 18px;
     color: var(--metroform-dark);
     margin-bottom: 10px;
 }
 
+/* Descrição do diferencial */
 .item-diferencial p {
     font-size: 14px;
     color: #666;
@@ -490,20 +360,185 @@ html {
 /* RODAPÉ DO SITE (FOOTER)                    */
 /* ========================================== */
 
+/* Estilização do rodapé institucional do site */
 .rodape-metroform {
     background-color: var(--metroform-dark); /* Fundo preto/cinza escuro corporativo */
-    color: #fff; /* Textos em branco */
+    color: #fff; /* Texto padrão em branco */
     text-align: center;
     padding: 30px 5%;
 }
 
+/* Parágrafos gerais dentro do rodapé */
 .rodape-metroform p {
     font-size: 14px;
     margin-bottom: 5px;
-    color: #ccc;/* Cinza claro para suavizar a leitura */
+    color: #ccc; /* Cinza claro para suavizar a leitura de direitos autorais */
 }
 
+/* Estilização específica para a nota de rodapé acadêmico */
 .texto-projeto {
     font-size: 12px;
-    color: #888; /* Cinza mais escuro para a nota de rodapé acadêmico */
+    color: #888; /* Cinza mais escuro para diferenciar discretamente */
+}
+
+/* ========================================== */
+/* ESTILOS DOS MODAIS E FORMULÁRIOS (NOVOS)   */
+
+/* Camada de fundo escuro translúcido para os modais flutuantes */
+.modal-overlay {
+    position: fixed; /* Fixa a sobreposição cobrindo toda a tela independentemente da rolagem */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo preto com 60% de opacidade (escuro e translúcido) */
+    display: none; /* Oculto por padrão (o JavaScript altera para flex ao abrir) */
+    justify-content: center; /* Centraliza a caixa branca horizontalmente */
+    align-items: center; /* Centraliza a caixa branca verticalmente */
+    z-index: 3000; /* Garante que fique acima de todos os outros elementos do site */
+}
+
+/* Caixa branca centralizada que abriga o conteúdo e formulários dos modais */
+.modal-box {
+    background-color: #ffffff; /* Fundo branco */
+    padding: 30px; /* Espaçamento interno */
+    border-radius: 10px; /* Cantos bem arredondados */
+    width: 100%;
+    max-width: 400px; /* Limita a largura máxima da caixa modal */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); /* Sombra marcante ao redor do modal */
+    border-top: 4px solid var(--metroform-red); /* Detalhe com a linha vermelha corporativa no topo da caixa */
+    box-sizing: border-box;
+    position: relative; /* Necessário para posicionar o botão de fechar "X" em relação à caixa */
+    max-height: 80vh; /* Altura máxima restrita a 80% da tela para evitar estouro */
+    overflow-y: auto; /* Adiciona barra de rolagem interna caso o conteúdo seja muito longo */
+}
+
+/* Botão de fechar ("X") posicionado no canto superior direito do modal */
+.modal-close {
+    position: absolute; /* Posicionamento absoluto em relação ao .modal-box */
+    top: 15px;
+    right: 15px;
+    background: transparent; /* Sem fundo */
+    border: none; /* Sem bordas */
+    font-size: 1.2rem; /* Tamanho grande para o símbolo "X" */
+    cursor: pointer;
+    color: #666;
+    font-weight: bold; 
+}
+
+/* Cabeçalho interno dos modais contendo título e subtítulo */
+.modal-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Título principal dentro do cabeçalho do modal */
+.modal-header h2 {
+    color: var(--metroform-red); /* Cor vermelha da marca */
+    margin: 0 0 5px 0;
+    font-size: 24px;
+}
+
+/* Subtítulo descritivo dentro do cabeçalho do modal */
+.modal-header p {
+    color: #666;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* Container de botões que funcionam como abas de navegação (ex: Entrar vs Criar Conta) */
+.auth-tabs {
+    display: flex;
+    background: #f1f3f5; /* Fundo cinza claro para destacar a barra de abas */
+    padding: 4px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+/* Estilo base para os botões de cada aba */
+.auth-tab-btn {
+    flex: 1; /* Divide o espaço igualmente entre as abas */
+    padding: 10px;
+    border: none;
+    background: transparent;
+    color: #555;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+/* Estado visual aplicado quando a aba está selecionada e ativa */
+.auth-tab-btn.ativo {
+    background: white; /* Fundo branco para destacar a aba ativa */
+    color: var(--metroform-red); /* Texto na cor vermelha oficial */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra sutil na aba ativa */
+}
+
+/* Bloco que agrupa cada campo de entrada de formulário (label + input) */
+.grupo-input {
+    margin-bottom: 15px; /* Espaço inferior entre os campos */
+    text-align: left;
+}
+
+/* Rótulo descritivo (label) acima de cada campo de input */
+.grupo-input label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+/* Estilização dos campos de digitação (input type text, email, password) */
+.grupo-input input {
+    width: 100%; /* Ocupa toda a largura disponível da caixa */
+    padding: 10px; /* Preenchimento interno confortável */
+    border: 1px solid #ccc; /* Borda cinza padrão */
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    outline: none; /* Remove a linha de foco padrão feia do navegador */
+}
+
+/* Efeito visual ao clicar e focar em um campo de input */
+.grupo-input input:focus {
+    border-color: var(--metroform-red); /* A borda muda para a cor vermelha da marca */
+}
+
+/* Botão principal de envio dentro dos modais de autenticação */
+.btn-submit-auth {
+    width: 100%; /* Ocupa 100% da largura do formulário */
+    padding: 12px;
+    background-color: var(--metroform-red); /* Fundo vermelho corporativo */
+    color: white; /* Texto branco */
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+/* Efeito ao passar o mouse sobre o botão de envio de autenticação */
+.btn-submit-auth:hover {
+    background-color: #6b0000; /* Vermelho mais escuro indicando interatividade */
+}
+
+/* Alinhamento para links auxiliares (ex: "Esqueceu sua senha?") */
+.acoes-extras {
+    text-align: right; /* Joga o link para o canto direito */
+    margin-bottom: 20px;
+}
+
+/* Estilização do link de ações extras */
+.acoes-extras a {
+    color: var(--metroform-red);
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+/* Efeito de sublinhado ao passar o mouse no link auxiliar */
+.acoes-extras a:hover {
+    text-decoration: underline;
 }

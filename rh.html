@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<!-- Informa ao navegador que este documento utiliza a versão padrão e moderna do HTML5 -->
 <html lang="pt-BR">
 <head>
-    <!-- Configurações fundamentais da página -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metroform - Painel do RH / Gestor</title>
@@ -10,11 +8,11 @@
     <!-- Importa a biblioteca FontAwesome para exibir ícones gráficos profissionais -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Importa a folha de estilos personalizada para a área de RH -->
+    <!-- Importa as folhas de estilos personalizados -->
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="rh.css">
 </head>
 <body class="pagina-rh">
-    <!-- Abre o corpo do documento com uma classe específica para o fundo do painel administrativo -->
 
     <!-- ========================================== -->
     <!-- CABEÇALHO DO PAINEL ADMINISTRATIVO         -->
@@ -75,7 +73,6 @@
                 <button class="btn-nova-vaga"><i class="fa-solid fa-plus"></i> Cadastrar Nova Vaga</button>
             </div>
 
-            <!-- Tabela estruturada de candidatos -->
             <table class="tabela-gestao">
                 <thead>
                     <tr>
@@ -87,7 +84,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Linha 01 da Tabela -->
                     <tr>
                         <td>
                             <div class="info-candidato">
@@ -106,8 +102,6 @@
                             <button class="btn-acao aprovar" title="Aprovar no Processo"><i class="fa-solid fa-check"></i></button>
                         </td>
                     </tr>
-
-                    <!-- Linha 02 da Tabela -->
                     <tr>
                         <td>
                             <div class="info-candidato">
@@ -130,34 +124,31 @@
             </table>
         </div>
 
-        <!-- ========================================== -->
-        <!-- SEÇÃO: BANCO GERAL DE TALENTOS (DENTRO DA MAIN) -->
-        <!-- ========================================== -->
-        <div class="rh-tabela-container" style="margin-top: 40px;">
+        <!-- SEÇÃO: BANCO GERAL DE TALENTOS -->
+        <div class="rh-tabela-container secao-banco-talentos-rh">
             <div class="tabela-topo">
-                <div>
-                    <h3 style="margin: 0; color: #7A0000;"><i class="fa-solid fa-users-viewfinder"></i> Currículos - Banco Geral de Talentos</h3>
-                    <p style="margin: 5px 0 0 0; color: #666; font-size: 0.9rem;">Profissionais que enviaram o currículo espontaneamente pelo site.</p>
+                <div class="titulo-banco-rh">
+                    <h3><i class="fa-solid fa-users-viewfinder"></i> Currículos - Banco Geral de Talentos</h3>
+                    <p>Profissionais que enviaram o currículo espontaneamente pelo site.</p>
                 </div>
             </div>
 
             <table class="tabela-gestao">
                 <thead>
                     <tr>
-                        <th style="width: 20%;">Nome</th>
-                        <th style="width: 22%;">E-mail</th>
-                        <th style="width: 15%;">Telefone</th>
-                        <th style="width: 23%;">Resumo</th>
-                        <th style="width: 10%; text-align: center;">Currículo</th>
-                        <th style="width: 10%;">Data</th>
+                        <th class="col-nome">Nome</th>
+                        <th class="col-email">E-mail</th>
+                        <th class="col-tel">Telefone</th>
+                        <th class="col-resumo">Resumo</th>
+                        <th class="col-curriculo">Currículo</th>
+                        <th class="col-data">Data</th>
                     </tr>
                 </thead>
                 <tbody id="tabela-banco-talentos">
-                    <!-- Os dados preenchidos via JavaScript entram aqui automaticamente -->
+                    <!-- Preenchido via JavaScript -->
                 </tbody>
             </table>
         </div>
-
     </main>
 
     <!-- ========================================== -->
@@ -175,9 +166,9 @@
                 <p><strong>Vaga Pretendida:</strong> <span id="modal-vaga">---</span></p>
                 <p><strong>Setor:</strong> <span id="modal-setor">---</span></p>
                 <p><strong>Compatibilidade (Match):</strong> <span id="modal-match">---</span></p>
-                <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
+                <hr class="modal-divisor">
                 <p><strong>Resumo Profissional / Habilidades:</strong></p>
-                <p id="modal-resumo" style="color: #666; margin-top: 5px; line-height: 1.5;">---</p>
+                <p id="modal-resumo" class="modal-texto-resumo">---</p>
             </div>
 
             <div class="modal-rodape">
@@ -199,27 +190,27 @@
 
             <div class="modal-corpo">
                 <form id="form-cadastrar-vaga">
-                    <div class="grupo-input" style="margin-bottom: 15px;">
-                        <label for="input-titulo-vaga" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Título do Cargo</label>
-                        <input type="text" id="input-titulo-vaga" placeholder="Ex: Desenvolvedor Front-End" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                    <div class="grupo-input">
+                        <label for="input-titulo-vaga">Título do Cargo</label>
+                        <input type="text" id="input-titulo-vaga" placeholder="Ex: Desenvolvedor Front-End" required>
                     </div>
 
-                    <div class="grupo-input" style="margin-bottom: 15px;">
-                        <label for="input-setor-vaga" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Setor</label>
-                        <input type="text" id="input-setor-vaga" placeholder="Ex: Tecnologia / Engenharia" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                    <div class="grupo-input">
+                        <label for="input-setor-vaga">Setor</label>
+                        <input type="text" id="input-setor-vaga" placeholder="Ex: Tecnologia / Engenharia" required>
                     </div>
 
-                    <div class="grupo-input" style="margin-bottom: 15px;">
-                        <label for="input-local-vaga" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Localização</label>
-                        <input type="text" id="input-local-vaga" placeholder="Ex: Guarulhos / SP" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                    <div class="grupo-input">
+                        <label for="input-local-vaga">Localização</label>
+                        <input type="text" id="input-local-vaga" placeholder="Ex: Guarulhos / SP" required>
                     </div>
 
-                    <div class="grupo-input" style="margin-bottom: 15px;">
-                        <label for="input-requisitos-vaga" style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Requisitos Principais</label>
-                        <input type="text" id="input-requisitos-vaga" placeholder="Ex: Experiência com HTML, CSS e Git." required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                    <div class="grupo-input">
+                        <label for="input-requisitos-vaga">Requisitos Principais</label>
+                        <input type="text" id="input-requisitos-vaga" placeholder="Ex: Experiência com HTML, CSS e Git." required>
                     </div>
 
-                    <div style="text-align: right; margin-top: 20px;">
+                    <div class="grupo-botoes-form">
                         <button type="submit" class="btn-aprovar-modal">Publicar Vaga</button>
                     </div>
                 </form>
@@ -227,92 +218,7 @@
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- SCRIPTS JAVASCRIPT                         -->
-    <!-- ========================================== -->
-    <script>
-        if (localStorage.getItem('rhLogado') !== 'true') {
-            alert('Acesso restrito! Por favor, faça login com as credenciais do RH.');
-            window.location.href = 'rh_login.html';
-        }
-
-        function abrirModal(nome, vaga, setor, match, resumo) {
-            document.getElementById('modal-nome').innerText = nome;
-            document.getElementById('modal-vaga').innerText = vaga;
-            document.getElementById('modal-setor').innerText = setor;
-            document.getElementById('modal-match').innerText = match;
-            document.getElementById('modal-resumo').innerText = resumo;
-            document.getElementById('modal-curriculo').style.display = 'flex';
-        }
-
-        function fecharModal() {
-            document.getElementById('modal-curriculo').style.display = 'none';
-        }
-
-        document.querySelector('.btn-nova-vaga').addEventListener('click', function() {
-            document.getElementById('modal-nova-vaga').style.display = 'flex';
-        });
-
-        function fecharModalVaga() {
-            document.getElementById('modal-nova-vaga').style.display = 'none';
-        }
-
-        document.getElementById('form-cadastrar-vaga').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const novaVaga = {
-                titulo: document.getElementById('input-titulo-vaga').value,
-                setor: document.getElementById('input-setor-vaga').value,
-                local: document.getElementById('input-local-vaga').value,
-                requisitos: document.getElementById('input-requisitos-vaga').value
-            };
-
-            let vagasSalvas = JSON.parse(localStorage.getItem('vagasMetroform')) || [];
-            vagasSalvas.push(novaVaga);
-            localStorage.setItem('vagasMetroform', JSON.stringify(vagasSalvas));
-
-            alert('Vaga cadastrada e publicada na página principal com sucesso!');
-            fecharModalVaga();
-            document.getElementById('form-cadastrar-vaga').reset();
-        });
-
-        async function carregarBancoTalentosRH() {
-            try {
-                const resposta = await fetch('http://localhost:3000/api/banco-talentos');
-                const talentos = await resposta.json();
-
-                const tbody = document.getElementById('tabela-banco-talentos');
-                if (!tbody) return;
-
-                tbody.innerHTML = '';
-
-                if (talentos.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 20px; color: #666;">Nenhum currículo encontrado no banco de talentos.</td></tr>';
-                    return;
-                }
-
-                talentos.forEach(talento => {
-                    const tr = document.createElement('tr');
-
-                    tr.innerHTML = `
-                        <td style="font-weight: bold; color: #333;">${talento.nome}</td>
-                        <td style="color: #555;">${talento.email}</td>
-                        <td style="color: #555;">${talento.telefone || 'Não informado'}</td>
-                        <td style="color: #666; font-size: 0.9rem;">${talento.resumo || 'Sem resumo'}</td>
-                        <td style="text-align: center;">
-                            <a href="http://localhost:3000/uploads/${talento.curriculo_pdf}" target="_blank" style="background: #7A0000; color: white; padding: 6px 12px; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: bold; display: inline-block;">Ver PDF</a>
-                        </td>
-                        <td style="color: #666; font-size: 0.9rem;">${new Date(talento.data_envio).toLocaleDateString('pt-BR')}</td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-
-            } catch (erro) {
-                console.error('Erro ao carregar banco de talentos para o RH:', erro);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', carregarBancoTalentosRH);
-    </script>
+    <!-- Script externo do RH -->
+    <script src="rh.js"></script>
 </body>
 </html>

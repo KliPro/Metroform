@@ -1,391 +1,221 @@
-<!DOCTYPE html>
-<!-- Informa ao navegador que este documento utiliza a versão mais moderna e padrão do HTML (HTML5) -->
-<html lang="pt-BR">
-<!-- Abre a página web principal e define o idioma oficial como português do Brasil (pt-BR) -->
+<!DOCTYPE html> <!-- Define o tipo de documento como HTML5 moderno -->
+<html lang="pt-BR"> <!-- Inicia o documento HTML definindo o idioma oficial como Português do Brasil -->
 
-<head>
-    <!-- Abre a "cabeça" do documento. Configurações invisíveis para o usuário, mas essenciais -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metroform - Trabalhe Conosco</title>
+<head> <!-- Abre o cabeçalho do documento, o usuário não tem acesso a essa parte -->
+    <meta charset="UTF-8"> <!-- Para suportar acentuação gráfica -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Torna a página responsiva para celulares, tablets e PCs -->
+    <title>Metroform - Trabalhe Conosco</title> <!-- Define o título exibido na aba do navegador -->
 
-    <!-- Importação da biblioteca FontAwesome para exibir ícones profissionais em vetor -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Conecta o código HTML ao arquivo de estilos personalizados (style.css) -->
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <!-- Importa a biblioteca de ícones FontAwesome -->
+    <link rel="stylesheet" href="style.css"> <!-- Conecta o arquivo de estilos CSS personalizado do site -->
+</head> <!-- Fecha o cabeçalho do documento -->
 
-<body>
-    <!-- Abre o CORPO do site. Tudo daqui para frente é o que o usuário realmente enxerga na tela -->
 
-    <!-- ========================================== -->
-    <!-- CABEÇALHO / MENU PRINCIPAL DE NAVEGAÇÃO    -->
-    <!-- ========================================== -->
-    <header class="header-metroform">
-        <div class="logo">
-            <a href="#">
-                <img src="img/logo.jpg" alt="Logo Metroform">
-            </a>
-        </div>
+<body> <!-- Abre o corpo da página onde fica todo o conteúdo visual exibido ao usuário -->
 
-        <nav class="nav-links">
-            <a href="#vagas">Vagas Abertas</a>
-            <a href="#cultura">Cultura e Valores</a>
-            <a href="#diferenciais">Diferenciais</a>
-        </nav>
- 
-       <div class="acesso-buttons">
-            <a href="login.html" class="btn-profissional">Cadastrar-se / Entrar</a>
-            <a href="rh_login.html" class="btn-profissional">Acesso RH/Gestor</a>
-       </div>
-    </header>
+    <header class="header-metroform"> <!-- Abre o cabeçalho superior de navegação do site -->
+        <div class="logo"> <!-- Bloco que contém a logomarca da empresa -->
+            <a href="#"> <!-- Link de redirecionamento da logo (aponta para a mesma página) -->
+                <img src="img/logo.jpg" alt="Logo Metroform"> <!-- Exibe a imagem da logomarca da Metroform -->
+            </a> <!-- Fecha a tag do link da logo -->
+        </div> <!-- Fecha a div da logo -->
 
-    <!-- ========================================== -->
-    <!-- SEÇÃO PRINCIPAL / BANNER DE DESTAQUE (HERO) -->
-    <!-- ========================================== -->
-    <section class="secao-principal">
-        <div class="conteudo-principal">
-            <h1>Construa Seu Futuro na Metroform</h1>
-            <p>Valorizamos talentos preparados, engajados e prontos para crescer conosco.</p>
+        <nav class="nav-links"> <!-- Abre o bloco de navegação do menu superior -->
+            <a href="#vagas">Vagas Abertas</a> <!-- Link âncora que rola suavemente até a seção de vagas -->
+            <a href="#cultura">Cultura e Valores</a> <!-- Link âncora para a seção de cultura -->
+            <a href="#diferenciais">Diferenciais</a> <!-- Link âncora para a seção de diferenciais competitivos -->
+        </nav> <!-- Fecha o bloco de navegação -->
 
-            <div class="caixa-busca">
-                <input type="text" id="input-busca" placeholder="Cargo, setor ou habilidade...">
-                <button class="btn-buscar" id="btn-pesquisar">Pesquisar</button>
-            </div>
-        </div>
-    </section>
+        <div class="acesso-buttons"> <!-- Abre o container que agrupa os botões de acesso do canto direito -->
+            <button type="button" onclick="abrirModalCandidato()" class="btn-profissional">Candidato</button> <!-- Botão que chama a função JS para abrir o modal do candidato -->
+            <button type="button" onclick="abrirModalRH()" class="btn-profissional">Gestor RH</button> <!-- Botão que chama a função JS para abrir o modal do RH -->
+        </div> <!-- Fecha a div dos botões de acesso -->
+    </header> <!-- Fecha o cabeçalho principal -->
 
-    <!-- ========================================== -->
-    <!-- SEÇÃO DE OPORTUNIDADES E VAGAS EM DESTAQUE -->
-    <!-- ========================================== -->
-    <section id="vagas" class="secao-vagas">
-        <div class="container-vagas">
-            <h2>Oportunidade em Destaque</h2>
-            <p class="subtitulo-vagas">Encontre a vaga ideal alinhada ao seu perfil e competência</p>
+    <section class="secao-principal"> <!-- Abre a seção do banner de destaque (Hero Section) -->
+        <div class="conteudo-principal"> <!-- Container para centralizar e alinhar o texto do banner -->
+            <h1>Construa Seu Futuro na Metroform</h1> <!-- Título principal de forte impacto visual -->
+            <p>Valorizamos talentos preparados, engajados e prontos para crescer conosco.</p> <!-- Parágrafo descritivo de apoio -->
+        </div> <!-- Fecha a div do conteúdo principal -->
+    </section> <!-- Fecha a seção principal -->
 
-            <!-- Grade onde as vagas do banco de dados serão injetadas dinamicamente -->
-            <div class="grid-vagas" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-                <!-- Preenchido via JavaScript -->
-            </div>
+    <section id="vagas" class="secao-vagas"> <!-- Abre a seção de oportunidades de vagas -->
+        <div class="container-vagas"> <!-- Container de largura máxima para centralizar o conteúdo das vagas -->
+            <h2>Oportunidade em Destaque</h2> <!-- Título da seção de vagas -->
+            <p class="subtitulo-vagas">Encontre a vaga ideal alinhada ao seu perfil e competência</p> <!-- Subtítulo explicativo -->
 
-            <!-- Botão Ver Todas as Vagas e Banco de Talentos -->
-            <div class="container-botoes-vagas">
-                <a href="vagas.html" class="btn-todas-vagas">Ver Todas as Vagas</a>
-            </div>
-
-            <div class="centro-banco-talentos">
-                <a href="javascript:void(0);" onclick="abrirModalBanco()" class="link-banco">📄 Enviar currículo para o Banco Geral de Talentos</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========================================== -->
-    <!-- SEÇÃO DE CULTURA E VALORES DA EMPRESA      -->
-    <!-- ========================================== -->
-    <section id="cultura" class="secao-cultura">
-        <div class="container-cultura">
-            <h2>Nossa Cultura e Valores</h2>
-
-            <div class="grid-cultura">
-                <div class="card-cultura">
-                    <i class="fa-solid fa-bullseye"></i>
-                    <h3>Foco em Resultados</h3>
-                    <p>Compromisso com a alta performance, excelência e entrega em cada projeto.</p>
-                </div>
-
-                <div class="card-cultura">
-                    <i class="fa-solid fa-handshake"></i>
-                    <h3>Respeito & Parceria</h3>
-                    <p>Valorização das pessoas, segurança e colaboração mútua no ambiente de trabalho.</p>
-                </div>
-
-                <div class="card-cultura">
-                    <i class="fa-solid fa-lightbulb"></i>
-                    <h3>Inovação Contínua</h3>
-                    <p>Buscamos sempre evoluir processos e desenvolver soluções inteligentes.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========================================== -->
-    <!-- SEÇÃO DE DIFERENCIAIS / POR QUE TRABALHAR  -->
-    <!-- ========================================== -->
-    <section id="diferenciais" class="secao-diferenciais">
-        <div class="container-diferenciais">
-            <h2>Por que construir sua carreira conosco?</h2>
-
-            <div class="grid-diferenciais">
-                <div class="item-diferencial">
-                    <i class="fa-solid fa-chart-line"></i>
-                    <h3>Plano de Desenvolvimento</h3>
-                    <p>Oportunidades reais de crescimento profissional e treinamentos contínuos.</p>
-                </div>
-
-                <div class="item-diferencial">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <h3>Segurança em Primeiro Lugar</h3>
-                    <p>Um ambiente estruturado focado na integridade física e psicológica de cada colaborador.</p>
-                </div>
-
-                <div class="item-diferencial">
-                    <i class="fa-solid fa-award"></i>
-                    <h3>Reconhecimento</h3>
-                    <p>Cultura voltada para valorizar o engajamento, a resiliência e o alto desempenho.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========================================== -->
-    <!-- MODAL DO BANCO GERAL DE TALENTOS (OCULTO)  -->
-    <!-- ========================================== -->
-    <div id="modal-banco-talentos" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: none; justify-content: center; align-items: center; z-index: 3000;">
-        <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; width: 100%; max-width: 500px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); border-top: 4px solid #7A0000; box-sizing: border-box; position: relative; max-height: 90vh; overflow-y: auto;">
+            <div class="grid-vagas" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;"></div> <!-- Grade onde as vagas serão injetadas dinamicamente via JavaScript -->
             
-            <button type="button" onclick="fecharModalBanco()" style="position: absolute; top: 15px; right: 15px; background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: #666; font-weight: bold;">&times;</button>
+            <div class="container-botoes-vagas"> <!-- Container do botão centralizado para ver todas as vagas -->
+                <a href="vagas.html" class="btn-todas-vagas">Ver Todas as Vagas</a> <!-- Link para a página completa de listagem de vagas -->
+            </div> <!-- Fecha o container do botão de vagas -->
 
-            <h2 style="margin-top: 0; margin-bottom: 10px; color: #7A0000;">Banco Geral de Talentos</h2>
-            <p style="margin-bottom: 20px; color: #666; font-size: 0.95rem;">Envie o seu currículo para a nossa base geral de talentos.</p>
+            <div class="centro-banco-talentos"> <!-- Container do link para envio de currículo espontâneo -->
+                <a href="javascript:void(0);" onclick="abrirModalBanco()" class="link-banco">📄 Enviar currículo para o Banco Geral de Talentos</a> <!-- Link interativo que abre o modal do banco de talentos -->
+            </div> <!-- Fecha o container do banco de talentos -->
 
-            <form id="formBancoTalentos" enctype="multipart/form-data">
-                <div style="margin-bottom: 15px; text-align: left;">
-                    <label style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem;">Nome Completo:</label>
-                    <input type="text" name="nome" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
-                </div>
+        </div> <!-- Fecha o container de vagas -->
+    </section> <!-- Fecha a seção de vagas -->
 
-                <div style="margin-bottom: 15px; text-align: left;">
-                    <label style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem;">E-mail:</label>
-                    <input type="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
-                </div>
+    <section id="cultura" class="secao-cultura"> <!-- Abre a seção de cultura e valores da empresa -->
+        <div class="container-cultura"> <!-- Container principal da seção de cultura -->
+            <h2>Nossa Cultura e Valores</h2> <!-- Título da seção de cultura -->
+            <div class="grid-cultura"> <!-- Grade que organiza os cartões culturais lado a lado -->
+                <div class="card-cultura"> <!-- Primeiro card cultural (Foco em Resultados) -->
+                    <i class="fa-solid fa-bullseye"></i> <!-- Ícone vetorial do FontAwesome -->
+                    <h3>Foco em Resultados</h3> <!-- Título do card -->
+                    <p>Compromisso com a alta performance, excelência e entrega em cada projeto.</p> <!-- Descrição do card -->
+                </div> <!-- Fecha o primeiro card -->
+                <div class="card-cultura"> <!-- Segundo card cultural (Respeito & Parceria) -->
+                    <i class="fa-solid fa-handshake"></i> <!-- Ícone vetorial do FontAwesome -->
+                    <h3>Respeito & Parceria</h3> <!-- Título do card -->
+                    <p>Valorização das pessoas, segurança e colaboração mútua no ambiente de trabalho.</p> <!-- Descrição do card -->
+                </div> <!-- Fecha o segundo card -->
+                <div class="card-cultura"> <!-- Terceiro card cultural (Inovação Contínua) -->
+                    <i class="fa-solid fa-lightbulb"></i> <!-- Ícone vetorial do FontAwesome -->
+                    <h3>Inovação Contínua</h3> <!-- Título do card -->
+                    <p>Buscamos sempre evoluir processos e desenvolver soluções inteligentes.</p> <!-- Descrição do card -->
+                </div> <!-- Fecha o terceiro card -->
+            </div> <!-- Fecha a grade cultural -->
+        </div> <!-- Fecha o container de cultura -->
+    </section> <!-- Fecha a seção de cultura -->
 
-                <div style="margin-bottom: 15px; text-align: left;">
-                    <label style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem;">Telefone:</label>
-                    <input type="text" name="telefone" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
-                </div>
+    <section id="diferenciais" class="secao-diferenciais"> <!-- Abre a seção de diferenciais da empresa -->
+        <div class="container-diferenciais"> <!-- Container principal da seção de diferenciais -->
+            <h2>Por que construir sua carreira conosco?</h2> <!-- Título da seção de diferenciais -->
+            <div class="grid-diferenciais"> <!-- Grade que organiza os itens de diferenciais -->
+                <div class="item-diferencial"> <!-- Primeiro diferencial (Plano de Desenvolvimento) -->
+                    <i class="fa-solid fa-chart-line"></i> <!-- Ícone vetorial do FontAwesome -->
+                    <h3>Plano de Desenvolvimento</h3> <!-- Título do diferencial -->
+                    <p>Oportunidades reais de crescimento profissional e treinamentos contínuos.</p> <!-- Descrição -->
+                </div> <!-- Fecha o primeiro diferencial -->
+                <div class="item-diferencial"> <!-- Segundo diferencial (Segurança em Primeiro Lugar) -->
+                    <i class="fa-solid fa-shield-halved"></i> <!-- Ícone vetorial do FontAwesome -->
+                    <h3>Segurança em Primeiro Lugar</h3> <!-- Título do diferencial -->
+                    <p>Um ambiente estruturado focado na integridade física e psicológica de cada colaborador.</p> <!-- Descrição -->
+                </div> <!-- Fecha o segundo diferencial -->
+                <div class="item-diferencial"> <!-- Terceiro diferencial (Reconhecimento) -->
+                    <i class="fa-solid fa-award"></i> <!-- Ícone vetorial do FontAwesome -->
+                    <h3>Reconhecimento</h3> <!-- Título do diferencial -->
+                    <p>Cultura voltada para valorizar o engajamento, a resiliência e o alto desempenho.</p> <!-- Descrição -->
+                </div> <!-- Fecha o terceiro diferencial -->
+            </div> <!-- Fecha a grade de diferenciais -->
+        </div> <!-- Fecha o container de diferenciais -->
+    </section> <!-- Fecha a seção de diferenciais -->
 
-                <div style="margin-bottom: 15px; text-align: left;">
-                    <label style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem;">Resumo Profissional:</label>
-                    <textarea name="resumo" rows="3" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"></textarea>
-                </div>
+    <!-- MODAL DO CANDIDATO -->
+    <div id="modal-candidato" class="modal-overlay"> <!-- Container de fundo escuro do modal do candidato (oculto por padrão no CSS) -->
+        <div class="modal-box"> <!-- Caixa branca centralizada que contém o formulário -->
+            <button type="button" onclick="fecharModalCandidato()" class="modal-close">&times;</button> <!-- Botão "X" para fechar o modal -->
 
-                <div style="margin-bottom: 20px; text-align: left;">
-                    <label style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem;">Currículo (PDF):</label>
-                    <input type="file" name="curriculo" accept=".pdf" required style="width: 100%;">
-                </div>
+            <div class="modal-header"> <!-- Cabeçalho interno do modal -->
+                <h2>Área do Candidato</h2> <!-- Título da área -->
+                <p>Acesse sua conta ou cadastre-se.</p> <!-- Subtítulo descritivo -->
+            </div> <!-- Fecha o cabeçalho do modal -->
 
-                <button type="submit" style="width: 100%; padding: 12px; background-color: #7A0000; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; font-weight: bold;">Enviar Currículo</button>
-            </form>
-        </div>
-    </div>
+            <div class="auth-tabs"> <!-- Container dos botões de alternância de abas -->
+                <button type="button" id="aba-cand-entrar" class="auth-tab-btn ativo" onclick="mudarAbaCand('login')">Entrar</button> <!-- Botão para ativar a aba de login -->
+                <button type="button" id="aba-cand-cadastrar" class="auth-tab-btn" onclick="mudarAbaCand('cadastro')">Criar Conta</button> <!-- Botão para ativar a aba de cadastro -->
+            </div> <!-- Fecha o container de abas -->
 
-    <!-- MODAL DE VER MATCH -->
-    <div id="modal-match" class="modal-overlay oculto" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: none; justify-content: center; align-items: center; z-index: 2000;">
-        <div class="modal-conteudo" style="background-color: #ffffff; padding: 30px; border-radius: 10px; width: 100%; max-width: 450px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); border-top: 4px solid #8B0000; box-sizing: border-box; text-align: center;">
-            <h3 style="color: #8B0000; margin-top: 0; margin-bottom: 15px;"><i class="fa-solid fa-chart-pie"></i> Análise de Compatibilidade (Match)</h3>
-            
-            <div id="match-resultado" style="margin: 20px 0; font-size: 1.1rem; color: #333;">
-                <!-- O conteúdo da análise será injetado aqui -->
-            </div>
+            <form id="form-login-candidato"> <!-- Formulário de login do candidato -->
+                <div class="grupo-input"> <!-- Grupo de input para o campo de e-mail -->
+                    <label>E-mail:</label> <!-- Rótulo do campo -->
+                    <input type="email" id="email-login-cand" required> <!-- Campo de entrada de e-mail obrigatório -->
+                </div> 
 
-            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 25px;">
-                <button type="button" onclick="fecharModalMatch()" class="btn-profissional" style="background-color: #666; border: none; padding: 10px 20px; border-radius: 5px; color: white; cursor: pointer; font-weight: bold;">Fechar</button>
-                <button type="button" id="btn-candidatar-match" class="btn-profissional" style="background-color: #8B0000; border: none; padding: 10px 20px; border-radius: 5px; color: white; cursor: pointer; font-weight: bold;">Candidatar-me Agora</button>
-            </div>
-        </div>
-    </div>
+                <div class="grupo-input"> <!-- Grupo de input para o campo de senha -->
+                    <label>Senha:</label> <!-- Rótulo do campo -->
+                    <input type="password" id="senha-login-cand" required> <!-- Campo de entrada de senha obrigatório -->
+                </div> 
 
-    <!-- ========================================== -->
-    <!-- RODAPÉ DA PÁGINA (FOOTER)                  -->
-    <!-- ========================================== -->
-    <footer class="rodape-metroform">
-        <div class="conteudo-rodape">
-            <p>&copy; 2026 Metroform - Soluções para Construção. Todos os direitos reservados.</p>
-            <p class="texto-projeto">Desenvolvido como projeto acadêmico de recrutamento e seleção inteligente.</p>
-        </div>
-    </footer>
+                <div class="acoes-extras"> <!-- Alinhamento para o link de recuperação de senha -->
+                    <a href="#" onclick="abrirModalRecuperar(event)">Esqueceu sua senha?</a> <!-- Link que dispara a abertura do modal de recuperação -->
+                </div> 
+
+                <button type="submit" class="btn-submit-auth">Entrar na Plataforma</button> <!-- Botão de submissão do login -->
+            </form> <!-- Fecha o formulário de login -->
+
+            <form id="form-cadastro-candidato" style="display: none;"> <!-- Formulário de cadastro do candidato (oculto inicialmente) -->
+                <div class="grupo-input"> <!-- Grupo de input para o nome completo -->
+                    <label>Nome Completo:</label> <!-- Rótulo do campo -->
+                    <input type="text" id="nome-cad-cand" required> <!-- Campo de entrada do nome obrigatório -->
+                </div> 
+
+                <div class="grupo-input"> <!-- Grupo de input para o e-mail de cadastro -->
+                    <label>E-mail:</label> <!-- Rótulo do campo -->
+                    <input type="email" id="email-cad-cand" required> <!-- Campo de entrada de e-mail obrigatório -->
+                </div> 
+
+                <div class="grupo-input"> <!-- Grupo de input para a criação de senha -->
+                    <label>Criar Senha:</label> <!-- Rótulo do campo -->
+                    <input type="password" id="senha-cad-cand" required> <!-- Campo de entrada de senha obrigatório -->
+                </div> 
+
+                <button type="submit" class="btn-submit-auth">Cadastrar e Continuar</button> <!-- Botão de submissão do cadastro -->
+            </form> <!-- Fecha o formulário de cadastro -->
+
+        </div> <!-- Fecha a caixa branca do modal -->
+    </div> <!-- Fecha a sobreposição do modal do candidato -->
+
+    <!-- MODAL DO RH (APENAS LOGIN) -->
+    <div id="modal-rh" class="modal-overlay"> <!-- Container de fundo escuro do modal de acesso do RH -->
+        <div class="modal-box"> <!-- Caixa branca centralizada do modal do gestor -->
+            <button type="button" onclick="fecharModalRH()" class="modal-close">&times;</button> <!-- Botão "X" para fechar o modal -->
+
+            <div class="modal-header"> <!-- Cabeçalho interno do modal de RH -->
+                <h2>Portal do Gestor - RH</h2> <!-- Título da área administrativa -->
+                <p>Faça login para acessar o painel de gestão.</p> <!-- Descrição de apoio -->
+            </div> <!-- Fecha o cabeçalho -->
+
+            <form id="form-login-rh-modal"> <!-- Formulário de login do gestor de RH -->
+                <div class="grupo-input"> <!-- Grupo de input para o e-mail -->
+                    <label>E-mail:</label> <!-- Rótulo do campo -->
+                    <input type="email" id="email-rh-modal"> <!-- Campo de entrada de e-mail -->
+                </div> 
+
+                <div class="grupo-input"> <!-- Grupo de input para a senha -->
+                    <label>Senha:</label> <!-- Rótulo do campo -->
+                    <input type="password" id="senha-rh-modal"> <!-- Campo de entrada de senha -->
+                </div> <!-- Fecha o grupo -->
+
+                <button type="submit" class="btn-submit-auth">Entrar no Painel</button> <!-- Botão de envio do login de RH -->
+            </form> <!-- Fecha o formulário de login do RH -->
+        </div> <!-- Fecha a caixa do modal -->
+    </div> <!-- Fecha o modal do RH -->
+
+    <!-- MODAL DE RECUPERAÇÃO DE SENHA -->
+    <div id="modal-recuperar" class="modal-overlay" style="z-index: 3500;"> <!-- Container de sobreposição para redefinir senha com camada superior (z-index) -->
+        <div class="modal-box" style="max-width: 400px;"> <!-- Caixa personalizada menor para o formulário de recuperação -->
+            <button type="button" onclick="fecharModalRecuperar()" class="modal-close">&times;</button> <!-- Botão "X" para fechar -->
+
+            <div class="modal-header"> <!-- Cabeçalho do modal de recuperação -->
+                <h2>Redefinir Senha</h2> <!-- Título do modal -->
+                <p>Insira o seu e-mail cadastrado e defina uma nova senha.</p> <!-- Descrição instrutiva -->
+            </div> <!-- Fecha o cabeçalho -->
+
+            <form id="form-modal-recuperar"> <!-- Formulário de redefinição de senha -->
+                <div class="grupo-input"> <!-- Grupo de input para o e-mail de recuperação -->
+                    <label>E-mail:</label> <!-- Rótulo do campo -->
+                    <input type="email" id="email-recuperar" required> <!-- Campo de e-mail obrigatório -->
+                </div> 
+
+                <div style="display: flex; gap: 10px; margin-top: 20px;"> <!-- Container flexível para alinhar os botões lado a lado -->
+                    <button type="button" onclick="fecharModalRecuperar()" style="flex: 1; padding: 10px; background: #666; border: none; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Cancelar</button> <!-- Botão para cancelar e fechar -->
+                    <button type="submit" style="flex: 1; padding: 10px; background: var(--metroform-red); border: none; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Atualizar</button> <!-- Botão para enviar a nova senha -->
+                </div> 
+            </form> <!-- Fecha o formulário de recuperação -->
+        </div> <!-- Fecha a caixa do modal -->
+    </div> <!-- Fecha a sobreposição do modal de recuperação -->
+
+    <footer class="rodape-metroform"> <!-- Abre o rodapé padrão institucional do site -->
+        <div class="conteudo-rodape"> <!-- Container interno para centralizar o texto do rodapé -->
+            <p>&copy; 2026 Metroform - Soluções para Construção. Todos os direitos reservados.</p> <!-- Aviso de direitos autorais e ano atual -->
+            <p class="texto-projeto">Desenvolvido como projeto acadêmico de recrutamento e seleção inteligente.</p> <!-- Nota de rodapé identificando o caráter acadêmico -->
+        </div> <!-- Fecha o container do rodapé -->
+    </footer> <!-- Fecha o rodapé -->
+
+    <script src="script.js"></script> <!-- Conecta o arquivo de script externo em JavaScript no final do corpo para controle interativo e requisições -->
     
-    <!-- ========================================== -->
-    <!-- SCRIPTS DE INTEGRAÇÃO COM O BANCO E BUSCA  -->
-    <!-- ========================================== -->
-    <script>
-        // Funções para abrir e fechar o Modal do Banco de Talentos
-        function abrirModalBanco() {
-            const modal = document.getElementById('modal-banco-talentos');
-            if (modal) {
-                modal.style.display = 'flex';
-            }
-        }
-
-        function fecharModalBanco() {
-            const modal = document.getElementById('modal-banco-talentos');
-            if (modal) {
-                modal.style.display = 'none';
-            }
-        }
-
-        // Carrega as vagas em destaque diretamente da API/MySQL na página inicial
-        async function carregarVagasHome() {
-            try {
-                const resposta = await fetch('http://localhost:3000/api/vagas');
-                const vagas = await resposta.json();
-
-                const gridVagas = document.querySelector('.grid-vagas');
-                if (!gridVagas) return;
-
-                gridVagas.innerHTML = '';
-
-                if (vagas.length === 0) {
-                    gridVagas.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: #666;">Não há vagas disponíveis no momento.</p>';
-                    return;
-                }
-
-                // Exibe até 3 vagas em destaque na página inicial
-                const vagasDestaque = vagas.slice(0, 3);
-
-                vagasDestaque.forEach(vaga => {
-                    const card = document.createElement('div');
-                    card.className = 'card-vaga';
-                    card.style.cssText = "background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border-top: 4px solid #8B0000;";
-
-                    card.innerHTML = `
-                        <h3 style="font-size: 18px; margin-bottom: 8px; color: #1a1a1a;">${vaga.titulo}</h3>
-                        <span class="setor" style="display: inline-block; background: #f1f3f5; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; color: #555; margin-bottom: 12px;">Setor: ${vaga.setor}</span>
-                        <p class="local" style="font-size: 13px; color: #666; margin-bottom: 10px;">📍 ${vaga.localizacao}</p>
-                        <p class="requisitos" style="font-size: 13px; color: #444; margin-bottom: 20px;"><strong>Requisitos:</strong> ${vaga.requisitos}</p>
-                        <div class="card-botoes" style="display: flex; gap: 10px;">
-                            <button class="btn-match" onclick="analisarMatch('${vaga.titulo}', '${vaga.setor}', '${vaga.requisitos}', ${vaga.id_vaga})" style="flex: 1; padding: 8px; background: transparent; border: 1px solid #8B0000; color: #8B0000; border-radius: 4px; font-weight: bold; cursor: pointer;">Ver Match</button>
-                            <button class="btn-candidatar" onclick="candidatarVagaHome(${vaga.id_vaga})" style="flex: 1; padding: 8px; background: #8B0000; border: none; color: white; border-radius: 4px; font-weight: bold; cursor: pointer;">Candidatar-se</button>
-                        </div>
-                    `;
-                    gridVagas.appendChild(card);
-                });
-
-            } catch (erro) {
-                console.error('Erro ao carregar vagas na home:', erro);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', carregarVagasHome);
-
-        // Redireciona para a página de vagas ao tentar candidatar-se na home
-        function candidatarVagaHome(idVaga) {
-            const candidato = JSON.parse(localStorage.getItem('candidatoLogado'));
-            if (!candidato) {
-                alert('Você precisa estar logado para se candidatar a uma vaga.');
-                window.location.href = 'login.html';
-                return;
-            }
-            window.location.href = 'vagas.html';
-        }
-
-        // Função de Match na página inicial
-        function analisarMatch(tituloVaga, setorVaga, requisitosVaga, idVaga) {
-            const candidato = JSON.parse(localStorage.getItem('candidatoLogado'));
-
-            if (!candidato) {
-                alert('Faça login para verificar o seu nível de match com as vagas.');
-                window.location.href = 'login.html';
-                return;
-            }
-
-            const resumoCandidato = candidato.resumo ? candidato.resumo.toLowerCase() : '';
-            let pontuacaoMatch = 50; 
-            let analiseTexto = "O seu perfil demonstra potencial para integrar esta equipa.";
-
-            if (resumoCandidato.length > 10) pontuacaoMatch += 20;
-
-            const reqs = requisitosVaga ? requisitosVaga.toLowerCase() : '';
-            if (resumoCandidato.includes(setorVaga.toLowerCase()) || reqs.split(' ').some(palavra => palavra.length > 3 && resumoCandidato.includes(palavra))) {
-                pontuacaoMatch += 25;
-                analiseTexto = "Excelente alinhamento! As competências descritas no seu resumo coincidem com os requisitos exigidos.";
-            } else if (resumoCandidato === '') {
-                pontuacaoMatch = 40;
-                analiseTexto = "O seu resumo profissional está vazio. Preencha o seu perfil para aumentar a precisão!";
-            }
-
-            if (pontuacaoMatch > 98) pontuacaoMatch = 98;
-            if (pontuacaoMatch < 55 && resumoCandidato !== '') pontuacaoMatch = 65;
-
-            const containerResultado = document.getElementById('match-resultado');
-            if (containerResultado) {
-                containerResultado.innerHTML = `
-                    <div style="font-size: 2.5rem; font-weight: bold; color: ${pontuacaoMatch >= 75 ? '#2b8a3e' : '#d97706'}; margin-bottom: 10px;">
-                        ${pontuacaoMatch}% de Match
-                    </div>
-                    <p style="font-weight: bold; color: #444; margin-bottom: 8px;">Vaga: ${tituloVaga}</p>
-                    <p style="font-size: 0.95rem; color: #666; line-height: 1.4;">${analiseTexto}</p>
-                `;
-            }
-
-            const btnCandidatarMatch = document.getElementById('btn-candidatar-match');
-            if (btnCandidatarMatch) {
-                btnCandidatarMatch.onclick = function() {
-                    fecharModalMatch();
-                    window.location.href = 'vagas.html';
-                };
-            }
-
-            const modal = document.getElementById('modal-match');
-            if (modal) {
-                modal.style.display = 'flex';
-                modal.classList.remove('oculto');
-            }
-        }
-
-        function fecharModalMatch() {
-            const modal = document.getElementById('modal-match');
-            if (modal) {
-                modal.style.display = 'none';
-                modal.classList.add('oculto');
-            }
-        }
-
-        // Função de Pesquisa Global na Home
-        function realizarPesquisa() {
-            const input = document.getElementById('input-busca');
-            const termo = input.value.trim();
-
-            if (termo) {
-                window.location.href = `vagas.html?busca=${encodeURIComponent(termo)}`;
-            } else {
-                window.location.href = 'vagas.html';
-            }
-        }
-
-        document.getElementById('btn-pesquisar').addEventListener('click', realizarPesquisa);
-        document.getElementById('input-busca').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                realizarPesquisa();
-            }
-        });
-
-        // Envio do formulário do Banco de Talentos via Fetch API
-        document.getElementById('formBancoTalentos').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-
-            try {
-                const resposta = await fetch('http://127.0.0.1:3000/api/banco-talentos', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const resultado = await resposta.json();
-
-                if (resposta.ok) {
-                    alert(resultado.mensagem);
-                    this.reset();
-                    fecharModalBanco();
-                } else {
-                    alert(resultado.erro || 'Erro ao enviar currículo.');
-                }
-            } catch (erro) {
-                console.error('Erro na requisição:', erro);
-                alert('Não foi possível conectar ao servidor.');
-            }
-        });
-    </script>
-</body>
-</html>
+</body> <!-- Fecha o corpo da página -->
+</html> <!-- Fecha a estrutura principal do documento HTML -->
