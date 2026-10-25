@@ -14,23 +14,28 @@
 <body> <!-- Abre o corpo da página onde fica todo o conteúdo visual exibido ao usuário -->
 
     <header class="header-metroform"> <!-- Abre o cabeçalho superior de navegação do site -->
-        <div class="logo"> <!-- Bloco que contém a logomarca da empresa -->
-            <a href="#"> <!-- Link de redirecionamento da logo (aponta para a mesma página) -->
-                <img src="img/logo.jpg" alt="Logo Metroform"> <!-- Exibe a imagem da logomarca da Metroform -->
-            </a> <!-- Fecha a tag do link da logo -->
-        </div> <!-- Fecha a div da logo -->
+    
+    <div class="logo"> <!-- Bloco que contém a logomarca da empresa -->
+        <a href="index.html"> <!-- Link de redirecionamento da logo -->
+            <img src="img/logo.jpg" alt="Logo Metroform"> <!-- Exibe a imagem da logomarca da Metroform -->
+        </a>
+    </div> <!-- Fecha a div da logo -->
 
-        <nav class="nav-links"> <!-- Abre o bloco de navegação do menu superior -->
-            <a href="#vagas">Vagas Abertas</a> <!-- Link âncora que rola suavemente até a seção de vagas -->
-            <a href="#cultura">Cultura e Valores</a> <!-- Link âncora para a seção de cultura -->
-            <a href="#diferenciais">Diferenciais</a> <!-- Link âncora para a seção de diferenciais competitivos -->
-        </nav> <!-- Fecha o bloco de navegação -->
+    <nav class="nav-links"> <!-- Abre o bloco de navegação do menu superior -->
+        <a href="#vagas">Vagas Abertas</a> <!-- Link âncora para a seção de vagas -->
+        <a href="#cultura">Cultura e Valores</a> <!-- Link âncora para a seção de cultura -->
+        <a href="#diferenciais">Diferenciais</a> <!-- Link âncora para a seção de diferenciais -->
+    </nav> <!-- Fecha o bloco de navegação -->
 
-        <div class="acesso-buttons"> <!-- Abre o container que agrupa os botões de acesso do canto direito -->
-            <button type="button" onclick="abrirModalCandidato()" class="btn-profissional">Candidato</button> <!-- Botão que chama a função JS para abrir o modal do candidato -->
-            <button type="button" onclick="abrirModalRH()" class="btn-profissional">Gestor RH</button> <!-- Botão que chama a função JS para abrir o modal do RH -->
-        </div> <!-- Fecha a div dos botões de acesso -->
-    </header> <!-- Fecha o cabeçalho principal -->
+    <div class="acesso-buttons"> <!-- Container que agrupa os botões de acesso do canto direito -->
+        <!-- Botão do Candidato com o ID para receber o nome quando logado -->
+        <button type="button" id="link-candidato-header" onclick="abrirModalCandidato()" class="btn-profissional">Candidato</button> 
+        
+        <!-- Botão do Gestor RH com o ID para receber o nome quando logado -->
+        <button type="button" id="link-rh-header" onclick="abrirModalRH()" class="btn-profissional">Gestor RH</button> 
+    </div> <!-- Fecha a div dos botões de acesso -->
+
+</header> <!-- Fecha o cabeçalho principal -->
 
     <section class="secao-principal"> <!-- Abre a seção do banner de destaque (Hero Section) -->
         <div class="conteudo-principal"> <!-- Container para centralizar e alinhar o texto do banner -->

@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="perfil.css">
 </head>
-<body>
+
+<body class="pagina-perfil-corpo">
     <header class="header-metroform">
         <div class="logo">
             <a href="index.html">
@@ -17,8 +18,8 @@
             </a>
         </div>
         
-        <button onclick="logout()" class="btn-profissional">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair da Conta
+        <button type="button" onclick="logout()" class="btn-sair-perfil">
+            <i class="fa-solid fa-right-from-bracket"></i> Sair da Conta
         </button>
     </header>
 
@@ -26,37 +27,54 @@
         <!-- Cartão de Informações e Edição de Perfil -->
         <section class="card-info-usuario">
             <div class="perfil-cabecalho">
-                <div class="avatar-container">
+                <div class="avatar-container" id="avatar-container-wrapper">
+                    <!-- A foto ou as iniciais entram aqui dinamicamente -->
                     <img id="foto-preview" src="img/default-avatar.png" alt="Foto de Perfil" class="foto-perfil">
                 </div>
                 <div class="dados-usuario">
-                    <h2><span id="nome-exibir">Utilizador</span></h2>
-                    <p><strong>E-mail:</strong> <span id="email-exibir">-</span></p>
-                    <p><strong>Telefone:</strong> <span id="telefone-exibir">Não informado</span></p>
+                    <h2 id="nome-exibir">Nome do Utilizador</h2>
+    
+                    <!-- Formação / O que é formado -->
+                    <p id="formacao-exibir" style="color: #7A0000; font-weight: 600; font-size: 15px; margin-bottom: 8px;">
+                        <i class="fa-solid fa-graduation-cap"></i> Formação não informada
+                    </p>
+
+                    <!-- E-mail -->
+                    <p><i class="fa-solid fa-envelope"></i> <span id="email-exibir">-</span></p>
+    
+                    <!-- Telefone -->
+                    <p><i class="fa-solid fa-phone"></i> <span id="telefone-exibir">Não informado</span></p>
+    
+                    <!-- Onde Mora / Endereço -->
+                    <p id="cidade-exibir">
+                        <i class="fa-solid fa-location-dot"></i> Endereço não informado
+                    </p>
                 </div>
             </div>
             
             <div class="resumo-profissional">
-                <h4>Resumo Profissional</h4>
+                <h4><i class="fa-solid fa-id-card"></i> Resumo Profissional</h4>
                 <p id="resumo-exibir">Adicione um resumo sobre a sua experiência profissional...</p>
             </div>
 
             <div class="acoes-perfil">
-                <button onclick="abrirModalEdicao()" class="btn-profissional">Editar Perfil</button>
+                <button onclick="abrirModalEdicao()" class="btn-editar-perfil-corporativo">
+                    <i class="fa-solid fa-pen-to-square"></i> Editar Perfil
+                </button>
             </div>
         </section>
 
         <!-- Cartão de Currículo -->
         <section class="card-curriculo">
-            <h3><i class="fa-solid fa-file-pdf"></i> Meu Currículo</h3>
+            <h3><i class="fa-solid fa-file-pdf" style="color: #7A0000;"></i> Meu Currículo</h3>
             <div id="status-curriculo">
-                <p>Nenhum currículo em PDF enviado.</p>
+                <p style="color: #666;">Nenhum currículo em PDF enviado.</p>
             </div>
         </section>
 
         <!-- Cartão de Minhas Candidaturas -->
         <section class="card-candidaturas">
-            <h3><i class="fa-solid fa-briefcase"></i> Minhas Candidaturas</h3>
+            <h3><i class="fa-solid fa-briefcase" style="color: #7A0000;"></i> Minhas Candidaturas</h3>
             <div id="grid-candidaturas">
                 <p class="carregando-candidaturas">A carregar candidaturas...</p>
             </div>
@@ -66,7 +84,10 @@
     <!-- MODAL DE EDIÇÃO DE PERFIL -->
     <div id="modal-edicao" class="modal-overlay oculto">
         <div class="modal-conteudo">
-            <h3>Editar Meu Perfil</h3>
+            <div class="modal-cabecalho-topo">
+                <h3><i class="fa-solid fa-user-pen"></i> Editar Meu Perfil</h3>
+                <button type="button" onclick="fecharModalEdicao()" class="btn-fechar-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
             <form id="form-editar-perfil" enctype="multipart/form-data">
                 <div class="grupo-input">
                     <label for="edit-nome">Nome Completo</label>
@@ -76,6 +97,17 @@
                 <div class="grupo-input">
                     <label for="edit-telefone">Telefone</label>
                     <input type="text" id="edit-telefone" placeholder="(11) 99999-9999">
+                </div>
+
+                <!-- Campos de Formação e Cidade movidos para dentro do Modal -->
+                <div class="grupo-input">
+                    <label for="edit-formacao">Formação / O que é formado</label>
+                    <input type="text" id="edit-formacao" placeholder="Ex: Bacharel em Ciência da Computação">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="edit-cidade">Onde Mora (Cidade / Estado)</label>
+                    <input type="text" id="edit-cidade" placeholder="Ex: Guarulhos - SP">
                 </div>
 
                 <div class="grupo-input">
@@ -95,7 +127,7 @@
 
                 <div class="modal-botoes">
                     <button type="button" onclick="fecharModalEdicao()" class="btn-cancelar">Cancelar</button>
-                    <button type="submit" class="btn-profissional">Salvar</button>
+                    <button type="submit" class="btn-salvar-corporativo">Salvar Alterações</button>
                 </div>
             </form>
         </div>

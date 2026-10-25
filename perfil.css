@@ -1,10 +1,17 @@
 /* ========================================== */
-/* ESTILOS DA PÁGINA DE PERFIL                */
+/* ESTILOS DA PÁGINA DE PERFIL - MODERNIZADO  */
 /* ========================================== */
 
+body.pagina-perfil-corpo {
+    background-color: #f4f6f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
 .container-perfil {
-    max-width: 1000px;
-    margin: 30px auto;
+    max-width: 900px;
+    margin: 40px auto;
     padding: 0 20px;
 }
 
@@ -12,44 +19,74 @@
 .card-curriculo,
 .card-candidaturas {
     background: white;
-    padding: 25px 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-    border-top: 4px solid #8B0000;
-    margin-bottom: 20px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid #7A0000;
+    margin-bottom: 25px;
 }
 
 .perfil-cabecalho {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
     flex-wrap: wrap;
 }
 
-.foto-perfil {
-    width: 90px;
-    height: 90px;
+/* Avatar com suporte a imagem ou iniciais */
+.avatar-container {
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #7A0000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    flex-shrink: 0;
+}
+
+.foto-perfil {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border: 2px solid #8B0000;
+}
+
+.avatar-inicial-perfil {
+    width: 100%;
+    height: 100%;
+    background-color: #7A0000;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .dados-usuario h2 {
-    margin: 0 0 5px 0;
-    color: #1a1a1a;
-    font-size: 22px;
+    margin: 0 0 8px 0;
+    color: #222;
+    font-size: 24px;
 }
 
 .dados-usuario p {
-    margin: 3px 0;
+    margin: 5px 0;
     color: #555;
     font-size: 14px;
 }
 
+.dados-usuario i {
+    color: #7A0000;
+    margin-right: 6px;
+    width: 16px;
+}
+
 .resumo-profissional {
-    margin-top: 20px;
-    border-top: 1px solid #eee;
-    padding-top: 15px;
+    margin-top: 25px;
+    border-top: 1px solid #eaeaea;
+    padding-top: 20px;
 }
 
 .resumo-profissional h4 {
@@ -58,23 +95,91 @@
     font-size: 16px;
 }
 
+.resumo-profissional h4 i {
+    color: #7A0000;
+    margin-right: 6px;
+}
+
 .resumo-profissional p {
     color: #666;
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
+/* Botões do Perfil */
 .acoes-perfil {
-    margin-top: 20px;
+    margin-top: 25px;
+}
+
+.btn-editar-perfil-corporativo {
+    background: #7A0000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-editar-perfil-corporativo:hover {
+    background: #5c0000;
+}
+
+.btn-sair-conta {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-sair-conta:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .card-curriculo h3,
 .card-candidaturas h3 {
-    color: #8B0000;
-    margin-bottom: 15px;
+    color: #7A0000;
+    margin-top: 0;
+    margin-bottom: 20px;
     font-size: 18px;
 }
 
+/* Área do Currículo */
+.curriculo-box-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.btn-ver-pdf-perfil {
+    background: #7A0000;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-ver-pdf-perfil:hover {
+    background: #5c0000;
+}
+
+/* Grid de Candidaturas */
 #grid-candidaturas {
     display: flex;
     flex-direction: column;
@@ -82,20 +187,26 @@
 }
 
 .item-candidatura {
-    padding: 15px;
-    border: 1px solid #eee;
-    border-radius: 6px;
-    background: #fdfdfd;
+    padding: 18px 20px;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    background: #ffffff;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    transition: transform 0.2s;
+}
+
+.item-candidatura:hover {
+    border-color: #7A0000;
 }
 
 .item-candidatura h4 {
     margin: 0 0 5px 0;
-    color: #1a1a1a;
+    color: #222;
     font-size: 16px;
 }
 
@@ -103,13 +214,15 @@
     font-size: 12px;
     color: #555;
     background: #f1f3f5;
-    padding: 3px 8px;
+    padding: 4px 10px;
     border-radius: 4px;
-    font-weight: bold;
+    font-weight: 600;
+    display: inline-block;
+    margin-right: 8px;
 }
 
 .local-candidatura {
-    margin: 5px 0 0 0;
+    margin: 6px 0 0 0;
     font-size: 13px;
     color: #666;
 }
@@ -118,7 +231,7 @@
     display: inline-block;
     background: #e6fcf5;
     color: #0ca678;
-    padding: 5px 12px;
+    padding: 6px 14px;
     border-radius: 20px;
     font-size: 12px;
     font-weight: bold;
@@ -126,7 +239,9 @@
 
 .data-candidatura {
     color: #888;
-    font-size: 11px;
+    font-size: 12px;
+    display: block;
+    margin-top: 4px;
 }
 
 /* Modal de Edição de Perfil */
@@ -150,14 +265,35 @@
 .modal-conteudo {
     background-color: #ffffff;
     padding: 30px;
-    border-radius: 10px;
+    border-radius: 12px;
     width: 100%;
-    max-width: 450px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-    border-top: 4px solid #8B0000;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-top: 4px solid #7A0000;
     box-sizing: border-box;
     max-height: 90vh;
     overflow-y: auto;
+}
+
+.modal-cabecalho-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-cabecalho-topo h3 {
+    margin: 0;
+    color: #7A0000;
+    font-size: 1.25rem;
+}
+
+.btn-fechar-modal {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #666;
 }
 
 .grupo-input {
@@ -166,39 +302,76 @@
 
 .grupo-input label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    font-size: 14px;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 13px;
     color: #333;
 }
 
 .grupo-input input[type="text"],
-.grupo-input textarea {
+.grupo-input textarea,
+.grupo-input input[type="file"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 6px;
     box-sizing: border-box;
     font-size: 14px;
 }
 
 .modal-botoes {
     display: flex;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 12px;
+    margin-top: 25px;
 }
 
 .btn-cancelar {
     flex: 1;
-    padding: 10px;
-    background: #666;
+    padding: 12px;
+    background: #6c757d;
     border: none;
     color: white;
-    border-radius: 4px;
+    border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
+    transition: background 0.2s;
 }
 
 .btn-cancelar:hover {
-    background: #555;
+    background: #5a6268;
+}
+
+.btn-salvar-corporativo {
+    flex: 1;
+    padding: 12px;
+    background: #7A0000;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-salvar-corporativo:hover {
+    background: #5c0000;
+}
+
+/* Botao ded sair da pagina de perfil */
+.btn-sair-perfil {
+    background-color: #7A0000;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s;
+}
+
+.btn-sair-perfil:hover {
+    background-color: #5c0000;
 }

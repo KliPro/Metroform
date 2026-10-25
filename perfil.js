@@ -8,14 +8,53 @@ if (!candidato) {
     document.getElementById('nome-exibir').textContent = candidato.nome || 'Utilizador';
     document.getElementById('email-exibir').textContent = candidato.email || '-';
     document.getElementById('telefone-exibir').textContent = candidato.telefone || 'Não informado';
+    
     if (candidato.resumo) {
         document.getElementById('resumo-exibir').textContent = candidato.resumo;
     }
 
-    // Exibe status do currículo se houver arquivo registrado
+    // Preenche a Formação se estiver registada
+    if (candidato.formacao) {
+        document.getElementById('formacao-exibir').innerHTML = `<i class="fa-solid fa-graduation-cap"></i> ${candidato.formacao}`;
+    }
+
+    // Preenche a Cidade / Onde mora se estiver registada
+    if (candidato.cidade) {
+        document.getElementById('cidade-exibir').innerHTML = `<i class="fa-solid fa-location-dot"></i> ${candidato.cidade}`;
+    }
+
+    // --- RENDERIZAÇÃO INTELIGENTE DO AVATAR (FOTO OU INICIAIS) ---
+    const avatarWrapper = document.getElementById('avatar-container-wrapper');
+    if (candidato.foto_perfil) {
+        avatarWrapper.innerHTML = `<img src="http://localhost:3000/uploads/${candidato.foto_perfil}" alt="Foto de Perfil" class="foto-perfil">`;
+    } else {
+        // Gera as iniciais automaticamente com base no nome do candidato
+        const nomePartes = (candidato.nome || 'Utilizador').trim().split(' ');
+        const iniciais = nomePartes.length > 1 
+            ? (nomePartes[0][0] + nomePartes[nomePartes.length - 1][0]).toUpperCase() 
+            : nomePartes[0].substring(0, 2).toUpperCase();
+        
+        avatarWrapper.innerHTML = `<div class="avatar-inicial-perfil">${iniciais}</div>`;
+    }
+
+    // --- EXIBIÇÃO DINÂMICA DO CURRÍCULO PDF ---
     const statusCurriculo = document.getElementById('status-curriculo');
-    if (candidato.curriculo || candidato.caminho_curriculo) {
-        statusCurriculo.innerHTML = `<p style="color: #0ca678; font-size: 14px; font-weight: bold;"><i class="fa-solid fa-check-circle"></i> Currículo enviado com sucesso.</p>`;
+    if (candidato.curriculo_pdf) {
+        statusCurriculo.innerHTML = `
+            <div class="curriculo-box-info">
+                <div>
+                    <p style="margin: 0; color: #0ca678; font-weight: bold; font-size: 14px;">
+                        <i class="fa-solid fa-check-circle"></i> Currículo enviado com sucesso
+                    </p>
+                    <small style="color: #666; font-size: 12px;">${candidato.curriculo_pdf}</small>
+                </div>
+                <a href="http://localhost:3000/uploads/${candidato.curriculo_pdf}" target="_blank" class="btn-ver-pdf-perfil">
+                    <i class="fa-solid fa-eye"></i> Ver PDF
+                </a>
+            </div>
+        `;
+    } else {
+        statusCurriculo.innerHTML = `<p style="color: #666; font-size: 14px;">Nenhum currículo em PDF enviado. Edite o perfil para enviar o seu arquivo.</p>`;
     }
 
     // Carrega as candidaturas do utilizador a partir da base de dados MySQL
@@ -45,10 +84,10 @@ async function carregarCandidaturas(idCandidato) {
                     <div>
                         <h4>${item.titulo}</h4>
                         <span class="tag-setor">Setor: ${item.setor}</span>
-                        <p class="local-candidatura">📍 ${item.localizacao}</p>
+                        <p class="local-candidatura"><i class="fa-solid fa-location-dot" style="color: #7A0000;"></i> ${item.localizacao}</p>
                     </div>
                     <div style="text-align: right;">
-                        <span class="status-badge">Candidatura Realizada</span>
+                        <span class="status-badge">${item.status_candidatura || 'Em Análise'}</span>
                         <br><small class="data-candidatura">Data: ${new Date(item.data_candidatura).toLocaleDateString('pt-BR')}</small>
                     </div>
                 `;
@@ -72,6 +111,8 @@ function abrirModalEdicao() {
     document.getElementById('edit-nome').value = candidato.nome || '';
     document.getElementById('edit-telefone').value = candidato.telefone || '';
     document.getElementById('edit-resumo').value = candidato.resumo || '';
+    document.getElementById('edit-formacao').value = candidato.formacao || '';
+    document.getElementById('edit-cidade').value = candidato.cidade || '';
     
     const modal = document.getElementById('modal-edicao');
     modal.style.display = 'flex';
@@ -91,6 +132,8 @@ document.getElementById('form-editar-perfil').addEventListener('submit', async f
     formData.append('nome', document.getElementById('edit-nome').value);
     formData.append('telefone', document.getElementById('edit-telefone').value);
     formData.append('resumo', document.getElementById('edit-resumo').value);
+    formData.append('formacao', document.getElementById('edit-formacao').value);
+    formData.append('cidade', document.getElementById('edit-cidade').value);
     
     const fotoFile = document.getElementById('edit-foto').files[0];
     if (fotoFile) formData.append('foto', fotoFile);
@@ -108,9 +151,15 @@ document.getElementById('form-editar-perfil').addEventListener('submit', async f
 
         if (resposta.ok) {
             alert(resultado.mensagem);
+            
+            // Atualiza os dados na sessão local para refletir imediatamente na página
             candidato.nome = document.getElementById('edit-nome').value;
             candidato.telefone = document.getElementById('edit-telefone').value;
             candidato.resumo = document.getElementById('edit-resumo').value;
+            candidato.formacao = document.getElementById('edit-formacao').value;
+            candidato.cidade = document.getElementById('edit-cidade').value;
+            
+            // Guarda na sessão e recarrega a página
             localStorage.setItem('candidatoLogado', JSON.stringify(candidato));
             
             location.reload();

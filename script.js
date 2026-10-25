@@ -156,3 +156,48 @@ document.getElementById('form-modal-recuperar').addEventListener('submit', async
         alert('Não foi possível conectar ao servidor.');
     }
 });
+
+// Função global para terminar sessão de qualquer tipo de utilizador
+function logoutGeral() {
+    localStorage.removeItem('candidatoLogado');
+    localStorage.removeItem('adminLogado');
+    localStorage.removeItem('rhLogado');
+    window.location.href = 'index.html';
+}
+
+// Verificação de sessão ao carregar a página inicial
+document.addEventListener('DOMContentLoaded', () => {
+    // --- VERIFICAÇÃO DO CANDIDATO ---
+    const candidatoLogado = JSON.parse(localStorage.getItem('candidatoLogado'));
+    const linkCandidato = document.getElementById('link-candidato-header');
+
+    if (candidatoLogado && linkCandidato) {
+        const primeiroNome = candidatoLogado.nome.split(' ')[0];
+        linkCandidato.textContent = `Olá, ${primeiroNome}`;
+        
+        // Redireciona diretamente para o perfil ao clicar
+        linkCandidato.onclick = function(e) {
+            e.preventDefault();
+            window.location.href = 'perfil.html';
+        };
+        
+        linkCandidato.classList.add('usuario-logado');
+    }
+
+    // --- VERIFICAÇÃO DO GESTOR RH ---
+    const adminLogado = JSON.parse(localStorage.getItem('adminLogado'));
+    const linkRh = document.getElementById('link-rh-header');
+
+    if (adminLogado && linkRh) {
+        const primeiroNomeAdmin = adminLogado.nome.split(' ')[0];
+        linkRh.textContent = `Painel: ${primeiroNomeAdmin}`;
+        
+        // Redireciona diretamente para o painel de RH ao clicar
+        linkRh.onclick = function(e) {
+            e.preventDefault();
+            window.location.href = 'rh.html';
+        };
+        
+        linkRh.classList.add('usuario-logado');
+    }
+});
