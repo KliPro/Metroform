@@ -1,98 +1,268 @@
-/* Adicione estas classes no seu arquivo rh.css para manter tudo limpo */
-.secao-banco-talentos-rh {
-    margin-top: 40px;
+/* ========================================== */
+/* ESTILOS DO PAINEL DO RH / GESTOR           */
+/* ========================================== */
+
+/* Cabeçalho do Painel RH */
+.header-metroform {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    border-top: 4px solid #8B0000;
 }
 
-.titulo-banco-rh h3 {
-    margin: 0;
-    color: #7A0000;
+.rh-perfil-topo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-.titulo-banco-rh p {
-    margin: 5px 0 0 0;
-    color: #666;
-    font-size: 0.9rem;
-}
-
-.col-nome { width: 20%; }
-.col-email { width: 22%; }
-.col-tel { width: 15%; }
-.col-resumo { width: 23%; }
-.col-curriculo { width: 10%; text-align: center; }
-.col-data { width: 10%; }
-
-.modal-divisor {
-    margin: 15px 0;
-    border: 0;
-    border-top: 1px solid #eee;
-}
-
-.modal-texto-resumo {
-    color: #666;
-    margin-top: 5px;
-    line-height: 1.5;
-}
-
-.grupo-input {
-    margin-bottom: 15px;
-}
-
-.grupo-input label {
-    display: block;
-    font-size: 13px;
+.nome-gestor {
     font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.grupo-input input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    color: #333;
     font-size: 14px;
 }
 
-.grupo-botoes-form {
-    text-align: right;
-    margin-top: 20px;
-}
-
-.tabela-vazia-msg {
-    text-align: center;
-    padding: 20px;
-    color: #666;
-}
-
-.td-nome {
-    font-weight: bold;
-    color: #333;
-}
-
-.td-email, .td-tel {
-    color: #555;
-}
-
-.td-resumo {
-    color: #666;
-    font-size: 0.9rem;
-}
-
-.td-acao-pdf {
-    text-align: center;
-}
-
-.btn-ver-pdf {
-    background: #7A0000;
+.btn-sair {
+    background-color: #8B0000;
     color: white;
-    padding: 6px 12px;
-    border-radius: 4px;
+    padding: 8px 16px;
+    border-radius: 6px;
     text-decoration: none;
-    font-size: 0.85rem;
     font-weight: bold;
-    display: inline-block;
+    font-size: 13px;
+    transition: background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
-.td-data {
+.btn-sair:hover {
+    background-color: #6b0000;
+}
+
+body.pagina-rh {
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container centralizado do painel do RH */
+.container-rh {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Cabeçalho da seção do painel */
+.rh-cabecalho-secao {
+    margin-bottom: 30px;
+}
+
+.rh-cabecalho-secao h2 {
+    margin: 0 0 8px 0;
+    color: #1a1a1a;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.rh-cabecalho-secao p {
     color: #666;
-    font-size: 0.9rem;
+    margin: 0;
+    font-size: 15px;
+}
+
+/* ========================================== */
+/* CARDS DE MÉTRICAS (3 COLUNAS LADO A LADO)  */
+/* ========================================== */
+.rh-cards-metricas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.metrica-card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-left: 5px solid #8B0000;
+    box-sizing: border-box;
+}
+
+.metrica-card i {
+    font-size: 2.5rem;
+    color: #8B0000;
+}
+
+.metrica-card h3 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.metrica-card p {
+    margin: 4px 0 0 0;
+    color: #666;
+    font-size: 14px;
+}
+
+/* ========================================== */
+/* TABELAS DE GESTÃO E CONTEÚDOS              */
+/* ========================================== */
+.rh-tabela-container {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    overflow-x: auto;
+}
+
+.tabela-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.tabela-topo h3 {
+    margin: 0;
+    color: #1a1a1a;
+    font-size: 18px;
+}
+
+.tabela-gestao {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.tabela-gestao th,
+.tabela-gestao td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 14px;
+}
+
+.tabela-gestao th {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Botão de cadastrar vaga */
+.btn-nova-vaga {
+    background-color: #8B0000;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.3s;
+}
+
+.btn-nova-vaga:hover {
+    background-color: #6b0000;
+}
+
+/* ========================================== */
+/* CORREÇÃO DOS MODAIS (OCULTOS POR PADRÃO)   */
+/* ========================================== */
+.modal-fundo,
+.modal-overlay, 
+.oculto {
+    display: none !important;
+}
+
+/* Quando ativados via JavaScript */
+.modal-fundo.ativo,
+.modal-overlay.ativo,
+.modal-fundo:not(.oculto),
+.modal-overlay:not(.oculto) {
+    display: flex !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+/* ========================================== */
+/* CORREÇÃO DEFINITIVA DOS MODAIS DO RH       */
+/* ========================================== */
+.modal-fundo,
+.modal-overlay, 
+.oculto {
+    display: none !important;
+}
+
+/* Quando o modal é ativado via JavaScript */
+.modal-fundo.ativo,
+.modal-overlay.ativo,
+.modal-fundo:not(.oculto),
+.modal-overlay:not(.oculto) {
+    display: flex !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.65);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Caixa branca centralizada do conteúdo do modal */
+.modal-conteudo {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-top: 4px solid #8B0000;
+    box-sizing: border-box;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-cabecalho h3 {
+    margin: 0;
+    color: #8B0000;
+    font-size: 20px;
+}
+
+.btn-fechar {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #666;
 }

@@ -25,8 +25,10 @@
         </div>
 
         <div class="rh-perfil-topo">
-            <span class="nome-gestor"><i class="fa-solid fa-user-tie"></i> Gestor RH (Metroform)</span>
-            <a href="index.html" class="btn-sair"><i class="fa-solid fa-right-from-bracket"></i> Sair</a>
+        <span class="nome-gestor"><i class="fa-solid fa-user-tie"></i> Gestor RH (Metroform)</span>
+        <button type="button" onclick="logoutGestor()" class="btn-sair">
+            <i class="fa-solid fa-right-from-bracket"></i> Sair
+         </button>
         </div>
     </header>
 
@@ -70,7 +72,7 @@
         <div class="rh-tabela-container">
             <div class="tabela-topo">
                 <h3>Candidatos Recentes no Processo Seletivo</h3>
-                <button class="btn-nova-vaga"><i class="fa-solid fa-plus"></i> Cadastrar Nova Vaga</button>
+                <button class="btn-nova-vaga" onclick="abrirModalVaga()"><i class="fa-solid fa-plus"></i> Cadastrar Nova Vaga</button>
             </div>
 
             <table class="tabela-gestao">
@@ -154,7 +156,7 @@
     <!-- ========================================== -->
     <!-- MODAL FLUTUANTE DE DETALHES DO CURRÍCULO   -->
     <!-- ========================================== -->
-    <div id="modal-curriculo" class="modal-fundo">
+    <div id="modal-curriculo" class="modal-fundo oculto">
         <div class="modal-conteudo">
             <div class="modal-cabecalho">
                 <h3>Detalhes do Currículo / Perfil</h3>
@@ -181,7 +183,7 @@
     <!-- ========================================== -->
     <!-- MODAL DE CADASTRO DE NOVA VAGA PELO RH     -->
     <!-- ========================================== -->
-    <div id="modal-nova-vaga" class="modal-fundo">
+    <div id="modal-nova-vaga" class="modal-fundo oculto">
         <div class="modal-conteudo">
             <div class="modal-cabecalho">
                 <h3>Cadastrar Nova Oportunidade</h3>

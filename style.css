@@ -8,10 +8,10 @@ html {
 
 /* Seletor universal (*): Aplica as regras de reset para todos os elementos da página */
 * {
-    margin: 0;       /* Remove as margens padrão indesejadas de todos os elementos */
-    padding: 0;      /* Remove os preenchimentos internos padrão */
-    box-sizing: border-box; /* Garante que bordas e paddings não aumentem o tamanho real programado das caixas */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Define a tipografia padrão limpa e moderna */
+    margin: 0;       
+    padding: 0;      
+    box-sizing: border-box; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
 }
 
 /* Raiz (:root): Armazena as cores oficiais da identidade visual da marca para reutilizar em todo o código */

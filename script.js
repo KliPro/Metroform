@@ -107,30 +107,36 @@ document.getElementById('form-login-candidato').addEventListener('submit', async
     }
 });
 
-// Adiciona um ouvinte para interceptar o envio do formulário de login do RH
-document.getElementById('form-login-rh-modal').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const email = document.getElementById('email-rh-modal').value.trim();
-    const senha = document.getElementById('senha-rh-modal').value.trim();
-    try {
-        const resposta = await fetch('http://localhost:3000/api/login-rh', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, senha })
-        });
-        const dados = await resposta.json();
-        if (resposta.ok) {
-            localStorage.setItem('rhLogado', 'true');
-            localStorage.setItem('adminLogado', JSON.stringify(dados.admin));
-            window.location.href = "rh.html";
+// Validação rigorosa do login do Gestor RH (E-mail e Senha)
+const formLoginRhModal = document.getElementById("form-login-rh-modal");
+
+if (formLoginRhModal) {
+    formLoginRhModal.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const emailInput = document.getElementById("email-rh-modal").value.trim();
+        const senhaInput = document.getElementById("senha-rh-modal").value.trim();
+
+        // Valida se o e-mail e a senha correspondem exatamente aos dados permitidos
+        if (emailInput === "rh@metroform.com" && senhaInput === "123456") {
+            
+            // Cria o objeto do gestor logado
+            const dadosAdmin = {
+                nome: "Gestor RH",
+                email: emailInput
+            };
+
+            // Salva a sessão correta no navegador
+            localStorage.setItem('adminLogado', JSON.stringify(dadosAdmin));
+            
+            // Redireciona para o painel de RH
+            window.location.href = 'rh.html';
+            
         } else {
-            alert(dados.erro || 'Credenciais inválidas.');
+            alert("E-mail ou senha incorretos!");
         }
-    } catch (erro) {
-        console.error('Erro de conexão:', erro);
-        alert('Não foi possível conectar ao servidor backend.');
-    }
-});
+    });
+}
 
 // Adiciona um ouvinte para o envio do formulário de recuperação de senha
 document.getElementById('form-modal-recuperar').addEventListener('submit', async function(e) {
@@ -201,3 +207,42 @@ document.addEventListener('DOMContentLoaded', () => {
         linkRh.classList.add('usuario-logado');
     }
 });
+
+// Carrega as vagas cadastradas pelo RH na Página Inicial
+document.addEventListener("DOMContentLoaded", () => {
+    carregarVagasNaHome();
+});
+
+async function carregarVagasNaHome() {
+    const gridVagas = document.querySelector(".grid-vagas");
+    if (!gridVagas) return;
+
+    try {
+        const resposta = await fetch("http://localhost:3000/api/vagas");
+        if (resposta.ok) {
+            const vagas = await resposta.json();
+
+            if (vagas.length === 0) {
+                gridVagas.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: #666;">Nenhuma vaga ativa no momento.</p>`;
+                return;
+            }
+
+            gridVagas.innerHTML = "";
+            // Exibe por exemplo as últimas 3 vagas cadastradas na página principal
+            vagas.slice(0, 3).forEach(vaga => {
+                const card = document.createElement("div");
+                card.style.cssText = "background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 4px solid #8B0000;";
+                
+                card.innerHTML = `
+                    <h3 style="margin-top: 0; color: #1a1a1a; font-size: 18px;">${vaga.titulo}</h3>
+                    <p style="color: #666; font-size: 14px; margin: 5px 0;"><strong>Setor:</strong> ${vaga.setor}</p>
+                    <p style="color: #666; font-size: 14px; margin: 5px 0;"><strong>Local:</strong> ${vaga.localizacao || "Guarulhos / SP"}</p>
+                    <p style="color: #555; font-size: 13px; margin: 15px 0 0 0;">${vaga.requisitos || ""}</p>
+                `;
+                gridVagas.appendChild(card);
+            });
+        }
+    } catch (erro) {
+        console.error("Erro ao carregar vagas na home:", erro);
+    }
+}
