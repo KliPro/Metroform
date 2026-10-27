@@ -139,29 +139,32 @@ if (formLoginRhModal) {
 }
 
 // Adiciona um ouvinte para o envio do formulário de recuperação de senha
-document.getElementById('form-modal-recuperar').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const email = document.getElementById('email-recuperar').value.trim();
-    const novaSenha = document.getElementById('nova-senha-recuperar').value.trim();
-    try {
-        const resposta = await fetch('http://localhost:3000/api/recuperar-senha', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, novaSenha })
-        });
-        const resultado = await resposta.json();
-        if (resposta.ok) {
-            alert(resultado.mensagem);
-            fecharModalRecuperar();
-            document.getElementById('form-modal-recuperar').reset();
-        } else {
-            alert(resultado.erro || 'Erro ao redefinir senha.');
+const formModalRecuperar = document.getElementById('form-modal-recuperar');
+if (formModalRecuperar) {
+    formModalRecuperar.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('email-recuperar').value.trim();
+        const novaSenha = document.getElementById('nova-senha-recuperar').value.trim();
+        try {
+            const resposta = await fetch('http://localhost:3000/api/recuperar-senha', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, novaSenha })
+            });
+            const resultado = await resposta.json();
+            if (resposta.ok) {
+                alert(resultado.mensagem);
+                fecharModalRecuperar();
+                formModalRecuperar.reset();
+            } else {
+                alert(resultado.erro || 'Erro ao redefinir senha.');
+            }
+        } catch (erro) {
+            console.error('Erro de conexão:', erro);
+            alert('Não foi possível conectar ao servidor.');
         }
-    } catch (erro) {
-        console.error('Erro de conexão:', erro);
-        alert('Não foi possível conectar ao servidor.');
-    }
-});
+    });
+}
 
 // Função global para terminar sessão de qualquer tipo de utilizador
 function logoutGeral() {
@@ -245,4 +248,115 @@ async function carregarVagasNaHome() {
     } catch (erro) {
         console.error("Erro ao carregar vagas na home:", erro);
     }
+}
+
+// --- FUNÇÕES PARA ABRIR E FECHAR O MODAL DE BANCO DE TALENTOS NA HOME ---
+function abrirModalBancoTalentos() {
+    const modal = document.getElementById('modal-banco-talentos');
+    if (!modal) return;
+
+    const candidatoLogado = JSON.parse(localStorage.getItem('candidatoLogado'));
+    const conteudoModal = modal.querySelector('.modal-box');
+
+    if (candidatoLogado) {
+        // Se estiver logado, exibe o Envio Rápido utilizando os dados do perfil com 1 clique
+        conteudoModal.innerHTML = `
+            <button type="button" onclick="fecharModalBancoTalentos()" class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h2>Banco Geral de Talentos</h2>
+                <p>Olá, <strong>${candidatoLogado.nome.split(' ')[0]}</strong>! Envie o seu perfil atual instantaneamente.</p>
+            </div>
+            <div style="text-align: center; padding: 20px 0;">
+                <p style="color: #555; margin-bottom: 25px; font-size: 14px; line-height: 1.5;">
+                    O sistema irá utilizar automaticamente as suas informações de contacto, resumo profissional e o currículo já associados à sua conta.
+                </p>
+                <button type="button" id="btn-envio-rapido" class="btn-submit-auth">
+                    🚀 Enviar Meu Perfil Atual com 1 Clique
+                </button>
+            </div>
+        `;
+
+        // Ação ao clicar no botão de envio rápido
+        document.getElementById('btn-envio-rapido').addEventListener('click', async () => {
+            try {
+                const formData = new FormData();
+                formData.append('nome', candidatoLogado.nome || '');
+                formData.append('email', candidatoLogado.email || '');
+                formData.append('telefone', candidatoLogado.telefone || '');
+                formData.append('resumo', candidatoLogado.resumo || '');
+                
+                const nomeCurriculo = candidatoLogado.curriculo_pdf || candidatoLogado.curriculoPdf || candidatoLogado.curriculo || 'curriculo_via_perfil.pdf';
+                formData.append('curriculo_pdf_existente', nomeCurriculo);
+
+                const resposta = await fetch('http://localhost:3000/api/banco-talentos', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const resultado = await resposta.json();
+
+                if (resposta.ok) {
+                    alert(resultado.mensagem);
+                    fecharModalBancoTalentos();
+                    window.location.reload();
+                } else {
+                    alert(resultado.erro || 'Erro ao enviar o currículo.');
+                }
+            } catch (erro) {
+                console.error('Erro de conexão:', erro);
+                alert('Não foi possível conectar ao servidor.');
+            }
+        });
+    }
+
+    modal.style.display = 'flex';
+    modal.classList.remove('oculto');
+}
+
+function fecharModalBancoTalentos() {
+    const modal = document.getElementById('modal-banco-talentos');
+    if (modal) {
+        modal.style.display = 'none';
+        modal.classList.add('oculto');
+    }
+}
+
+// --- EVENTO DE ENVIO DO FORMULÁRIO DO BANCO DE TALENTOS (PARA VISITANTES) ---
+const formBancoTalentos = document.getElementById('form-banco-talentos');
+
+if (formBancoTalentos) {
+    formBancoTalentos.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append('nome', document.getElementById('talento-nome').value.trim());
+        formData.append('email', document.getElementById('talento-email').value.trim());
+        formData.append('telefone', document.getElementById('talento-telefone').value.trim());
+        formData.append('resumo', document.getElementById('talento-resumo').value.trim());
+        
+        const curriculoFile = document.getElementById('talento-curriculo').files[0];
+        if (curriculoFile) {
+            formData.append('curriculo', curriculoFile);
+        }
+
+        try {
+            const resposta = await fetch('http://localhost:3000/api/banco-talentos', {
+                method: 'POST',
+                body: formData
+            });
+
+            const resultado = await resposta.json();
+
+            if (resposta.ok) {
+                alert(resultado.mensagem);
+                formBancoTalentos.reset();
+                fecharModalBancoTalentos();
+            } else {
+                alert(resultado.erro || 'Erro ao enviar o currículo.');
+            }
+        } catch (erro) {
+            console.error('Erro de conexão:', erro);
+            alert('Não foi possível conectar ao servidor para enviar o currículo.');
+        }
+    });
 }

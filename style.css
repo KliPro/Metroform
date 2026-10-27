@@ -542,3 +542,14 @@ html {
 .acoes-extras a:hover {
     text-decoration: underline;
 }
+
+/* Classe utilitária para ocultar elementos */
+.oculto {
+    display: none !important;
+}
+
+/* Garante que a sobreposição do modal utilize flexbox quando ativa */
+.modal-overlay[style*="display: flex"],
+.modal-fundo[style*="display: flex"] {
+    display: flex !important;
+}
