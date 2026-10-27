@@ -165,6 +165,15 @@ html {
     font-size: 16px;
 }
 
+/* Grelha de vagas corrigida para organizar os cards lado a lado de forma responsiva */
+.grid-vagas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 35px;
+}
+
 /* Container do botão para ver todas as vagas */
 .container-botoes-vagas {
     text-align: center; /* Centraliza o botão */
@@ -191,10 +200,53 @@ html {
     color: white; /* Texto fica branco */
 }
 
+/* Estilização padronizada para o botão de voltar */
+.btn-voltar {
+    display: inline-block;
+    background-color: var(--metroform-red);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    transition: background 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-voltar:hover {
+    background-color: #6b0000;
+}
+
 /* Container centralizado para o link de envio de currículo espontâneo */
 .centro-banco-talentos {
     text-align: center;
     margin-top: 15px;
+}
+
+/* Container principal da grelha de vagas para limitar a largura e organizar em colunas */
+.grid-vagas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+/* Estilização individual de cada card de vaga para que não estiquem */
+.grid-vagas > div {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    border-left: 4px solid #8B0000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
 }
 
 /* Estilização do link para o banco geral de talentos */

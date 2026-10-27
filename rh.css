@@ -266,3 +266,143 @@ body.pagina-rh {
     cursor: pointer;
     color: #666;
 }
+
+/* --- Melhorias Estéticas para o Modal de Detalhes do Currículo --- */
+.modal-conteudo {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 550px;
+    width: 90%;
+}
+
+.modal-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 12px;
+    margin-bottom: 15px;
+}
+
+.modal-cabecalho h3 {
+    color: #7A0000;
+    font-size: 18px;
+    margin: 0;
+}
+
+.modal-corpo p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.modal-divisor {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 12px 0;
+}
+
+/* --- Estilização dos Botões do Rodapé do Modal --- */
+.modal-rodape {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.btn-rejeitar {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-rejeitar:hover {
+    background-color: #c9302c;
+}
+
+/* --- Botão Aprovar com Tom Verde Profissional --- */
+.btn-aprovar-modal {
+    background-color: #28a745; /* Verde moderno e limpo */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-aprovar-modal:hover {
+    background-color: #218838; /* Tom de verde mais escuro ao passar o rato */
+}
+
+/* --- Botão "Ver Detalhes" na Tabela --- */
+.tabela-gestao .btn-profissional {
+    background-color: #f8f9fa;
+    color: #7A0000;
+    border: 1px solid #7A0000;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.tabela-gestao .btn-profissional:hover {
+    background-color: #7A0000;
+    color: white;
+}
+
+/* --- Melhorias Estéticas para a Tabela do Banco de Talentos --- */
+.secao-banco-talentos-rh .tabela-gestao {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.secao-banco-talentos-rh .tabela-gestao th {
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 2px solid #e0e0e0;
+    font-weight: 600;
+}
+
+.secao-banco-talentos-rh .tabela-gestao td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    color: #444;
+}
+
+/* Efeito suave ao passar o rato nas linhas da tabela */
+.secao-banco-talentos-rh .tabela-gestao tbody tr:hover {
+    background-color: #fdf8f8;
+}
+
+/* Transformar o link "Ver PDF" num botão elegante */
+.secao-banco-talentos-rh .tabela-gestao td a {
+    background-color: #f1f1f1;
+    color: #7A0000;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+.secao-banco-talentos-rh .tabela-gestao td a:hover {
+    background-color: #7A0000;
+    color: white;
+}

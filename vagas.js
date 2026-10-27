@@ -57,10 +57,30 @@ document.addEventListener('DOMContentLoaded', carregarVagasDoBanco);
 
 // Função responsável por enviar a candidatura para o backend
 async function candidatarVaga(idVaga) {
-    const candidato = JSON.parse(localStorage.getItem('candidatoLogado'));
+    const candidatoStr = localStorage.getItem('candidatoLogado');
 
-    if (!candidato) {
+    if (!candidatoStr) {
         alert('Você precisa estar logado para se candidatar a uma vaga.');
+        window.location.href = 'index.html';
+        return;
+    }
+
+    let candidato;
+    try {
+        candidato = JSON.parse(candidatoStr);
+    } catch (e) {
+        alert('Erro nos dados do utilizador. Faça login novamente.');
+        localStorage.removeItem('candidatoLogado');
+        window.location.href = 'index.html';
+        return;
+    }
+
+    // Procura por qualquer variação possível do ID no objeto guardado
+    const idCandidatoReal = candidato.id_candidato || candidato.id || candidato.usuario_id;
+
+    if (!idCandidatoReal) {
+        alert('ID do candidato não encontrado. Por favor, faça login novamente na sua conta.');
+        localStorage.removeItem('candidatoLogado');
         window.location.href = 'index.html';
         return;
     }
@@ -70,8 +90,8 @@ async function candidatarVaga(idVaga) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                id_candidato: candidato.id || candidato.id_candidato,
-                id_vaga: idVaga
+                id_candidato: Number(idCandidatoReal), // Garante que é enviado como número
+                id_vaga: Number(idVaga)
             })
         });
 
@@ -79,7 +99,7 @@ async function candidatarVaga(idVaga) {
 
         if (resposta.ok) {
             alert(resultado.mensagem);
-            window.location.href = 'perfil.html'; // Redireciona para o perfil para ver a candidatura listada
+            window.location.href = 'perfil.html';
         } else {
             alert(resultado.erro || 'Erro ao efetuar a candidatura.');
         }

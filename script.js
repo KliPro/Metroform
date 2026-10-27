@@ -96,8 +96,9 @@ document.getElementById('form-login-candidato').addEventListener('submit', async
         });
         const resultado = await resposta.json();
         if (resposta.ok) {
-            localStorage.setItem('candidatoLogado', JSON.stringify(resultado.candidato));
-            window.location.href = 'perfil.html';
+        localStorage.removeItem('adminLogado'); // Remove qualquer sessão de RH ativa
+        localStorage.setItem('candidatoLogado', JSON.stringify(resultado.candidato));
+        window.location.href = 'perfil.html';
         } else {
             alert(resultado.erro);
         }
@@ -119,32 +120,30 @@ if (formLoginRhModal) {
 
         // Valida se o e-mail e a senha correspondem exatamente aos dados permitidos
         if (emailInput === "rh@metroform.com" && senhaInput === "123456") {
-            
-            // Cria o objeto do gestor logado
-            const dadosAdmin = {
-                nome: "Gestor RH",
-                email: emailInput
-            };
-
-            // Salva a sessão correta no navegador
-            localStorage.setItem('adminLogado', JSON.stringify(dadosAdmin));
-            
-            // Redireciona para o painel de RH
-            window.location.href = 'rh.html';
-            
-        } else {
+    localStorage.removeItem('candidatoLogado'); // Remove qualquer sessão de candidato ativa
+    
+    const dadosAdmin = {
+        nome: "Gestor RH",
+        email: emailInput
+    };
+    localStorage.setItem('adminLogado', JSON.stringify(dadosAdmin));
+    window.location.href = 'rh.html';
+    } else {
             alert("E-mail ou senha incorretos!");
         }
     });
 }
 
-// Adiciona um ouvinte para o envio do formulário de recuperação de senha
+// Adiciona um ouvinte para o envio do formulário de recuperação de senha (Corrigido)
 const formModalRecuperar = document.getElementById('form-modal-recuperar');
 if (formModalRecuperar) {
     formModalRecuperar.addEventListener('submit', async function(e) {
         e.preventDefault();
         const email = document.getElementById('email-recuperar').value.trim();
-        const novaSenha = document.getElementById('nova-senha-recuperar').value.trim();
+        const novaSenha = prompt('Insira a sua nova senha temporária ou definitiva:');
+
+        if (!novaSenha) return;
+
         try {
             const resposta = await fetch('http://localhost:3000/api/recuperar-senha', {
                 method: 'POST',
@@ -231,7 +230,7 @@ async function carregarVagasNaHome() {
             }
 
             gridVagas.innerHTML = "";
-            // Exibe por exemplo as últimas 3 vagas cadastradas na página principal
+            // Exibe as últimas 3 vagas cadastradas na página principal
             vagas.slice(0, 3).forEach(vaga => {
                 const card = document.createElement("div");
                 card.style.cssText = "background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 4px solid #8B0000;";

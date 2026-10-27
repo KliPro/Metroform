@@ -5,18 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metroform - Painel do RH / Gestor</title>
     
-    <!-- Importa a biblioteca FontAwesome para exibir ícones gráficos profissionais -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Importa as folhas de estilos personalizados -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="rh.css">
 </head>
 <body class="pagina-rh">
 
-    <!-- ========================================== -->
-    <!-- CABEÇALHO DO PAINEL ADMINISTRATIVO         -->
-    <!-- ========================================== -->
     <header class="header-metroform">
         <div class="logo">
             <a href="index.html">
@@ -25,16 +19,13 @@
         </div>
 
         <div class="rh-perfil-topo">
-        <span class="nome-gestor"><i class="fa-solid fa-user-tie"></i> Gestor RH (Metroform)</span>
-        <button type="button" onclick="logoutGestor()" class="btn-sair">
-            <i class="fa-solid fa-right-from-bracket"></i> Sair
-         </button>
+            <span class="nome-gestor"><i class="fa-solid fa-user-tie"></i> Gestor RH (Metroform)</span>
+            <button type="button" onclick="logoutGestor()" class="btn-sair">
+                <i class="fa-solid fa-right-from-bracket"></i> Sair
+            </button>
         </div>
     </header>
 
-    <!-- ========================================== -->
-    <!-- CONTEÚDO PRINCIPAL DO PAINEL DE GESTÃO     -->
-    <!-- ========================================== -->
     <main class="container-rh">
         
         <!-- Título e Resumo do Painel -->
@@ -48,27 +39,27 @@
             <div class="metrica-card">
                 <i class="fa-solid fa-briefcase"></i>
                 <div>
-                    <h3>04</h3>
+                    <h3 id="contador-vagas">0</h3>
                     <p>Vagas Ativas</p>
                 </div>
             </div>
             <div class="metrica-card">
                 <i class="fa-solid fa-users"></i>
                 <div>
-                    <h3>28</h3>
+                    <h3 id="contador-candidatos">0</h3>
                     <p>Candidatos Inscritos</p>
                 </div>
             </div>
             <div class="metrica-card">
                 <i class="fa-solid fa-star"></i>
                 <div>
-                    <h3>12</h3>
+                    <h3 id="contador-matches">0</h3>
                     <p>Matches Altos (>85%)</p>
                 </div>
             </div>
         </div>
 
-        <!-- Seção da Tabela de Gestão de Candidatos -->
+        <!-- 1. SEÇÃO: Candidatos Recentes no Processo Seletivo (Com botão Ver Detalhes) -->
         <div class="rh-tabela-container">
             <div class="tabela-topo">
                 <h3>Candidatos Recentes no Processo Seletivo</h3>
@@ -78,56 +69,21 @@
             <table class="tabela-gestao">
                 <thead>
                     <tr>
-                        <th>Candidato(a)</th>
+                        <th>Nome</th>
                         <th>Vaga Desejada</th>
                         <th>Setor</th>
-                        <th>Compatibilidade (Match)</th>
+                        <th>Status</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="info-candidato">
-                                <span class="avatar-inicial">CM</span>
-                                <div>
-                                    <strong>Carlos Moreira</strong>
-                                    <small>carlos.moreira@exemplo.com</small>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Técnico de Manutenção</td>
-                        <td>Industrial</td>
-                        <td><span class="badge-match alto">92% - Alto</span></td>
-                        <td>
-                            <button class="btn-acao visualizar" onclick="abrirModal('Carlos Moreira', 'Técnico de Manutenção', 'Industrial', '92% - Alto', 'Experiência sólida em manutenção corretiva e preventiva de máquinas industriais. Foco em metas e resiliência sob pressão.')" title="Ver Currículo"><i class="fa-solid fa-eye"></i></button>
-                            <button class="btn-acao aprovar" title="Aprovar no Processo"><i class="fa-solid fa-check"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="info-candidato">
-                                <span class="avatar-inicial">JS</span>
-                                <div>
-                                    <strong>Juliana Souza</strong>
-                                    <small>juliana.souza@exemplo.com</small>
-                                </div>
-                            </div>
-                        </td>
-                        <td>Analista de Processos</td>
-                        <td>Engenharia</td>
-                        <td><span class="badge-match medio">78% - Médio</span></td>
-                        <td>
-                            <button class="btn-acao visualizar" onclick="abrirModal('Juliana Souza', 'Analista de Processos', 'Engenharia', '78% - Médio', 'Formada em Engenharia de Produção, com forte atuação em melhoria contínua de processos e ferramentas de qualidade.')" title="Ver Currículo"><i class="fa-solid fa-eye"></i></button>
-                            <button class="btn-acao aprovar" title="Aprovar no Processo"><i class="fa-solid fa-check"></i></button>
-                        </td>
-                    </tr>
+                <tbody id="tabela-candidatos-rh">
+                    <!-- Preenchido via JavaScript -->
                 </tbody>
             </table>
         </div>
 
-        <!-- SEÇÃO: BANCO GERAL DE TALENTOS -->
-        <div class="rh-tabela-container secao-banco-talentos-rh">
+        <!-- 2. SEÇÃO: Banco Geral de Talentos (Com botão Excluir) -->
+        <div class="rh-tabela-container secao-banco-talentos-rh" style="margin-top: 30px;">
             <div class="tabela-topo">
                 <div class="titulo-banco-rh">
                     <h3><i class="fa-solid fa-users-viewfinder"></i> Currículos - Banco Geral de Talentos</h3>
@@ -138,12 +94,12 @@
             <table class="tabela-gestao">
                 <thead>
                     <tr>
-                        <th class="col-nome">Nome</th>
-                        <th class="col-email">E-mail</th>
-                        <th class="col-tel">Telefone</th>
-                        <th class="col-resumo">Resumo</th>
-                        <th class="col-curriculo">Currículo</th>
-                        <th class="col-data">Data</th>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Telefone</th>
+                        <th>Currículo</th>
+                        <th>Data</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody id="tabela-banco-talentos">
@@ -151,38 +107,56 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- 3. SEÇÃO: Oportunidades Cadastradas (Gestão e Exclusão de Vagas) -->
+        <div class="rh-tabela-container" style="margin-top: 30px;">
+            <div class="tabela-topo">
+                <div class="titulo-banco-rh">
+                    <h3><i class="fa-solid fa-briefcase"></i> Oportunidades Cadastradas (Gestão)</h3>
+                    <p>Lista de todas as vagas ativas publicadas. Pode excluir as que já foram preenchidas.</p>
+                </div>
+            </div>
+
+            <div id="lista-vagas-rh" style="padding: 15px;">
+                <!-- Preenchido automaticamente pelo rh.js -->
+            </div>
+        </div>
+    
     </main>
 
-    <!-- ========================================== -->
-    <!-- MODAL FLUTUANTE DE DETALHES DO CURRÍCULO   -->
-    <!-- ========================================== -->
+    <!-- Modal de Detalhes e Aprovação do Candidato -->
     <div id="modal-curriculo" class="modal-fundo oculto">
         <div class="modal-conteudo">
             <div class="modal-cabecalho">
-                <h3>Detalhes do Currículo / Perfil</h3>
+                <h3>Detalhes do Currículo / Perfil Completo</h3>
                 <button class="btn-fechar" onclick="fecharModal()"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
-            <div class="modal-corpo">
+            <div class="modal-corpo" style="max-height: 70vh; overflow-y: auto;">
                 <p><strong>Candidato(a):</strong> <span id="modal-nome">---</span></p>
+                <p><strong>E-mail:</strong> <span id="modal-email">---</span></p>
+                <p><strong>Telefone:</strong> <span id="modal-telefone">---</span></p>
+                <p><strong>Cidade:</strong> <span id="modal-cidade">---</span></p>
+                <p><strong>Formação:</strong> <span id="modal-formacao">---</span></p>
+                <hr class="modal-divisor">
                 <p><strong>Vaga Pretendida:</strong> <span id="modal-vaga">---</span></p>
                 <p><strong>Setor:</strong> <span id="modal-setor">---</span></p>
                 <p><strong>Compatibilidade (Match):</strong> <span id="modal-match">---</span></p>
                 <hr class="modal-divisor">
                 <p><strong>Resumo Profissional / Habilidades:</strong></p>
                 <p id="modal-resumo" class="modal-texto-resumo">---</p>
+                <hr class="modal-divisor">
+                <p><strong>Documento / Currículo Anexado:</strong> <span id="modal-pdf-container">---</span></p>
             </div>
 
             <div class="modal-rodape">
-                <button class="btn-rejeitar" onclick="fecharModal()">Reprovar</button>
-                <button class="btn-aprovar-modal" onclick="alert('Candidato aprovado para a próxima fase com sucesso!'); fecharModal();">Aprovar Candidato</button>
+                <button class="btn-rejeitar" onclick="atualizarStatusCandidatura('Reprovado')">Reprovar</button>
+                <button class="btn-aprovar-modal" onclick="atualizarStatusCandidatura('Aprovado')">Aprovar Candidato</button>
             </div>
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- MODAL DE CADASTRO DE NOVA VAGA PELO RH     -->
-    <!-- ========================================== -->
+    <!-- Modal de Cadastro de Nova Vaga -->
     <div id="modal-nova-vaga" class="modal-fundo oculto">
         <div class="modal-conteudo">
             <div class="modal-cabecalho">
@@ -220,7 +194,6 @@
         </div>
     </div>
 
-    <!-- Script externo do RH -->
     <script src="rh.js"></script>
 </body>
 </html>

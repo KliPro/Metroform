@@ -1,9 +1,12 @@
-const candidato = JSON.parse(localStorage.getItem('candidatoLogado'));
+const candidatoStr = localStorage.getItem('candidatoLogado');
+const candidato = candidatoStr ? JSON.parse(candidatoStr) : null;
 
-if (!candidato) {
+if (!candidato || (!candidato.id && !candidato.id_candidato)) {
     alert('Você precisa estar logado para aceder a esta página.');
     window.location.href = 'index.html';
 } else {
+    const idCandidatoReal = candidato.id_candidato || candidato.id;
+
     // Preenche os dados do utilizador no cabeçalho do perfil
     document.getElementById('nome-exibir').textContent = candidato.nome || 'Utilizador';
     document.getElementById('email-exibir').textContent = candidato.email || '-';
@@ -15,17 +18,17 @@ if (!candidato) {
 
     // Preenche a Formação se estiver registada
     const formacaoExibir = document.getElementById('formacao-exibir');
-    if (formacaoExibir && candidato.formacao) {
-        formacaoExibir.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> ${candidato.formacao}`;
+    if (formacaoExibir) {
+        formacaoExibir.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> ${candidato.formacao || 'Formação não informada'}`;
     }
 
     // Preenche a Cidade / Onde mora se estiver registada
     const cidadeExibir = document.getElementById('cidade-exibir');
-    if (cidadeExibir && candidato.cidade) {
-        cidadeExibir.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${candidato.cidade}`;
+    if (cidadeExibir) {
+        cidadeExibir.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${candidato.cidade || 'Endereço não informado'}`;
     }
 
-    // --- RENDERIZAÇÃO INTELIGENTE DO AVATAR (FOTO OU INICIAIS) ---
+    // --- RENDERIZAÇÃO INTELIGENTE DO AVATAR ---
     const avatarWrapper = document.getElementById('avatar-container-wrapper');
     if (avatarWrapper) {
         if (candidato.foto_perfil) {
@@ -43,7 +46,7 @@ if (!candidato) {
     // --- EXIBIÇÃO DINÂMICA DO CURRÍCULO PDF ---
     const statusCurriculo = document.getElementById('status-curriculo');
     if (statusCurriculo) {
-        if (candidato.curriculo_pdf) {
+        if (candidato.curriculo_pdf && candidato.curriculo_pdf !== 'null') {
             statusCurriculo.innerHTML = `
                 <div class="curriculo-box-info">
                     <div>
@@ -63,14 +66,12 @@ if (!candidato) {
     }
 
     // Carrega as candidaturas do utilizador a partir da base de dados MySQL
-    const idCandidato = candidato.id_candidato || candidato.id;
-    if (idCandidato) {
-        carregarCandidaturas(idCandidato);
+    if (idCandidatoReal) {
+        carregarCandidaturas(idCandidatoReal);
     }
 }
 
 async function carregarCandidaturas(idCandidato) {
-    // Procura por 'grid-candidaturas' ou 'minhas-candidaturas' para garantir compatibilidade com o HTML
     const containerLista = document.getElementById('grid-candidaturas') || document.getElementById('minhas-candidaturas');
     if (!containerLista) return;
 
@@ -176,6 +177,7 @@ if (formEditarPerfil) {
             if (resposta.ok) {
                 alert(resultado.mensagem);
                 
+                // Atualiza os dados no objeto local e sincroniza no localStorage
                 candidato.nome = document.getElementById('edit-nome').value;
                 candidato.telefone = document.getElementById('edit-telefone').value;
                 candidato.resumo = document.getElementById('edit-resumo').value;
@@ -183,6 +185,8 @@ if (formEditarPerfil) {
                 candidato.cidade = document.getElementById('edit-cidade').value;
                 
                 localStorage.setItem('candidatoLogado', JSON.stringify(candidato));
+                
+                fecharModalEdicao();
                 location.reload();
             } else {
                 alert(resultado.erro || 'Erro ao atualizar perfil.');
