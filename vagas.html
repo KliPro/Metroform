@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Configuração de codificação de caracteres e responsividade para dispositivos móveis -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metroform - Todas as Vagas Abertas</title>
     
-    <!-- Importa a biblioteca FontAwesome para os ícones -->
+    <!-- Importa a biblioteca FontAwesome para exibir ícones gráficos profissionais -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Importa as folhas de estilo -->
+    <!-- Importa as folhas de estilo customizadas do sistema e da página de vagas -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="vagas.css">
 </head>
@@ -18,11 +19,13 @@
     <!-- CABEÇALHO PADRONIZADO DA METROFORM         -->
     <!-- ========================================== -->
     <header class="header-metroform">
+        <!-- Logótipo da empresa com link de retorno à página principal -->
         <div class="logo">
             <a href="index.html">
                 <img src="img/logo.jpg" alt="Logo Metroform">
             </a>
         </div>
+        <!-- Botão de navegação rápida para voltar ao início -->
         <div>
             <a href="index.html" class="btn-profissional"><i class="fa-solid fa-arrow-left"></i> Voltar ao Início</a>
         </div>
@@ -33,13 +36,13 @@
     <!-- ========================================== -->
     <main class="container-vagas-pagina">
         
-        <!-- Cabeçalho da Seção -->
+        <!-- Cabeçalho descritivo da seção de oportunidades -->
         <div class="vagas-cabecalho-secao">
             <h2>Oportunidades em Aberto na Metroform</h2>
             <p>Explore todas as vagas disponíveis e encontre a que melhor se adapta ao seu perfil profissional.</p>
         </div>
 
-        <!-- Barra de Filtros Rápidos -->
+        <!-- Barra de Filtros Rápidos (Pesquisa por texto e seleção de setores) -->
         <div class="barra-filtros">
             <input type="text" id="filtro-busca" placeholder="Pesquisar por cargo ou palavra-chave...">
             <select id="filtro-setor">
@@ -53,26 +56,30 @@
         <!-- Grade onde as vagas estáticas e dinâmicas serão exibidas -->
         <div class="grid-vagas-completa">
             
-            <!-- Vaga Exemplo 01 -->
+            <!-- Vaga Exemplo 01: Técnico de Manutenção -->
             <div class="card-vaga">
                 <h3>Técnico de Manutenção</h3>
                 <span class="setor">Setor: Industrial</span>
                 <p class="local">📍 Guarulhos / SP</p>
                 <p class="requisitos"><strong>Requisitos:</strong> Experiência prévia em manutenção de equipamentos industriais e disponibilidade de horários.</p>
                 <div class="card-botoes">
+                    <!-- Botão para acionar a análise de compatibilidade (Match) -->
                     <button class="btn-match" onclick="analisarMatch('Técnico de Manutenção', 'Industrial', 'Experiência prévia em manutenção de equipamentos industriais e disponibilidade de horários.', 1)">Ver Match</button>
+                    <!-- Botão para efetuar candidatura direta -->
                     <button class="btn-candidatar" onclick="candidatarVaga(1)">Candidatar-se</button>
                 </div>
             </div>
 
-            <!-- Vaga Exemplo 02 -->
+            <!-- Vaga Exemplo 02: Analista de Processos -->
             <div class="card-vaga">
                 <h3>Analista de Processos</h3>
                 <span class="setor">Setor: Engenharia</span>
                 <p class="local">📍 Guarulhos / SP</p>
                 <p class="requisitos"><strong>Requisitos:</strong> Superior completo em Engenharia de Produção, domínio de melhoria contínua e Excel avançado.</p>
                 <div class="card-botoes">
+                    <!-- Botão para acionar a análise de compatibilidade (Match) -->
                     <button class="btn-match" onclick="analisarMatch('Analista de Processos', 'Engenharia', 'Superior completo em Engenharia de Produção, domínio de melhoria contínua e Excel avançado.', 2)">Ver Match</button>
+                    <!-- Botão para efetuar candidatura direta -->
                     <button class="btn-candidatar" onclick="candidatarVaga(2)">Candidatar-se</button>
                 </div>
             </div>
@@ -80,15 +87,17 @@
         </div>
     </main>
 
-    <!-- MODAL DE VER MATCH -->
+    <!-- ========================================== -->
+    <!-- MODAL DE VER MATCH (JANELA FLUTUANTE)      -->
+    <!-- ========================================== -->
     <div id="modal-match" class="modal-overlay oculto">
         <div class="modal-conteudo-match">
             <h3><i class="fa-solid fa-chart-pie"></i> Análise de Compatibilidade (Match)</h3>
             
-            <div id="match-resultado">
-                <!-- O conteúdo da análise será injetado aqui via JavaScript -->
-            </div>
+            <!-- Área onde o JavaScript injeta dinamicamente o resultado do match -->
+            <div id="match-resultado"></div>
 
+            <!-- Botões de ação do modal de match -->
             <div class="modal-botoes-match">
                 <button type="button" onclick="fecharModalMatch()" class="btn-profissional btn-cinza">Fechar</button>
                 <button type="button" id="btn-candidatar-match" class="btn-profissional btn-vermelho">Candidatar-me Agora</button>
@@ -96,7 +105,7 @@
         </div>
     </div>
 
-    <!-- Script externo de vagas -->
+    <!-- Importação do script JavaScript externo responsável pela lógica da página de vagas -->
     <script src="vagas.js"></script>
 </body>
 </html>

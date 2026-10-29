@@ -2,200 +2,228 @@
 /* ESTILOS DA PÁGINA DE VAGAS                 */
 /* ========================================== */
 
+/* Container principal que envolve todo o conteúdo da página de vagas */
 .container-vagas-pagina {
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 0 20px;
+    max-width: 1000px; /* Limita a largura máxima para manter o layout centralizado e legível */
+    margin: 40px auto; /* Adiciona espaçamento vertical (40px) e centraliza horizontalmente (auto) */
+    padding: 0 20px;   /* Garante margens internas laterais para ecrãs menores */
 }
 
+/* Cabeçalho descritivo da seção de oportunidades */
 .vagas-cabecalho-secao {
-    text-align: center;
-    margin-bottom: 40px;
+    text-align: center; /* Centraliza todo o texto do cabeçalho */
+    margin-bottom: 40px; /* Espaçamento abaixo do cabeçalho antes dos filtros */
 }
 
 .vagas-cabecalho-secao h2 {
-    color: #1a1a1a;
-    font-size: 28px;
-    margin-bottom: 10px;
+    color: #1a1a1a;     /* Cor escura de destaque para o título principal */
+    font-size: 28px;    /* Tamanho grande e marcante para o título */
+    margin-bottom: 10px; /* Pequeno espaçamento entre o título e o parágrafo explicativo */
 }
 
 .vagas-cabecalho-secao p {
-    color: #666;
-    font-size: 15px;
+    color: #666;        /* Cor cinza suave para a descrição de apoio */
+    font-size: 15px;    /* Tamanho de letra legível e equilibrado */
 }
 
+/* Barra que agrupa os campos de filtragem e pesquisa de vagas */
 .barra-filtros {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: flex;       /* Organiza os elementos de filtro lado a lado */
+    gap: 15px;           /* Espaçamento entre a barra de texto e o menu de seleção */
+    margin-bottom: 30px; /* Espaçamento abaixo da barra de filtros */
+    flex-wrap: wrap;     /* Permite que os elementos quebrem de linha em telemóveis */
+    justify-content: center; /* Centraliza os filtros na tela */
 }
 
+/* Estilização da caixa de texto para pesquisa por palavras-chave */
 #filtro-busca {
-    padding: 10px 15px;
-    width: 300px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 14px;
-    outline: none;
+    padding: 10px 15px;  /* Espaçamento interno confortável para escrita */
+    width: 300px;        /* Largura padrão ideal para computadores */
+    border: 1px solid #ddd; /* Borda cinza clara e subtil */
+    border-radius: 6px;  /* Cantos ligeiramente arredondados */
+    font-size: 14px;     /* Tamanho da fonte digitada */
+    outline: none;       /* Remove a linha padrão de foco do navegador */
 }
 
+/* Estilização do menu suspenso (select) para filtrar por setor */
 #filtro-setor {
-    padding: 10px 15px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 14px;
-    background: white;
-    outline: none;
+    padding: 10px 15px;  /* Espaçamento interno igual ao campo de busca */
+    border: 1px solid #ddd; /* Borda cinza clara */
+    border-radius: 6px;  /* Cantos arredondados padronizados */
+    font-size: 14px;     /* Tamanho da fonte */
+    background: white;   /* Fundo branco sólido */
+    outline: none;       /* Remove o contorno padrão de foco */
 }
 
+/* Grade (Grid) onde os cartões de vagas serão distribuídos de forma responsiva */
 .grid-vagas-completa {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    display: grid;       /* Ativa o modelo de layout em grelha */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Cria colunas automáticas com mínimo de 300px e redimensionamento fluido */
+    gap: 20px;           /* Espaçamento uniforme entre os cartões de vagas */
 }
 
+/* Cartão individual de cada vaga */
 .card-vaga {
-    background: white;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-    border-top: 4px solid #8B0000;
+    background: white;   /* Fundo branco limpo para o cartão */
+    padding: 25px;       /* Espaçamento interno para afastar o conteúdo das bordas */
+    border-radius: 8px;  /* Cantos arredondados modernos */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04); /* Sombra muito suave e elegante em camadas */
+    border-top: 4px solid #8B0000; /* Detalhe visual superior na cor bordô institucional */
 }
 
 .card-vaga h3 {
-    font-size: 18px;
-    margin-bottom: 8px;
-    color: #1a1a1a;
+    font-size: 18px;     /* Tamanho do título da vaga no cartão */
+    margin-bottom: 8px;  /* Espaçamento abaixo do título */
+    color: #1a1a1a;      /* Cor escura de alta legibilidade */
 }
 
+/* Etiqueta (Badge) que identifica o setor da vaga */
 .card-vaga .setor {
-    display: inline-block;
-    background: #f1f3f5;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: bold;
-    color: #555;
-    margin-bottom: 12px;
+    display: inline-block; /* Permite comportar-se como bloco com margens e preenchimentos próprios */
+    background: #f1f3f5; /* Fundo cinza claro neutro */
+    padding: 4px 10px;   /* Preenchimento interno compacto */
+    border-radius: 4px;  /* Cantos arredondados na etiqueta */
+    font-size: 12px;     /* Fonte menor e discreta */
+    font-weight: bold;   /* Texto em negrito para destaque */
+    color: #555;         /* Cor de texto cinza escura */
+    margin-bottom: 12px; /* Espaçamento abaixo da etiqueta */
 }
 
+/* Localização geográfica da vaga (ex: Guarulhos / SP) */
 .card-vaga .local {
-    font-size: 13px;
-    color: #666;
-    margin-bottom: 10px;
+    font-size: 13px;     /* Tamanho compacto */
+    color: #666;         /* Cinza secundário */
+    margin-bottom: 10px; /* Espaçamento inferior */
 }
 
+/* Texto descritivo com os requisitos necessários para a vaga */
 .card-vaga .requisitos {
-    font-size: 13px;
-    color: #444;
-    margin-bottom: 20px;
-    line-height: 1.4;
+    font-size: 13px;     /* Tamanho legível para textos explicativos */
+    color: #444;         /* Cor cinza escura para o corpo do texto */
+    margin-bottom: 20px; /* Espaçamento antes dos botões de ação */
+    line-height: 1.4;    /* Altura de linha otimizada para facilitar a leitura */
 }
 
+/* Container flexível para alinhar os botões lado a lado no rodapé do cartão */
 .card-botoes {
-    display: flex;
-    gap: 10px;
+    display: flex;       /* Alinha os botões horizontalmente */
+    gap: 10px;           /* Espaçamento entre o botão de Match e o de Candidatura */
 }
 
+/* Botão de ver compatibilidade (Match) com estilo de contorno (Outline) */
 .btn-match {
-    flex: 1;
-    padding: 8px;
-    background: transparent;
-    border: 1px solid #8B0000;
-    color: #8B0000;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s;
+    flex: 1;             /* Faz com que o botão ocupe espaço proporcional igual */
+    padding: 8px;        /* Preenchimento interno do botão */
+    background: transparent; /* Fundo transparente */
+    border: 1px solid #8B0000; /* Borda na cor bordô */
+    color: #8B0000;      /* Texto na cor bordô */
+    border-radius: 4px;  /* Cantos arredondados */
+    font-weight: bold;   /* Texto em negrito */
+    cursor: pointer;     /* Altera o cursor do rato para indicar interatividade */
+    transition: all 0.3s; /* Suaviza a transição de cores ao passar o rato */
 }
 
+/* Efeito de foco/hover ao passar o rato no botão de Match (inverte as cores) */
 .btn-match:hover {
-    background: #8B0000;
-    color: white;
+    background: #8B0000; /* Preenche o fundo com bordô */
+    color: white;        /* Torna o texto branco */
 }
 
+/* Botão de candidatura direta com fundo preenchido */
 .btn-candidatar {
-    flex: 1;
-    padding: 8px;
-    background: #8B0000;
-    border: none;
-    color: white;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
+    flex: 1;             /* Ocupa espaço proporcional igual */
+    padding: 8px;        /* Preenchimento interno */
+    background: #8B0000; /* Fundo sólido bordô */
+    border: none;        /* Sem bordas */
+    color: white;        /* Texto branco */
+    border-radius: 4px;  /* Cantos arredondados */
+    font-weight: bold;   /* Texto em negrito */
+    cursor: pointer;     /* Cursor interativo */
+    transition: background 0.3s; /* Suaviza a transição de cor de fundo */
 }
 
+/* Efeito de hover para o botão de candidatura (escurece o tom do bordô) */
 .btn-candidatar:hover {
-    background: #6b0000;
+    background: #6b0000; /* Tom mais escuro de bordô */
 }
 
-/* Modal de Match */
+
+/* ========================================== */
+/* ESTILOS DO MODAL DE MATCH                  */
+/* ========================================== */
+
+/* Camada de fundo escurecida (Overlay) que cobre a tela inteira quando o modal abre */
 .modal-overlay {
-    position: fixed;
+    position: fixed;     /* Fixa o modal na tela, ignorando o scroll da página */
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
+    width: 100%;         /* Ocupa 100% da largura da janela */
+    height: 100%;        /* Ocupa 100% da altura da janela */
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo preto translúcido (60% de opacidade) */
+    display: flex;       /* Usa flexbox para centralizar o conteúdo perfeitamente */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;     /* Centraliza verticalmente */
+    z-index: 2000;       /* Garante que o modal fique sobre qualquer outro elemento da página */
 }
 
+/* Classe utilitária para esconder completamente o modal */
 .modal-overlay.oculto {
-    display: none;
+    display: none;       /* Oculta o elemento da árvore visual do DOM */
 }
 
+/* Caixa de conteúdo central do modal de Match */
 .modal-conteudo-match {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 450px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-    border-top: 4px solid #8B0000;
-    box-sizing: border-box;
-    text-align: center;
+    background-color: #ffffff; /* Fundo branco puro */
+    padding: 30px;       /* Espaçamento interno generoso */
+    border-radius: 10px; /* Cantos arredondados acentuados */
+    width: 100%;         /* Largura fluida */
+    max-width: 450px;    /* Limita a largura máxima da caixa de diálogo */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); /* Sombra pronunciada para dar efeito de profundidade */
+    border-top: 4px solid #8B0000; /* Detalhe decorativo superior em bordô */
+    box-sizing: border-box; /* Inclui o padding no cálculo total da largura */
+    text-align: center;  /* Centraliza todos os textos internos */
 }
 
+/* Título principal dentro do modal de Match */
 .modal-conteudo-match h3 {
-    color: #8B0000;
+    color: #8B0000;      /* Cor bordô de destaque */
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 15px; /* Espaçamento inferior */
 }
 
+/* Área onde o resultado numérico e textual do Match será inserido pelo JavaScript */
 #match-resultado {
-    margin: 20px 0;
-    font-size: 1.1rem;
-    color: #333;
+    margin: 20px 0;      /* Espaçamento vertical de respiro */
+    font-size: 1.1rem;   /* Tamanho de texto ligeiramente ampliado */
+    color: #333;         /* Cor cinza escura para leitura confortável */
 }
 
+/* Container dos botões localizados no rodapé do modal */
 .modal-botoes-match {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 25px;
+    display: flex;       /* Alinha os botões lado a lado */
+    gap: 10px;           /* Espaçamento entre os botões de fechar e candidatar */
+    justify-content: center; /* Centraliza os botões no rodapé */
+    margin-top: 25px;    /* Espaçamento superior separando do conteúdo anterior */
 }
 
+/* Botão secundário de cor cinza (geralmente usado para fechar/cancelar) */
 .btn-cinza {
-    background-color: #666;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
+    background-color: #666; /* Fundo cinza neutro */
+    border: none;        /* Sem bordas */
+    padding: 10px 20px;  /* Preenchimento interno alongado */
+    border-radius: 5px;  /* Cantos arredondados */
+    color: white;        /* Texto branco */
+    cursor: pointer;     /* Cursor interativo */
+    font-weight: bold;   /* Texto em negrito */
 }
 
+/* Botão primário de cor vermelha/bordô para ações principais (como candidatar-se) */
 .btn-vermelho {
-    background-color: #8B0000;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
+    background-color: #8B0000; /* Fundo sólido bordô */
+    border: none;        /* Sem bordas */
+    padding: 10px 20px;  /* Preenchimento interno alongado */
+    border-radius: 5px;  /* Cantos arredondados */
+    color: white;        /* Texto branco */
+    cursor: pointer;     /* Cursor interativo */
+    font-weight: bold;   /* Texto em negrito */
 }
