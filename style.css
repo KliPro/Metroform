@@ -37,11 +37,14 @@ html {
 }
 
 /* Estilização da imagem da logo dentro do cabeçalho */
+/* Estilização da imagem da logo dentro do cabeçalho */
 .logo img {
-    height: 52px; /* Define a altura fixa da logo */
-    width: auto; /* Mantém a proporção correta da largura automaticamente */
-    display: block; /* Remove espaços indesejados abaixo da imagem */
-    image-rendering: -webkit-optimize-contrast; /* Otimiza a nitidez e contraste da imagem redimensionada */
+    height: 40px;           /* Reduz ligeiramente para encaixar perfeitamente na barra */
+    max-width: 180px;       /* Garante uma largura máxima segura */
+    width: auto;            /* Mantém a proporção correta */
+    object-fit: contain;    /* Evita qualquer distorção da imagem */
+    display: block; 
+    image-rendering: -webkit-optimize-contrast;
 }
 
 /* Container que agrupa os links do menu de navegação */
@@ -162,6 +165,63 @@ html {
     color: #666; /* Cinza médio */
     margin-bottom: 45px;
     font-size: 16px;
+}
+
+/* ESTILOS DO CARD DE OPORTUNIDADE EM DESTAQUE (PADRONIZADO) */
+.vaga-destaque-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 25px;            /* Podes ajustar o padding interno se quiseres mais compacto */
+    max-width: 400px;         /* Reduzido de 650px para 500px para ficar mais compacto e elegante */
+    margin: 0 auto 30px auto; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    border-top: 4px solid var(--metroform-red);
+    display: flex;
+    flex-direction: column;
+    gap: 12px; 
+    box-sizing: border-box;
+}
+
+/* Estilização do título da vaga em destaque */
+.vaga-destaque-card .vaga-titulo {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--metroform-dark);
+    margin-bottom: 4px;
+}
+
+/* Estilização das informações e requisitos do card de destaque */
+.vaga-destaque-card .vaga-info, 
+.vaga-destaque-card .vaga-requisitos {
+    font-size: 14px;
+    color: #444444;
+    line-height: 1.5;
+}
+
+/* Container para alinhar e centralizar o botão de candidatura no card */
+.vaga-acoes {
+    display: flex;
+    justify-content: center; /* Centraliza o botão perfeitamente no rodapé do card */
+    margin-top: 15px;
+}
+
+/* Estilização do botão "Candidatar-se" exclusivo do destaque */
+.btn-candidatar {
+    background-color: var(--metroform-red); /* Vermelho corporativo da marca */
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Efeito ao passar o mouse no botão de candidatura */
+.btn-candidatar:hover {
+    background-color: #6b0000; /* Tom de vermelho mais escuro */
+    transform: translateY(-1px);
 }
 
 /* Container do botão para ver todas as vagas */

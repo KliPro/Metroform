@@ -97,8 +97,8 @@ async function carregarCandidaturas(idCandidato) {
     if (!containerLista) return; // Se o container não existir na página, interrompe a execução
 
     try {
-        // Realiza uma requisição GET assíncrona para buscar as candidaturas do candidato específico na API
-        const resposta =- await fetch(`http://localhost:3000/api/candidaturas/${idCandidato}`);
+        // Realiza uma requisição GET assíncrona para buscar as candidaturas do candidato específico na API (corrigido '=-')
+        const resposta = await fetch(`http://localhost:3000/api/candidaturas/${idCandidato}`);
         
         // Se a resposta da API não for bem-sucedida
         if (!resposta.ok) {

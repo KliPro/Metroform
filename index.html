@@ -49,7 +49,22 @@
             <h2>Oportunidade em Destaque</h2> <!-- Título da seção de vagas -->
             <p class="subtitulo-vagas">Encontre a vaga ideal alinhada ao seu perfil e competência</p> <!-- Subtítulo explicativo -->
 
-            <div class="grid-vagas" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;"></div> <!-- Grade onde as vagas serão injetadas dinamicamente via JavaScript -->
+            <!-- CARD DE OPORTUNIDADE EM DESTAQUE ATUALIZADO (CONFORME O FIGMA) -->
+            <!-- CARD DE OPORTUNIDADE EM DESTAQUE ATUALIZADO (CONFORME O FIGMA) -->
+        <!-- CARD DE OPORTUNIDADE EM DESTAQUE ATUALIZADO -->
+        <div class="vaga-destaque-card">
+            <h3 class="vaga-titulo">Técnico de Manutenção</h3>
+            <p class="vaga-info"><strong>Setor:</strong> Industrial</p>
+            <p class="vaga-info">📍 Guarulhos / SP</p>
+            <p class="vaga-requisitos">
+                <strong>Requisitos:</strong> Experiência prévia em manutenção de equipamentos industriais e disponibilidade de horários.
+            </p>
+    
+        <div class="vaga-acoes">
+             <button type="button" class="btn-candidatar" onclick="candidatarVaga(9)">Candidatar-se</button>
+        </div>
+        </div>
+            <!-- FIM DO CARD DE DESTAQUE -->
             
             <div class="container-botoes-vagas"> <!-- Container do botão centralizado para ver todas as vagas -->
                 <a href="vagas.html" class="btn-todas-vagas">Ver Todas as Vagas</a> <!-- Link para a página completa de listagem de vagas -->
@@ -223,47 +238,62 @@
     <script src="script.js"></script> <!-- Conecta o arquivo de script externo em JavaScript no final do corpo para controle interativo e requisições -->
     
     <!-- ========================================== -->
-<!-- MODAL DO BANCO GERAL DE TALENTOS (HOME)    -->
-<!-- ========================================== -->
-<div id="modal-banco-talentos" class="modal-overlay">
-    <div class="modal-box">
-        <button type="button" onclick="fecharModalBancoTalentos()" class="modal-close">&times;</button>
-        
-        <div class="modal-header">
-            <h2>Banco Geral de Talentos</h2>
-            <p>Envie o seu currículo espontaneamente para a nossa base.</p>
+    <!-- MODAL DO BANCO GERAL DE TALENTOS (HOME)    -->
+    <!-- ========================================== -->
+    <div id="modal-banco-talentos" class="modal-overlay">
+        <div class="modal-box">
+            <button type="button" onclick="fecharModalBancoTalentos()" class="modal-close">&times;</button>
+            
+            <div class="modal-header">
+                <h2>Banco Geral de Talentos</h2>
+                <p>Envie o seu currículo espontaneamente para a nossa base.</p>
+            </div>
+
+            <form id="form-banco-talentos">
+                <div class="grupo-input">
+                    <label>Nome Completo:</label>
+                    <input type="text" id="talento-nome" required>
+                </div>
+
+                <div class="grupo-input">
+                    <label>E-mail:</label>
+                    <input type="email" id="talento-email" required>
+                </div>
+
+                <div class="grupo-input">
+                    <label>Telefone:</label>
+                    <input type="text" id="talento-telefone">
+                </div>
+
+                <div class="grupo-input">
+                    <label>Resumo Profissional:</label>
+                    <textarea id="talento-resumo" rows="3" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; outline: none;"></textarea>
+                </div>
+
+                <div class="grupo-input">
+                    <label>Currículo (PDF):</label>
+                    <input type="file" id="talento-curriculo" accept=".pdf" required>
+                </div>
+
+                <button type="submit" class="btn-submit-auth">Enviar Currículo</button>
+            </form>
         </div>
-
-        <form id="form-banco-talentos">
-            <div class="grupo-input">
-                <label>Nome Completo:</label>
-                <input type="text" id="talento-nome" required>
-            </div>
-
-            <div class="grupo-input">
-                <label>E-mail:</label>
-                <input type="email" id="talento-email" required>
-            </div>
-
-            <div class="grupo-input">
-                <label>Telefone:</label>
-                <input type="text" id="talento-telefone">
-            </div>
-
-            <div class="grupo-input">
-                <label>Resumo Profissional:</label>
-                <textarea id="talento-resumo" rows="3" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; outline: none;"></textarea>
-            </div>
-
-            <div class="grupo-input">
-                <label>Currículo (PDF):</label>
-                <input type="file" id="talento-curriculo" accept=".pdf" required>
-            </div>
-
-            <button type="submit" class="btn-submit-auth">Enviar Currículo</button>
-        </form>
     </div>
-</div>
+
+    <script>
+
+        <!-- Excluir a parte de banco de talentos se o Gestor rh estiver logado. -->
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Se o Gestor de RH estiver logado, esconde o bloco do Banco de Talentos
+    if (localStorage.getItem("adminLogado")) {
+        const blocoBanco = document.querySelector(".centro-banco-talentos");
+        if (blocoBanco) {
+            blocoBanco.style.display = "none";
+        }
+    }
+});
+</script>
 
 </body> <!-- Fecha o corpo da página -->
 </html> <!-- Fecha a estrutura principal do documento HTML -->

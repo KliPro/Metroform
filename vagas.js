@@ -41,15 +41,14 @@ async function carregarVagasDoBanco() {
             const card = document.createElement('div');
             card.className = 'card-vaga';
 
-            // Injeta a estrutura HTML do cartão com os dados reais da vaga
+            // Injeta a estrutura HTML do cartão com os dados reais da vaga (sem o botão Ver Match e com o botão centralizado)
             card.innerHTML = `
-                <h3>${vaga.titulo}</h3>
+                <h3 class="vaga-titulo">${vaga.titulo}</h3>
                 <span class="setor">Setor: ${vaga.setor}</span>
-                <p class="local">📍 ${vaga.localizacao}</p>
-                <p class="requisitos"><strong>Requisitos:</strong> ${vaga.requisitos}</p>
-                <div class="card-botoes">
-                     <button class="btn-match" onclick="analisarMatch('${vaga.titulo}', '${vaga.setor}', '${vaga.requisitos}', ${vaga.id_vaga})">Ver Match</button>
-                     <button class="btn-candidatar" onclick="candidatarVaga(${vaga.id_vaga})">Candidatar-se</button>
+                <p class="local">📍 ${vaga.localizacao || "Guarulhos / SP"}</p>
+                <p class="requisitos"><strong>Requisitos:</strong> ${vaga.requisitos || ""}</p>
+                <div class="vaga-acoes">
+                     <button type="button" class="btn-candidatar" onclick="candidatarVaga(${vaga.id_vaga})">Candidatar-se</button>
                 </div>
             `;
             // Adiciona o cartão gerado dentro do container principal (grid)
@@ -111,7 +110,7 @@ async function candidatarVaga(idVaga) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 id_candidato: Number(idCandidatoReal), // Garante que o ID do candidato é enviado como número
-                id_vaga: Number(idVaga)               // Garante que o ID da vaga é enviado como número
+                id_vaga: Number(idVaga)              // Garante que o ID da vaga é enviado como número
             })
         });
 
@@ -129,73 +128,4 @@ async function candidatarVaga(idVaga) {
         console.error('Erro de conexão:', erro);
         alert('Não foi possível conectar ao servidor.');
     }
-}
-
-
-// ==========================================
-// FUNÇÃO DE ANÁLISE DE COMPATIBILIDADE (MATCH)
-// ==========================================
-// Função para calcular a compatibilidade com base no resumo profissional do candidato e nos requisitos da vaga
-function analisarMatch(tituloVaga, setorVaga, requisitosVaga, idVaga) {
-    const candidato = JSON.parse(localStorage.getItem('candidatoLogado'));
-
-    // Valida se o utilizador está autenticado antes de calcular o match
-    if (!candidato) {
-        alert('Faça login para verificar o seu nível de match com as vagas.');
-        window.location.href = 'index.html';
-        return;
-    }
-
-    // Normaliza o resumo do candidato para letras minúsculas para facilitar a comparação por palavras-chave
-    const resumoCandidato = candidato.resumo ? candidato.resumo.toLowerCase() : '';
-    
-    let pontuacaoMatch = 50; // Pontuação inicial base
-    let analiseTexto = "O seu perfil demonstra potencial para integrar esta equipa.";
-
-    // Bonifica o candidato caso o seu resumo tenha conteúdo relevante
-    if (resumoCandidato.length > 10) {
-        pontuacaoMatch += 20;
-    }
-
-    const reqs = requisitosVaga.toLowerCase();
-    // Verifica correspondências entre as competências do resumo e os requisitos/setor da vaga
-    if (resumoCandidato.includes(setorVaga.toLowerCase()) || reqs.split(' ').some(palavra => palavra.length > 3 && resumoCandidato.includes(palavra))) {
-        pontuacaoMatch += 25;
-        analiseTexto = "Excelente alinhamento! As competências descritas no seu resumo coincidem com os requisitos exigidos para esta vaga.";
-    } else if (resumoCandidato === '') {
-        pontuacaoMatch = 40;
-        analiseTexto = "O seu resumo profissional está vazio. Preencha o seu perfil para aumentar a precisão do Match!";
-    }
-
-    // Limites de segurança para a pontuação de match percentual
-    if (pontuacaoMatch > 98) pontuacaoMatch = 98;
-    if (pontuacaoMatch < 55 && resumoCandidato !== '') pontuacaoMatch = 65;
-
-    // Seleciona o container do modal e injeta o resultado formatado dinamicamente com cores baseadas na pontuação
-    const containerResultado = document.getElementById('match-resultado');
-    containerResultado.innerHTML = `
-        <div style="font-size: 2.5rem; font-weight: bold; color: ${pontuacaoMatch >= 75 ? '#2b8a3e' : '#d97706'}; margin-bottom: 10px;">
-            ${pontuacaoMatch}% de Match
-        </div>
-        <p style="font-weight: bold; color: #444; margin-bottom: 8px;">Vaga: ${tituloVaga}</p>
-        <p style="font-size: 0.95rem; color: #666; line-height: 1.4;">${analiseTexto}</p>
-    `;
-
-    // Configura a ação do botão de candidatura direta dentro do próprio modal de match
-    document.getElementById('btn-candidatar-match').onclick = function() {
-        fecharModalMatch();
-        candidatarVaga(idVaga);
-    };
-
-    // Abre e exibe o modal de match na tela removendo a classe de ocultação
-    const modal = document.getElementById('modal-match');
-    modal.classList.remove('oculto');
-    modal.style.display = 'flex';
-}
-
-// Função para fechar o modal de análise de Match
-function fecharModalMatch() {
-    const modal = document.getElementById('modal-match');
-    modal.classList.add('oculto');
-    modal.style.display = 'none';
 }

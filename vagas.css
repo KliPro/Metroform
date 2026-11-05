@@ -57,18 +57,29 @@
 
 /* Grade (Grid) onde os cartões de vagas serão distribuídos de forma responsiva */
 .grid-vagas-completa {
-    display: grid;       /* Ativa o modelo de layout em grelha */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Cria colunas automáticas com mínimo de 300px e redimensionamento fluido */
-    gap: 20px;           /* Espaçamento uniforme entre os cartões de vagas */
+    display: grid;
+    /* Cria colunas flexíveis com largura máxima controlada (mínimo de 320px, máximo de 1fr) */
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 25px;
+    max-width: 1200px; /* Limita a largura total da grelha para não esticar demasiado em telas grandes */
+    margin: 0 auto;    /* Centraliza a grelha na página */
 }
 
 /* Cartão individual de cada vaga */
+/* Cartão individual de cada vaga */
 .card-vaga {
-    background: white;   /* Fundo branco limpo para o cartão */
-    padding: 25px;       /* Espaçamento interno para afastar o conteúdo das bordas */
-    border-radius: 8px;  /* Cantos arredondados modernos */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.04); /* Sombra muito suave e elegante em camadas */
-    border-top: 4px solid #8B0000; /* Detalhe visual superior na cor bordô institucional */
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    border-top: 4px solid #8B0000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    max-width: 340px; /* Podes ajustar este valor (ex: 600px a 700px) para encontrar a largura ideal */
+    margin: 0 auto;   /* Centraliza o cartão */
+    width: 100%;      /* Garante que ocupa o espaço disponível até atingir o limite do max-width */
 }
 
 .card-vaga h3 {
@@ -79,14 +90,13 @@
 
 /* Etiqueta (Badge) que identifica o setor da vaga */
 .card-vaga .setor {
-    display: inline-block; /* Permite comportar-se como bloco com margens e preenchimentos próprios */
-    background: #f1f3f5; /* Fundo cinza claro neutro */
-    padding: 4px 10px;   /* Preenchimento interno compacto */
-    border-radius: 4px;  /* Cantos arredondados na etiqueta */
-    font-size: 12px;     /* Fonte menor e discreta */
-    font-weight: bold;   /* Texto em negrito para destaque */
-    color: #555;         /* Cor de texto cinza escura */
-    margin-bottom: 12px; /* Espaçamento abaixo da etiqueta */
+    display: inline-block;
+    background: transparent; /* Remove o fundo */
+    padding: 0;              /* Remove o preenchimento da caixa */
+    font-size: 14px;         /* Ajusta o tamanho se necessário */
+    font-weight: 600;        /* Deixa num peso semi-negrito elegante */
+    color: #555;             /* Cor cinza escura de apoio */
+    margin-bottom: 8px;      /* Espaçamento inferior */
 }
 
 /* Localização geográfica da vaga (ex: Guarulhos / SP) */

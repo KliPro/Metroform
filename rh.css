@@ -116,65 +116,63 @@ body.pagina-rh {
 }
 
 /* ========================================== */
-/* CARDS DE MÉTRICAS (3 COLUNAS LADO A LADO)  */
+/* CARDS DE MÉTRICAS (CENTRALIZADOS)          */
 /* ========================================== */
 .rh-cards-metricas {
-    /* Utiliza o CSS Grid para organizar os cartões de métricas */
-    display: grid;
-    /* Cria 3 colunas de tamanhos iguais (1fr cada) */
-    grid-template-columns: repeat(3, 1fr);
-    /* Define um espaçamento de 25px entre os cartões */
-    gap: 25px;
-    /* Adiciona margem inferior de 35px */
-    margin-bottom: 35px;
+    display: flex;
+    justify-content: center; /* Centraliza os cartões horizontalmente no meio da tela */
+    gap: 24px;
+    margin-bottom: 30px;
+    flex-wrap: wrap; /* Garante que se adaptem bem caso o ecrã seja menor */
 }
 
 .metrica-card {
-    /* Define o fundo branco para cada cartão de métrica */
+    /* Faz com que cada cartão ocupe o espaço de forma igual e proporcional, com limite máximo */
+    flex: 1;
+    max-width: 380px; 
+    min-width: 280px; /* Garante um tamanho ideal em ecrãs menores */
     background: #ffffff;
-    /* Aplica espaçamento interno de 25px */
-    padding: 25px;
-    /* Arredonda as pontas em 10px */
-    border-radius: 10px;
-    /* Adiciona uma sombra suave ao redor do cartão */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    /* Utiliza flexbox para alinhar o ícone e os textos internamente */
+    padding: 24px 28px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
     display: flex;
-    /* Alinha os itens verticalmente ao centro */
     align-items: center;
-    /* Define um espaço de 20px entre o ícone e os dados numéricos */
     gap: 20px;
-    /* Adiciona uma barra lateral esquerda com 5px de espessura na cor vermelha institucional */
     border-left: 5px solid #8B0000;
-    /* Garante o cálculo correto das dimensões incluindo bordas e preenchimento */
     box-sizing: border-box;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efeito elegante ao passar o rato por cima do cartão */
+.metrica-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(139, 0, 0, 0.08);
 }
 
 .metrica-card i {
-    /* Define o tamanho da fonte do ícone para 2.5rem */
-    font-size: 2.5rem;
-    /* Define a cor do ícone como vermelho institucional */
+    font-size: 2rem;
     color: #8B0000;
+    background: rgba(139, 0, 0, 0.06);
+    padding: 14px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .metrica-card h3 {
-    /* Remove margens padrão */
     margin: 0;
-    /* Define o tamanho do número da métrica para 26px */
-    font-size: 26px;
-    /* Deixa o número em negrito forte */
+    font-size: 28px;
     font-weight: 700;
-    /* Define a cor do texto do número */
     color: #1a1a1a;
+    line-height: 1.1;
 }
 
 .metrica-card p {
-    /* Adiciona margem superior de 4px e zera as restantes */
     margin: 4px 0 0 0;
-    /* Define a cor do texto descritivo como cinza */
     color: #666;
-    /* Define o tamanho da fonte para 14px */
     font-size: 14px;
+    font-weight: 500;
 }
 
 /* ========================================== */
@@ -489,7 +487,7 @@ body.pagina-rh {
 /* --- Botão Aprovar com Tom Verde Profissional --- */
 .btn-aprovar-modal {
     /* Define um fundo verde corporativo (#28a745) indicativo de aprovação */
-    background-color: #28a745; /* Verde moderno e limpo */
+    background-color: #28a745;
     color: white;
     border: none;
     padding: 8px 16px;
@@ -501,7 +499,7 @@ body.pagina-rh {
 
 .btn-aprovar-modal:hover {
     /* Transiciona para um tom de verde mais escuro ao passar o cursor */
-    background-color: #218838; /* Tom de verde mais escuro ao passar o cursor */
+    background-color: #218838;
 }
 
 /* --- Botão "Ver Detalhes" na Tabela --- */

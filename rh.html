@@ -25,7 +25,7 @@
 
         <!-- Área de identificação do perfil logado e botão de saída no topo direito -->
         <div class="rh-perfil-topo">
-            <span class="nome-gestor"><i class="fa-solid fa-user-tie"></i> Gestor RH (Metroform)</span>
+            <span class="nome-gestor"></span>
             <!-- Botão de logout que dispara a função JavaScript de encerramento da sessão administrativa -->
             <button type="button" onclick="logoutGestor()" class="btn-sair">
                 <i class="fa-solid fa-right-from-bracket"></i> Sair
@@ -42,36 +42,27 @@
             <p>Gerencie as oportunidades em aberto e acompanhe os candidatos com melhor compatibilidade (Match).</p>
         </div>
 
-        <!-- Cards de resumo rápido para exibição de métricas numéricas do sistema -->
-        <div class="rh-cards-metricas">
-            <!-- Card indicador de Vagas Ativas -->
-            <div class="metrica-card">
-                <i class="fa-solid fa-briefcase"></i>
-                <div>
-                    <!-- O ID contador-vagas é preenchido dinamicamente via script.js/rh.js -->
-                    <h3 id="contador-vagas">0</h3>
-                    <p>Vagas Ativas</p>
-                </div>
-            </div>
-            <!-- Card indicador de Candidatos Inscritos -->
-            <div class="metrica-card">
-                <i class="fa-solid fa-users"></i>
-                <div>
-                    <!-- O ID contador-candidatos é atualizado dinamicamente pelo backend -->
-                    <h3 id="contador-candidatos">0</h3>
-                    <p>Candidatos Inscritos</p>
-                </div>
-            </div>
-            <!-- Card indicador de Matches Altos -->
-            <div class="metrica-card">
-                <i class="fa-solid fa-star"></i>
-                <div>
-                    <!-- O ID contador-matches reflete o volume de perfis com alta compatibilidade -->
-                    <h3 id="contador-matches">0</h3>
-                    <p>Matches Altos (>85%)</p>
-                </div>
-            </div>
+      <!-- Cards de resumo rápido para exibição de métricas numéricas do sistema -->
+<div class="rh-cards-metricas">
+    <!-- Card indicador de Vagas Ativas -->
+    <div class="metrica-card">
+        <i class="fa-solid fa-briefcase"></i>
+        <div>
+            <!-- O ID contador-vagas é preenchido dinamicamente via script.js/rh.js -->
+            <h3 id="contador-vagas">0</h3>
+            <p>Vagas Ativas</p>
         </div>
+    </div>
+    <!-- Card indicador de Candidatos Inscritos -->
+    <div class="metrica-card">
+        <i class="fa-solid fa-users"></i>
+        <div>
+            <!-- O ID contador-candidatos é atualizado dinamicamente pelo backend -->
+            <h3 id="contador-candidatos">0</h3>
+            <p>Candidatos Inscritos</p>
+        </div>
+    </div>
+</div>
 
         <!-- 1. SEÇÃO: Tabela de Candidatos Recentes no Processo Seletivo -->
         <div class="rh-tabela-container">

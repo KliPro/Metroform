@@ -277,8 +277,14 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==========================================
 // CARREGAR VAGAS RECENTES NA PÁGINA INICIAL
 // ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-    carregarVagasNaHome(); // Dispara a função de carregamento de vagas assim que o documento HTML estiver pronto
+document.addEventListener("DOMContentLoaded", function() {
+    // Se o Gestor de RH estiver logado, esconde o botão/link do Banco Geral de Talentos da tela
+    if (localStorage.getItem("adminLogado")) {
+        const linkBancoTalentos = document.querySelector(".link-banco-talentos"); // Coloca aqui a classe ou ID exato do link no teu HTML
+        if (linkBancoTalentos) {
+            linkBancoTalentos.style.display = "none";
+        }
+    }
 });
 
 async function carregarVagasNaHome() {
@@ -301,14 +307,16 @@ async function carregarVagasNaHome() {
             // Seleciona e exibe dinamicamente apenas as 3 primeiras vagas (mais recentes) cadastradas
             vagas.slice(0, 3).forEach(vaga => {
                 const card = document.createElement("div");
-                card.style.cssText = "background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 4px solid #8B0000;";
                 
-                // Preenche o cartão HTML com as informações detalhadas da vaga vinda da base de dados
+                // Preenche o cartão HTML com as informações detalhadas da vaga vinda da base de dados e o novo botão centralizado
                 card.innerHTML = `
-                    <h3 style="margin-top: 0; color: #1a1a1a; font-size: 18px;">${vaga.titulo}</h3>
-                    <p style="color: #666; font-size: 14px; margin: 5px 0;"><strong>Setor:</strong> ${vaga.setor}</p>
-                    <p style="color: #666; font-size: 14px; margin: 5px 0;"><strong>Local:</strong> ${vaga.localizacao || "Guarulhos / SP"}</p>
-                    <p style="color: #555; font-size: 13px; margin: 15px 0 0 0;">${vaga.requisitos || ""}</p>
+                    <h3 class="vaga-titulo">${vaga.titulo}</h3>
+                    <p class="vaga-info"><strong>Setor:</strong> ${vaga.setor}</p>
+                    <p class="vaga-info">📍 ${vaga.localizacao || "Guarulhos / SP"}</p>
+                    <p class="vaga-requisitos"><strong>Requisitos:</strong> ${vaga.requisitos || ""}</p>
+                    <div class="vaga-acoes">
+                     <button type="button" class="btn-candidatar" onclick="candidatarVaga(${vaga.id_vaga})">Candidatar-se</button>
+                    </div>
                 `;
                 gridVagas.appendChild(card); // Adiciona o card gerado dentro da grelha na página
             });
@@ -429,7 +437,7 @@ if (formBancoTalentos) {
             // Se o envio for processado com sucesso pelo servidor
             if (resposta.ok) {
                 alert(resultado.mensagem);
-                formBancoTalentos.reset();         // Limpa os campos preenchidos do formulário
+                formBancoTalentos.reset();        // Limpa os campos preenchidos do formulário
                 fecharModalBancoTalentos();        // Fecha a janela modal de talentos
             } else {
                 alert(resultado.erro || 'Erro ao enviar o currículo.');
@@ -439,4 +447,64 @@ if (formBancoTalentos) {
             alert('Não foi possível conectar ao servidor para enviar o currículo.');
         }
     });
+}
+
+// ==========================================
+// FUNÇÃO DE CANDIDATURA À VAGA (CORRIGIDA)
+// ==========================================
+async function candidatarVaga(idVaga) {
+    // Se por acaso o ID vier vazio, tenta obtê-lo do contexto do botão clicado
+    if (!idVaga) {
+        console.error("ID da vaga não foi fornecido.");
+        alert("Erro: ID da vaga não identificado.");
+        return;
+    }
+
+    const candidatoStr = localStorage.getItem('candidatoLogado');
+
+    if (!candidatoStr) {
+        alert('Você precisa estar logado para se candidatar a uma vaga.');
+        abrirModalCandidato(); // Abre o modal de login automaticamente
+        return;
+    }
+
+    let candidato;
+    try {
+        candidato = JSON.parse(candidatoStr);
+    } catch (e) {
+        alert('Erro nos dados do utilizador. Faça login novamente.');
+        localStorage.removeItem('candidatoLogado');
+        return;
+    }
+
+    const idCandidatoReal = candidato.id_candidato || candidato.id || candidato.usuario_id;
+
+    if (!idCandidatoReal) {
+        alert('ID do candidato não encontrado. Por favor, faça login novamente na sua conta.');
+        localStorage.removeItem('candidatoLogado');
+        return;
+    }
+
+    try {
+        const resposta = await fetch('http://localhost:3000/api/candidaturas', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                id_candidato: Number(idCandidatoReal),
+                id_vaga: Number(idVaga)
+            })
+        });
+
+        const resultado = await resposta.json();
+
+        if (resposta.ok) {
+            alert(resultado.mensagem);
+            window.location.href = 'perfil.html';
+        } else {
+            alert(resultado.erro || 'Erro ao efetuar a candidatura.');
+        }
+    } catch (erro) {
+        console.error('Erro de conexão:', erro);
+        alert('Não foi possível conectar ao servidor.');
+    }
 }
