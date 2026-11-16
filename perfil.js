@@ -36,7 +36,7 @@ function arquivoSalvo(nome) {
 }
 
 function urlUpload(nomeArquivo) {
-    return `/uploads/${encodeURIComponent(nomeArquivo)}`;
+    return `https://metroform.onrender.com/uploads/${encodeURIComponent(nomeArquivo)}`;
 }
 
 function iniciaisDoNome(nome) {
@@ -110,7 +110,7 @@ function exibirDadosPerfil(dados) {
 
 async function sincronizarPerfilComServidor(idCandidato) {
     try {
-        const resposta = await fetch(`/api/candidatos/${idCandidato}`);
+        const resposta = await fetch(`https://metroform.onrender.com/api/candidatos/${idCandidato}`);
         if (!resposta.ok) return;
         const dados = await resposta.json();
         Object.assign(candidato, dados, {
@@ -132,7 +132,7 @@ async function carregarCandidaturas(idCandidato) {
 
     try {
         // Realiza uma requisição GET assíncrona para buscar as candidaturas do candidato específico na API (corrigido '=-')
-        const resposta = await fetch(`/api/candidaturas/${idCandidato}`);
+        const resposta = await fetch(`https://metroform.onrender.com/api/candidaturas/${idCandidato}`);
         
         // Se a resposta da API não for bem-sucedida
         if (!resposta.ok) {
@@ -311,7 +311,7 @@ if (formEditarPerfil) {
 
         try {
             // Envia os dados atualizados para a API do backend via requisição PUT utilizando FormData
-            const resposta = await fetch(`/api/candidatos/${idCandidato}`, {
+            const resposta = await fetch(`https://metroform.onrender.com/api/candidatos/${idCandidato}`, {
                 method: 'PUT',
                 body: formData
             });

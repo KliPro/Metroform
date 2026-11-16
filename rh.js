@@ -103,7 +103,7 @@ if (formCadastrarVaga) {
         }
 
         try {
-            const resposta = await fetch('/api/vagas', {
+            const resposta = await fetch('https://metroform.onrender.com/api/vagas', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(novaVaga)
@@ -136,7 +136,7 @@ async function carregarVagasPainelRH() {
     if (!containerVagas) return;
 
     try {
-        const resposta = await fetch('/api/vagas');
+        const resposta = await fetch('https://metroform.onrender.com/api/vagas');
         if (!resposta.ok) return;
 
         const vagas = await resposta.json();
@@ -174,7 +174,7 @@ async function carregarVagasPainelRH() {
 
 async function excluirVaga(idVaga) {
     try {
-        const resposta = await fetch(`/api/vagas/${idVaga}`, {
+        const resposta = await fetch(`https://metroform.onrender.com/api/vagas/${idVaga}`, {
             method: 'DELETE'
         });
 
@@ -202,7 +202,7 @@ async function carregarCandidaturasRH() {
     if (!tbody) return;
 
     try {
-        const resposta = await fetch('/api/candidaturas-rh');
+        const resposta = await fetch('https://metroform.onrender.com/api/candidaturas-rh');
         if (!resposta.ok) return;
 
         const candidaturas = await resposta.json();
@@ -240,7 +240,7 @@ async function carregarBancoTalentosRH() {
     if (!tbody) return;
 
     try {
-        const resposta = await fetch('/api/banco-talentos');
+        const resposta = await fetch('https://metroform.onrender.com/api/banco-talentos');
         if (!resposta.ok) return;
 
         const dados = await resposta.json();
@@ -260,7 +260,7 @@ async function carregarBancoTalentosRH() {
                 <td>${talento.nome}</td>
                 <td>${talento.email}</td>
                 <td>${talento.telefone || '-'}</td>
-                <td><a href="/uploads/${talento.curriculo_pdf}" target="_blank" style="background-color: #f1f1f1; color: #7A0000; padding: 5px 10px; border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 12px;">Ver PDF</a></td>
+                <td><a href="https://metroform.onrender.com/uploads/${talento.curriculo_pdf}" target="_blank" style="background-color: #f1f1f1; color: #7A0000; padding: 5px 10px; border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 12px;">Ver PDF</a></td>
                 <td>${new Date(talento.data_envio).toLocaleDateString('pt-BR')}</td>
                 <td>
                     <button onclick="excluirTalento(${idTalentoReal})" class="btn-profissional btn-vermelho" style="padding: 6px 10px; font-size: 12px; background-color: #d9534f; color: white; border: none; border-radius: 4px; cursor: pointer;">
@@ -277,7 +277,7 @@ async function carregarBancoTalentosRH() {
 
 async function excluirTalento(idTalento) {
     try {
-        const resposta = await fetch(`/api/banco-talentos/${idTalento}`, {
+        const resposta = await fetch(`https://metroform.onrender.com/api/banco-talentos/${idTalento}`, {
             method: 'DELETE'
         });
 
@@ -301,7 +301,7 @@ async function excluirTalento(idTalento) {
 // ==========================================
 async function carregarEstatisticasRH() {
     try {
-        const resposta = await fetch('/api/estatisticas-rh');
+        const resposta = await fetch('https://metroform.onrender.com/api/estatisticas-rh');
         if (!resposta.ok) return;
 
         const dados = await resposta.json();
@@ -340,7 +340,7 @@ function abrirDetalhesCandidato(item) {
 
     const pdfContainer = document.getElementById('modal-pdf-container');
     if (item.curriculo_pdf && item.curriculo_pdf !== 'null') {
-        pdfContainer.innerHTML = `<a href="/uploads/${item.curriculo_pdf}" target="_blank" style="color: #7A0000; font-weight: bold;"><i class="fa-solid fa-file-pdf"></i> Abrir Currículo em PDF</a>`;
+        pdfContainer.innerHTML = `<a href="https://metroform.onrender.com/uploads/${item.curriculo_pdf}" target="_blank" style="color: #7A0000; font-weight: bold;"><i class="fa-solid fa-file-pdf"></i> Abrir Currículo em PDF</a>`;
     } else {
         pdfContainer.textContent = 'Nenhum currículo em anexo.';
     }
@@ -356,7 +356,7 @@ async function atualizarStatusCandidatura(novoStatus) {
     if (!candidaturaSelecionadaId) return; 
 
     try {
-        const resposta = await fetch(`/api/candidaturas/${candidaturaSelecionadaId}/status`, {
+        const resposta = await fetch(`https://metroform.onrender.com/api/candidaturas/${candidaturaSelecionadaId}/status`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ status: novoStatus })

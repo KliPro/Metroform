@@ -92,7 +92,7 @@ document.getElementById('form-cadastro-candidato').addEventListener('submit', as
     };
 
     try {
-        const resposta = await fetch('/api/candidatos', {
+        const resposta = await fetch('https://metroform.onrender.com/api/candidatos', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dadosCandidato)
@@ -125,7 +125,7 @@ document.getElementById('form-login-candidato').addEventListener('submit', async
     };
 
     try {
-        const resposta = await fetch('/api/login', {
+        const resposta = await fetch('https://metroform.onrender.com/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dadosLogin)
@@ -199,7 +199,7 @@ if (formModalRecuperar) {
 
         try {
             // Envia solicitação de recuperação para a API do backend
-            const resposta = await fetch('/api/recuperar-senha', {
+            const resposta = await fetch('https://metroform.onrender.com/api/recuperar-senha', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, novaSenha })
@@ -226,7 +226,7 @@ if (formModalRecuperar) {
 // ==========================================
 function logoutGeral() {
     localStorage.removeItem('candidatoLogado'); 
-    localStorage.removeItem('adminLogado');     
+    localStorage.removeItem('adminLogado');    
     localStorage.removeItem('rhLogado');        
     window.location.href = 'index.html';        
 }
@@ -287,7 +287,7 @@ async function carregarVagasNaHome() {
     if (!gridVagas) return;
 
     try {
-        const resposta = await fetch("/api/vagas");
+        const resposta = await fetch("https://metroform.onrender.com/api/vagas");
         if (resposta.ok) {
             const vagas = await resposta.json();
 
@@ -317,6 +317,7 @@ async function carregarVagasNaHome() {
         console.error("Erro ao carregar vagas na home:", erro);
     }
 }
+
 
 // ==========================================
 // BANCO GERAL DE TALENTOS (MODAL COM SEGURANÇA E 1 CLIQUE)
@@ -374,7 +375,7 @@ function abrirModalBancoTalentos() {
             const nomeCurriculo = candidatoLogado.curriculo_pdf || candidatoLogado.curriculoPdf || candidatoLogado.curriculo || 'curriculo_via_perfil.pdf';
             formData.append('curriculo_pdf_existente', nomeCurriculo);
 
-            const resposta = await fetch('/api/banco-talentos', {
+            const resposta = await fetch('https://metroform.onrender.com/api/banco-talentos', {
                 method: 'POST',
                 body: formData
             });
@@ -435,7 +436,7 @@ if (formBancoTalentos) {
         }
 
         try {
-            const resposta = await fetch('/api/banco-talentos', {
+            const resposta = await fetch('https://metroform.onrender.com/api/banco-talentos', {
                 method: 'POST',
                 body: formData
             });
@@ -493,7 +494,7 @@ async function candidatarVaga(idVaga) {
     }
 
     try {
-        const resposta = await fetch('/api/candidaturas', {
+        const resposta = await fetch('https://metroform.onrender.com/api/candidaturas', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
