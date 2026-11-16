@@ -1,40 +1,53 @@
 // ==========================================
+// FUNÇÃO GLOBAL DE TOAST NOTIFICATIONS (Atualizada para não empilhar)
+// ==========================================
+function mostrarToast(mensagem, tipo = 'erro') {
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        document.body.appendChild(container);
+    } else {
+        container.innerHTML = ''; // Limpa toasts anteriores para nunca misturar verde e vermelho
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${tipo}`;
+    toast.innerText = mensagem;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+
+
+// ==========================================
 // FUNÇÕES DE CONTROLE DE MODAIS (ABRIR E FECHAR)
 // ==========================================
-
-// Função global para exibir o modal de login/cadastro do candidato na tela
 function abrirModalCandidato() {
-    // Altera a propriedade CSS display do elemento para 'flex', tornando o modal visível
     document.getElementById('modal-candidato').style.display = 'flex';
 }
 
-// Função global para ocultar o modal de candidato
 function fecharModalCandidato() {
-    // Altera a propriedade CSS display para 'none', escondendo o modal da tela
     document.getElementById('modal-candidato').style.display = 'none';
 }
 
-// Função global para exibir o modal de acesso do RH/Gestor
 function abrirModalRH() {
-    // Torna visível o modal de autenticação restrita para o administrador de RH
     document.getElementById('modal-rh').style.display = 'flex';
 }
 
-// Função global para ocultar o modal de RH/Gestor
 function fecharModalRH() {
-    // Oculta o modal de login do gestor de RH
     document.getElementById('modal-rh').style.display = 'none';
 }
 
-// Função para abrir o modal de recuperação de senha a partir do link do modal de candidato
 function abrirModalRecuperar(event) {
-    event.preventDefault(); // Impede o comportamento padrão de navegação ou recarregamento do link HTML
-    document.getElementById('modal-recuperar').style.display = 'flex'; // Exibe o modal de recuperação de senha
+    event.preventDefault();
+    document.getElementById('modal-recuperar').style.display = 'flex';
 }
 
-// Função para fechar o modal de recuperação de senha
 function fecharModalRecuperar() {
-    // Esconde o modal de recuperação de senha da tela
     document.getElementById('modal-recuperar').style.display = 'none';
 }
 
@@ -42,32 +55,24 @@ function fecharModalRecuperar() {
 // ==========================================
 // ALTERNÂNCIA DE ABAS NO MODAL DE CANDIDATO
 // ==========================================
-// Função para alternar visualmente entre as abas de Entrar e Criar Conta no modal do Candidato
 function mudarAbaCand(tipo) {
     const btnEntrar = document.getElementById('aba-cand-entrar');
     const btnCadastrar = document.getElementById('aba-cand-cadastrar');
     const formLogin = document.getElementById('form-login-candidato');
     const formCadastro = document.getElementById('form-cadastro-candidato');
 
-    // Verifica se a opção escolhida pelo utilizador foi a aba de login
     if (tipo === 'login') {
-        // Estiliza visualmente o botão de entrar como ativo (fundo branco e texto em destaque)
         btnEntrar.style.background = 'white';
         btnEntrar.style.color = '#7A0000';
-        // Remove o destaque visual da aba de cadastro
         btnCadastrar.style.background = 'transparent';
         btnCadastrar.style.color = '#555';
-        // Mostra o formulário de login e esconde o formulário de cadastro
         formLogin.style.display = 'block';
         formCadastro.style.display = 'none';
     } else {
-        // Caso contrário, ativa visualmente a aba de cadastro
         btnCadastrar.style.background = 'white';
         btnCadastrar.style.color = '#7A0000';
-        // Remove o destaque visual da aba de entrar
         btnEntrar.style.background = 'transparent';
         btnEntrar.style.color = '#555';
-        // Mostra o formulário de cadastro e esconde o formulário de login
         formCadastro.style.display = 'block';
         formLogin.style.display = 'none';
     }
@@ -77,11 +82,9 @@ function mudarAbaCand(tipo) {
 // ==========================================
 // FORMULÁRIO DE CADASTRO DE CANDIDATO
 // ==========================================
-// Adiciona um ouvinte para interceptar o envio do formulário de cadastro do candidato
 document.getElementById('form-cadastro-candidato').addEventListener('submit', async function(e) {
-    e.preventDefault(); // Impede o comportamento padrão de submissão que recarregaria a página
+    e.preventDefault();
     
-    // Agrupa em um objeto os valores introduzidos pelo utilizador nos campos de input do cadastro
     const dadosCandidato = {
         nome: document.getElementById('nome-cad-cand').value,
         email: document.getElementById('email-cad-cand').value,
@@ -89,25 +92,23 @@ document.getElementById('form-cadastro-candidato').addEventListener('submit', as
     };
 
     try {
-        // Envia os dados para a API de registo de candidatos no servidor backend via requisição POST
-        const resposta = await fetch('http://localhost:3000/api/candidatos', {
+        const resposta = await fetch('/api/candidatos', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dadosCandidato)
         });
         const resultado = await resposta.json();
 
-        // Se o servidor MySQL registar o candidato com sucesso
         if (resposta.ok) {
-            alert(resultado.mensagem); // Exibe mensagem informativa de sucesso
-            document.getElementById('form-cadastro-candidato').reset(); // Limpa os campos do formulário
-            mudarAbaCand('login'); // Redireciona visualmente o utilizador para a aba de login
+            mostrarToast(resultado.mensagem, 'sucesso');
+            document.getElementById('form-cadastro-candidato').reset();
+            mudarAbaCand('login');
         } else {
-            alert(resultado.erro); // Exibe o erro retornado pela API (ex: e-mail já duplicado)
+            mostrarToast(resultado.erro || 'Erro ao cadastrar candidato.', 'erro');
         }
     } catch (erro) {
         console.error('Erro de conexão:', erro);
-        alert('Não foi possível conectar ao servidor backend.');
+        mostrarToast('Não foi possível conectar ao servidor backend.', 'erro');
     }
 });
 
@@ -115,36 +116,32 @@ document.getElementById('form-cadastro-candidato').addEventListener('submit', as
 // ==========================================
 // FORMULÁRIO DE LOGIN DE CANDIDATO
 // ==========================================
-// Adiciona um ouvinte para interceptar o envio do formulário de login do candidato
 document.getElementById('form-login-candidato').addEventListener('submit', async function(e) {
-    e.preventDefault(); // Impede o recarregamento automático da página
+    e.preventDefault();
     
-    // Recolhe as credenciais inseridas no formulário de login
     const dadosLogin = {
         email: document.getElementById('email-login-cand').value,
         senha: document.getElementById('senha-login-cand').value
     };
 
     try {
-        // Envia as credenciais para a rota de autenticação de candidatos via método POST
-        const resposta = await fetch('http://localhost:3000/api/login', {
+        const resposta = await fetch('/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dadosLogin)
         });
         const resultado = await resposta.json();
 
-        // Se as credenciais forem válidas
         if (resposta.ok) {
-            localStorage.removeItem('adminLogado'); // Remove qualquer sessão anterior de RH por segurança
-            localStorage.setItem('candidatoLogado', JSON.stringify(resultado.candidato)); // Guarda os dados do candidato no armazenamento do navegador
-            window.location.href = 'perfil.html'; // Redireciona o utilizador logado para a página de perfil
+            localStorage.removeItem('adminLogado');
+            localStorage.setItem('candidatoLogado', JSON.stringify(resultado.candidato));
+            window.location.href = 'perfil.html';
         } else {
-            alert(resultado.erro); // Alerta caso o e-mail ou palavra-passe estejam incorretos
+            mostrarToast(resultado.erro || 'E-mail ou senha incorretos.', 'erro');
         }
     } catch (erro) {
         console.error('Erro de conexão:', erro);
-        alert('Não foi possível conectar ao servidor backend.');
+        mostrarToast('Não foi possível conectar ao servidor backend.', 'erro');
     }
 });
 
@@ -152,30 +149,26 @@ document.getElementById('form-login-candidato').addEventListener('submit', async
 // ==========================================
 // VALIDAÇÃO E LOGIN DO GESTOR RH
 // ==========================================
-// Seleciona o formulário de login modal do RH
 const formLoginRhModal = document.getElementById("form-login-rh-modal");
 
 if (formLoginRhModal) {
     formLoginRhModal.addEventListener("submit", (e) => {
-        e.preventDefault(); // Evita o recarregamento padrão da página
+        e.preventDefault();
 
-        // Captura e remove espaços extras dos dados digitados nos campos
         const emailInput = document.getElementById("email-rh-modal").value.trim();
         const senhaInput = document.getElementById("senha-rh-modal").value.trim();
 
-        // Validação estática das credenciais de acesso restrito do gestor de RH
         if (emailInput === "rh@metroform.com" && senhaInput === "123456") {
-            localStorage.removeItem('candidatoLogado'); // Remove qualquer sessão de candidato aberta para evitar conflitos
+            localStorage.removeItem('candidatoLogado');
             
-            // Cria o objeto com os dados de identificação do administrador
             const dadosAdmin = {
                 nome: "Gestor RH",
                 email: emailInput
             };
-            localStorage.setItem('adminLogado', JSON.stringify(dadosAdmin)); // Salva a sessão do administrador no LocalStorage
-            window.location.href = 'rh.html'; // Redireciona o gestor para o painel de controlo restrito de RH
+            localStorage.setItem('adminLogado', JSON.stringify(dadosAdmin));
+            window.location.href = 'rh.html';
         } else {
-            alert("E-mail ou senha incorretos!"); // Alerta de credenciais inválidas
+            mostrarToast("E-mail ou senha incorretos!", 'erro');
         }
     });
 }
@@ -184,36 +177,45 @@ if (formLoginRhModal) {
 // ==========================================
 // RECUPERAÇÃO DE SENHA
 // ==========================================
-// Adiciona um ouvinte para o envio do formulário de recuperação de senha
 const formModalRecuperar = document.getElementById('form-modal-recuperar');
 if (formModalRecuperar) {
     formModalRecuperar.addEventListener('submit', async function(e) {
-        e.preventDefault(); // Impede o comportamento padrão de envio
+        e.preventDefault(); // Evita o recarregamento padrão
+        
         const email = document.getElementById('email-recuperar').value.trim();
-        const novaSenha = prompt('Insira a sua nova senha temporária ou definitiva:');
+        const novaSenhaInput = document.getElementById('nova-senha-recuperar');
+        const novaSenha = novaSenhaInput ? novaSenhaInput.value.trim() : '';
 
-        if (!novaSenha) return; // Interrompe a execução caso o utilizador cancele o prompt
+        if (!email || !novaSenha) {
+            mostrarToast('Preencha o e-mail e a nova senha.', 'erro');
+            return;
+        }
+
+        // Validação de tamanho mínimo (ex: pelo menos 15 caracteres)
+        if (novaSenha.length < 15) {
+            mostrarToast('A nova senha deve ter pelo menos 15 caracteres.', 'erro');
+            return;
+        }
 
         try {
-            // Envia o e-mail e a nova palavra-passe para a API de recuperação no servidor
-            const resposta = await fetch('http://localhost:3000/api/recuperar-senha', {
+            // Envia solicitação de recuperação para a API do backend
+            const resposta = await fetch('/api/recuperar-senha', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, novaSenha })
             });
             const resultado = await resposta.json();
             
-            // Se a alteração for bem-sucedida
             if (resposta.ok) {
-                alert(resultado.mensagem);
-                fecharModalRecuperar(); // Fecha o modal de recuperação
+                mostrarToast(resultado.mensagem || 'Senha redefinida com sucesso!', 'sucesso'); // Toast verde elegante
+                fecharModalRecuperar(); // Fecha o modal automaticamente
                 formModalRecuperar.reset(); // Limpa os campos do formulário
             } else {
-                alert(resultado.erro || 'Erro ao redefinir senha.');
+                mostrarToast(resultado.erro || 'Erro ao redefinir senha.', 'erro'); // Toast vermelho de erro
             }
         } catch (erro) {
             console.error('Erro de conexão:', erro);
-            alert('Não foi possível conectar ao servidor.');
+            mostrarToast('Não foi possível conectar ao servidor.', 'erro');
         }
     });
 }
@@ -222,30 +224,25 @@ if (formModalRecuperar) {
 // ==========================================
 // LOGOUT GERAL DO SISTEMA
 // ==========================================
-// Função global para terminar sessão de qualquer tipo de utilizador e limpar o armazenamento local
 function logoutGeral() {
-    localStorage.removeItem('candidatoLogado'); // Apaga os dados de sessão do candidato
-    localStorage.removeItem('adminLogado');     // Apaga os dados de sessão do administrador de RH
-    localStorage.removeItem('rhLogado');        // Limpeza de compatibilidade para outras chaves de sessão
-    window.location.href = 'index.html';        // Redireciona o utilizador de volta à página inicial
+    localStorage.removeItem('candidatoLogado'); 
+    localStorage.removeItem('adminLogado');     
+    localStorage.removeItem('rhLogado');        
+    window.location.href = 'index.html';        
 }
 
 
 // ==========================================
 // VERIFICAÇÃO DE SESSÃO AO CARREGAR A PÁGINA
 // ==========================================
-// Executado ao carregar a página inicial para verificar se existem utilizadores ativos e personalizar o cabeçalho
 document.addEventListener('DOMContentLoaded', () => {
-    // --- VERIFICAÇÃO DO CANDIDATO ---
     const candidatoLogado = JSON.parse(localStorage.getItem('candidatoLogado'));
     const linkCandidato = document.getElementById('link-candidato-header');
 
-    // Se houver um candidato autenticado e o link existir no menu
     if (candidatoLogado && linkCandidato) {
-        const primeiroNome = candidatoLogado.nome.split(' ')[0]; // Extrai apenas o primeiro nome do utilizador
-        linkCandidato.textContent = `Olá, ${primeiroNome}`; // Substitui o texto do botão por uma saudação personalizada
+        const primeiroNome = candidatoLogado.nome.split(' ')[0]; 
+        linkCandidato.textContent = `Olá, ${primeiroNome}`; 
         
-        // Altera a ação do clique para redirecionar diretamente para a página de perfil
         linkCandidato.onclick = function(e) {
             e.preventDefault();
             window.location.href = 'perfil.html';
@@ -254,16 +251,13 @@ document.addEventListener('DOMContentLoaded', () => {
         linkCandidato.classList.add('usuario-logado');
     }
 
-    // --- VERIFICAÇÃO DO GESTOR RH ---
     const adminLogado = JSON.parse(localStorage.getItem('adminLogado'));
     const linkRh = document.getElementById('link-rh-header');
 
-    // Se houver um administrador de RH autenticado e o link existir no menu
     if (adminLogado && linkRh) {
         const primeiroNomeAdmin = adminLogado.nome.split(' ')[0];
-        linkRh.textContent = `Painel: ${primeiroNomeAdmin}`; // Personaliza o texto do menu para o gestor
+        linkRh.textContent = `Painel: ${primeiroNomeAdmin}`; 
         
-        // Altera a ação do clique para redirecionar diretamente para o painel de RH
         linkRh.onclick = function(e) {
             e.preventDefault();
             window.location.href = 'rh.html';
@@ -278,37 +272,35 @@ document.addEventListener('DOMContentLoaded', () => {
 // CARREGAR VAGAS RECENTES NA PÁGINA INICIAL
 // ==========================================
 document.addEventListener("DOMContentLoaded", function() {
-    // Se o Gestor de RH estiver logado, esconde o botão/link do Banco Geral de Talentos da tela
     if (localStorage.getItem("adminLogado")) {
-        const linkBancoTalentos = document.querySelector(".link-banco-talentos"); // Coloca aqui a classe ou ID exato do link no teu HTML
+        const linkBancoTalentos = document.querySelector(".link-banco-talentos"); 
         if (linkBancoTalentos) {
             linkBancoTalentos.style.display = "none";
         }
     }
+
+    carregarVagasNaHome();
 });
 
 async function carregarVagasNaHome() {
     const gridVagas = document.querySelector(".grid-vagas");
-    if (!gridVagas) return; // Se o container de vagas não existir na página, interrompe a execução
+    if (!gridVagas) return;
 
     try {
-        const resposta = await fetch("http://localhost:3000/api/vagas"); // Requisição GET para buscar as vagas na API
+        const resposta = await fetch("/api/vagas");
         if (resposta.ok) {
             const vagas = await resposta.json();
 
-            // Se não houver vagas cadastradas no banco de dados, exibe um aviso amigável
             if (vagas.length === 0) {
                 gridVagas.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: #666;">Nenhuma vaga ativa no momento.</p>`;
                 return;
             }
 
-            gridVagas.innerHTML = ""; // Limpa o container antes de inserir os novos elementos
+            gridVagas.innerHTML = "";
             
-            // Seleciona e exibe dinamicamente apenas as 3 primeiras vagas (mais recentes) cadastradas
             vagas.slice(0, 3).forEach(vaga => {
                 const card = document.createElement("div");
                 
-                // Preenche o cartão HTML com as informações detalhadas da vaga vinda da base de dados e o novo botão centralizado
                 card.innerHTML = `
                     <h3 class="vaga-titulo">${vaga.titulo}</h3>
                     <p class="vaga-info"><strong>Setor:</strong> ${vaga.setor}</p>
@@ -318,7 +310,7 @@ async function carregarVagasNaHome() {
                      <button type="button" class="btn-candidatar" onclick="candidatarVaga(${vaga.id_vaga})">Candidatar-se</button>
                     </div>
                 `;
-                gridVagas.appendChild(card); // Adiciona o card gerado dentro da grelha na página
+                gridVagas.appendChild(card);
             });
         }
     } catch (erro) {
@@ -326,9 +318,8 @@ async function carregarVagasNaHome() {
     }
 }
 
-
 // ==========================================
-// BANCO GERAL DE TALENTOS (ENVIO RÁPIDO / MODAL)
+// BANCO GERAL DE TALENTOS (MODAL COM SEGURANÇA E 1 CLIQUE)
 // ==========================================
 function abrirModalBancoTalentos() {
     const modal = document.getElementById('modal-banco-talentos');
@@ -337,81 +328,100 @@ function abrirModalBancoTalentos() {
     const candidatoLogado = JSON.parse(localStorage.getItem('candidatoLogado'));
     const conteudoModal = modal.querySelector('.modal-box');
 
-    // Se o candidato já estiver autenticado na plataforma, exibe um atalho inteligente de Envio Rápido em 1 clique
-    if (candidatoLogado) {
-        conteudoModal.innerHTML = `
-            <button type="button" onclick="fecharModalBancoTalentos()" class="modal-close">&times;</button>
-            <div class="modal-header">
-                <h2>Banco Geral de Talentos</h2>
-                <p>Olá, <strong>${candidatoLogado.nome.split(' ')[0]}</strong>! Envie o seu perfil atual instantaneamente.</p>
-            </div>
-            <div style="text-align: center; padding: 20px 0;">
-                <p style="color: #555; margin-bottom: 25px; font-size: 14px; line-height: 1.5;">
-                    O sistema irá utilizar automaticamente as suas informações de contacto, resumo profissional e o currículo já associados à sua conta.
-                </p>
-                <button type="button" id="btn-envio-rapido" class="btn-submit-auth">
-                    🚀 Enviar Meu Perfil Atual com 1 Clique
-                </button>
-            </div>
-        `;
-
-        // Configura o evento de clique no botão de envio rápido automatizado
-        document.getElementById('btn-envio-rapido').addEventListener('click', async () => {
-            try {
-                const formData = new FormData();
-                formData.append('nome', candidatoLogado.nome || '');
-                formData.append('email', candidatoLogado.email || '');
-                formData.append('telefone', candidatoLogado.telefone || '');
-                formData.append('resumo', candidatoLogado.resumo || '');
-                
-                // Reaproveita o nome do ficheiro de currículo em PDF já guardado no perfil do utilizador
-                const nomeCurriculo = candidatoLogado.curriculo_pdf || candidatoLogado.curriculoPdf || candidatoLogado.curriculo || 'curriculo_via_perfil.pdf';
-                formData.append('curriculo_pdf_existente', nomeCurriculo);
-
-                // Envia os dados do perfil atual diretamente para a API do Banco de Talentos via POST
-                const resposta = await fetch('http://localhost:3000/api/banco-talentos', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const resultado = await resposta.json();
-
-                if (resposta.ok) {
-                    alert(resultado.mensagem);
-                    fecharModalBancoTalentos(); // Fecha o modal após a conclusão bem-sucedida
-                    window.location.reload();   // Atualiza a página
-                } else {
-                    alert(resultado.erro || 'Erro ao enviar o currículo.');
-                }
-            } catch (erro) {
-                console.error('Erro de conexão:', erro);
-                alert('Não foi possível conectar ao servidor.');
-            }
-        });
+    // 1. SE NÃO ESTIVER LOGADO: Bloqueia, avisa com Toast e abre o modal de login/cadastro
+    if (!candidatoLogado) {
+        mostrarToast('Você precisa estar cadastrado e logado para enviar o currículo ao Banco de Talentos.', 'erro');
+        abrirModalCandidato(); // Abre a área do candidato para entrar ou criar conta
+        return;
     }
 
-    modal.style.display = 'flex'; // Exibe o modal na tela
+    // 2. SE ESTIVER LOGADO: Renderiza o modal de 1 clique personalizado com o nome
+    conteudoModal.innerHTML = `
+        <button type="button" id="btn-fechar-talentos" class="modal-close">&times;</button>
+        <div class="modal-header">
+            <h2>Banco Geral de Talentos</h2>
+            <p>Olá, <strong>${candidatoLogado.nome.split(' ')[0]}</strong>! Envie o seu perfil atual instantaneamente.</p>
+        </div>
+        <div style="text-align: center; padding: 20px 0;">
+            <p style="color: #555; margin-bottom: 25px; font-size: 14px; line-height: 1.5;">
+                O sistema irá utilizar automaticamente as suas informações de contacto, resumo profissional e o currículo já associados à sua conta.
+            </p>
+            <button type="button" id="btn-envio-rapido" class="btn-submit-auth">
+                🚀 Enviar Meu Perfil Atual com 1 Clique
+            </button>
+        </div>
+    `;
+
+    // Botão X de fechar funcional
+    document.getElementById('btn-fechar-talentos').addEventListener('click', fecharModalBancoTalentos);
+
+    // Evento de clique protegido contra duplicações (envio único)
+    document.getElementById('btn-envio-rapido').addEventListener('click', async function() {
+        const botaoEnvio = this;
+        
+        botaoEnvio.disabled = true;
+        botaoEnvio.style.opacity = '0.7';
+        botaoEnvio.style.cursor = 'not-allowed';
+        botaoEnvio.innerText = 'A enviar perfil...';
+
+        try {
+            const formData = new FormData();
+            formData.append('nome', candidatoLogado.nome || '');
+            formData.append('email', candidatoLogado.email || '');
+            formData.append('telefone', candidatoLogado.telefone || '');
+            formData.append('resumo', candidatoLogado.resumo || '');
+            
+            const nomeCurriculo = candidatoLogado.curriculo_pdf || candidatoLogado.curriculoPdf || candidatoLogado.curriculo || 'curriculo_via_perfil.pdf';
+            formData.append('curriculo_pdf_existente', nomeCurriculo);
+
+            const resposta = await fetch('/api/banco-talentos', {
+                method: 'POST',
+                body: formData
+            });
+
+            const resultado = await resposta.json();
+
+            if (resposta.ok) {
+                mostrarToast(resultado.mensagem, 'sucesso');
+                fecharModalBancoTalentos();
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                mostrarToast(resultado.erro || 'Erro ao enviar o currículo.', 'erro');
+                botaoEnvio.disabled = false;
+                botaoEnvio.style.opacity = '1';
+                botaoEnvio.innerText = '🚀 Enviar Meu Perfil Atual com 1 Clique';
+            }
+        } catch (erro) {
+            console.error('Erro de conexão:', erro);
+            mostrarToast('Não foi possível conectar ao servidor.', 'erro');
+            botaoEnvio.disabled = false;
+            botaoEnvio.style.opacity = '1';
+            botaoEnvio.innerText = '🚀 Enviar Meu Perfil Atual com 1 Clique';
+        }
+    });
+
+    modal.style.display = 'flex';
     modal.classList.remove('oculto');
 }
 
 function fecharModalBancoTalentos() {
     const modal = document.getElementById('modal-banco-talentos');
     if (modal) {
-        modal.style.display = 'none'; // Esconde o modal
+        modal.style.display = 'none'; 
         modal.classList.add('oculto');
     }
 }
 
-
 // ==========================================
 // FORMULÁRIO DO BANCO DE TALENTOS (VISITANTES)
 // ==========================================
-// Adiciona o ouvinte para submissão manual de currículos por visitantes externos não logados
 const formBancoTalentos = document.getElementById('form-banco-talentos');
 
 if (formBancoTalentos) {
     formBancoTalentos.addEventListener('submit', async function(e) {
-        e.preventDefault(); // Impede o recarregamento da página ao submeter o formulário
+        e.preventDefault();
 
         const formData = new FormData();
         formData.append('nome', document.getElementById('talento-nome').value.trim());
@@ -419,52 +429,49 @@ if (formBancoTalentos) {
         formData.append('telefone', document.getElementById('talento-telefone').value.trim());
         formData.append('resumo', document.getElementById('talento-resumo').value.trim());
         
-        // Captura o ficheiro PDF de currículo anexado manualmente pelo visitante através do input type file
         const curriculoFile = document.getElementById('talento-curriculo').files[0];
         if (curriculoFile) {
             formData.append('curriculo', curriculoFile);
         }
 
         try {
-            // Envia o formulário completo contendo os textos e o ficheiro binário para a API do backend
-            const resposta = await fetch('http://localhost:3000/api/banco-talentos', {
+            const resposta = await fetch('/api/banco-talentos', {
                 method: 'POST',
                 body: formData
             });
 
             const resultado = await resposta.json();
 
-            // Se o envio for processado com sucesso pelo servidor
             if (resposta.ok) {
-                alert(resultado.mensagem);
-                formBancoTalentos.reset();        // Limpa os campos preenchidos do formulário
-                fecharModalBancoTalentos();        // Fecha a janela modal de talentos
+                mostrarToast(resultado.mensagem, 'sucesso');
+                formBancoTalentos.reset();
+                fecharModalBancoTalentos();
             } else {
-                alert(resultado.erro || 'Erro ao enviar o currículo.');
+                mostrarToast(resultado.erro || 'Erro ao enviar o currículo.', 'erro');
             }
         } catch (erro) {
             console.error('Erro de conexão:', erro);
-            alert('Não foi possível conectar ao servidor para enviar o currículo.');
+            mostrarToast('Não foi possível conectar ao servidor para enviar o currículo.', 'erro');
         }
     });
 }
 
+
 // ==========================================
-// FUNÇÃO DE CANDIDATURA À VAGA (CORRIGIDA)
+// FUNÇÃO DE CANDIDATURA À VAGA
 // ==========================================
 async function candidatarVaga(idVaga) {
-    // Se por acaso o ID vier vazio, tenta obtê-lo do contexto do botão clicado
     if (!idVaga) {
         console.error("ID da vaga não foi fornecido.");
-        alert("Erro: ID da vaga não identificado.");
+        mostrarToast("Erro: ID da vaga não identificado.", 'erro');
         return;
     }
 
     const candidatoStr = localStorage.getItem('candidatoLogado');
 
     if (!candidatoStr) {
-        alert('Você precisa estar logado para se candidatar a uma vaga.');
-        abrirModalCandidato(); // Abre o modal de login automaticamente
+        mostrarToast('Você precisa estar logado para se candidatar a uma vaga.', 'erro');
+        abrirModalCandidato();
         return;
     }
 
@@ -472,7 +479,7 @@ async function candidatarVaga(idVaga) {
     try {
         candidato = JSON.parse(candidatoStr);
     } catch (e) {
-        alert('Erro nos dados do utilizador. Faça login novamente.');
+        mostrarToast('Erro nos dados do utilizador. Faça login novamente.', 'erro');
         localStorage.removeItem('candidatoLogado');
         return;
     }
@@ -480,13 +487,13 @@ async function candidatarVaga(idVaga) {
     const idCandidatoReal = candidato.id_candidato || candidato.id || candidato.usuario_id;
 
     if (!idCandidatoReal) {
-        alert('ID do candidato não encontrado. Por favor, faça login novamente na sua conta.');
+        mostrarToast('ID do candidato não encontrado. Faça login novamente.', 'erro');
         localStorage.removeItem('candidatoLogado');
         return;
     }
 
     try {
-        const resposta = await fetch('http://localhost:3000/api/candidaturas', {
+        const resposta = await fetch('/api/candidaturas', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -498,13 +505,74 @@ async function candidatarVaga(idVaga) {
         const resultado = await resposta.json();
 
         if (resposta.ok) {
-            alert(resultado.mensagem);
-            window.location.href = 'perfil.html';
+            mostrarToast(resultado.mensagem, 'sucesso');
+            setTimeout(() => {
+                window.location.href = 'perfil.html';
+            }, 1000);
         } else {
-            alert(resultado.erro || 'Erro ao efetuar a candidatura.');
+            mostrarToast(resultado.erro || 'Erro ao efetuar a candidatura.', 'erro');
         }
     } catch (erro) {
         console.error('Erro de conexão:', erro);
-        alert('Não foi possível conectar ao servidor.');
+        mostrarToast('Não foi possível conectar ao servidor.', 'erro');
     }
 }
+
+
+// ==========================================
+// CONTADOR DE CARACTERES DO RESUMO PROFISSIONAL
+// ==========================================
+function atualizarContadorResumo(textarea) {
+    const max = textarea.getAttribute('maxlength');
+    const atual = textarea.value.length;
+    const restantes = max - atual;
+    
+    const contadorEl = document.getElementById('contador-resumo');
+    if (contadorEl) {
+        contadorEl.innerText = `${restantes} caracteres restantes`;
+        
+        if (restantes < 30) {
+            contadorEl.style.color = '#d32f2f';
+        } else {
+            contadorEl.style.color = '#666';
+        }
+    }
+}
+
+
+// ==========================================
+// MÁSCARA E VALIDAÇÃO DO CAMPO TELEFONE
+// ==========================================
+function mascaraTelefone(input) {
+    let valor = input.value.replace(/\D/g, '');
+    
+    if (valor.length > 11) {
+        valor = valor.substring(0, 11);
+    }
+
+    if (valor.length > 10) {
+        valor = valor.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+    } else if (valor.length > 5) {
+        valor = valor.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+    } else if (valor.length > 2) {
+        valor = valor.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+    } else if (valor.length > 0) {
+        valor = valor.replace(/^(\d{0,2})/, '($1');
+    }
+
+    input.value = valor;
+}
+
+// ==========================================
+// FORÇAR A PÁGINA A INICIAR SEMPRE NO TOPO
+// ==========================================
+
+// Desativa a restauração automática de rolagem do navegador ao atualizar
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
+// Garante que ao carregar a página o scroll vai direto para o topo (0, 0)
+window.addEventListener('load', function() {
+    window.scrollTo(0, 0);
+});
