@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // ==========================================
 // FUNÇÃO TOAST INTERNA DA PÁGINA DE VAGAS (Autónoma)
 // ==========================================
@@ -188,7 +187,6 @@ async function candidatarVaga(idVaga) {
         console.error('Erro de conexão:', erro);
         mostrarToast('Não foi possível conectar ao servidor.', 'erro');
     }
-=======
 // ==========================================
 // FUNÇÃO TOAST INTERNA DA PÁGINA DE VAGAS (Autónoma)
 // ==========================================
@@ -378,5 +376,4 @@ async function candidatarVaga(idVaga) {
         console.error('Erro de conexão:', erro);
         mostrarToast('Não foi possível conectar ao servidor.', 'erro');
     }
->>>>>>> 65d1f7c11b428b3fa8bd6ebe73a669b868ad94c7
 }
