@@ -37,14 +37,15 @@ html {
 }
 
 /* Estilização da imagem da logo dentro do cabeçalho */
-/* Estilização da imagem da logo dentro do cabeçalho */
 .logo img {
-    height: 40px;           /* Reduz ligeiramente para encaixar perfeitamente na barra */
-    max-width: 180px;       /* Garante uma largura máxima segura */
-    width: auto;            /* Mantém a proporção correta */
-    object-fit: contain;    /* Evita qualquer distorção da imagem */
-    display: block; 
-    image-rendering: -webkit-optimize-contrast;
+    /* 800×187 nativo: altura inteira e largura automática, sem segundo encolhimento */
+    height: 48px;
+    width: auto;
+    max-width: 220px;
+    object-fit: contain;
+    object-position: left center;
+    display: block;
+    image-rendering: auto;
 }
 
 /* Container que agrupa os links do menu de navegação */
@@ -654,4 +655,178 @@ html {
 .modal-overlay[style*="display: flex"],
 .modal-fundo[style*="display: flex"] {
     display: flex !important;
+}
+
+/* ========================================== */
+/* SISTEMA DE TOAST NOTIFICATIONS             */
+/* ========================================== */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.toast {
+    min-width: 280px;
+    max-width: 380px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    pointer-events: auto;
+    animation: slideInRight 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+}
+
+/* Toast de Erro (Vermelho Metroform) */
+.toast.erro {
+    background-color: var(--metroform-red);
+    border-left: 5px solid #5a0000;
+}
+
+/* Toast de Sucesso (Verde Elegante) */
+.toast.sucesso {
+    background-color: #2e7d32;
+    border-left: 5px solid #1b5e20;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+/* ========================================== */
+/* ESTILIZAÇÃO DO RODAPÉ (COM REDES SOCIAIS)  */
+/* ========================================== */
+.rodape-metroform {
+    background-color: #2b2b2b; /* Fundo cinza escuro profissional */
+    color: #ffffff;
+    padding: 25px 5%;
+    box-sizing: border-box;
+}
+
+.conteudo-rodape {
+    display: flex;
+    justify-content: space-between; /* Distribui os itens: esquerda, centro e direita */
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.rodape-textos {
+    text-align: center;
+    flex: 1;
+}
+
+.rodape-textos p {
+    margin: 4px 0;
+    font-size: 13px;
+    color: #cccccc;
+}
+
+.rodape-sociais-esquerda,
+.rodape-sociais-direita {
+    display: flex;
+    gap: 15px; /* Espaço entre os ícones */
+}
+
+.rodape-sociais-esquerda a,
+.rodape-sociais-direita a {
+    color: #ffffff;
+    font-size: 18px;
+    background: rgba(255, 255, 255, 0.08); /* Fundo subtil circular */
+    width: 38px;
+    height: 38px;
+    border-radius: 50%; /* Deixa os ícones em formato circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.rodape-sociais-esquerda a:hover,
+.rodape-sociais-direita a:hover {
+    background-color: #8B0000; /* Vermelho institucional da Metroform ao passar o rato */
+    color: #ffffff;
+    transform: translateY(-2px); /* Pequeno efeito de elevação */
+}
+
+/* Responsividade para ecrãs menores (telemóveis) */
+@media (max-width: 768px) {
+    .conteudo-rodape {
+        flex-direction: column;
+        text-align: center;
+    }
+    .rodape-sociais-esquerda,
+    .rodape-sociais-direita {
+        justify-content: center;
+    }
+}
+
+/* ========================================== */
+/* MELHORIAS VISUAIS PARA OS CARDS (CULTURA E DIFERENCIAIS) */
+/* ========================================== */
+
+.card-cultura, 
+.item-diferencial {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 35px 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eaeaea; /* Mantém apenas a bordinha cinza suave em toda a volta */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efeito de elevação ao passar o rato (Hover) */
+.card-cultura:hover, 
+.item-diferencial:hover {
+    transform: translateY(-6px); /* O card sobe levemente */
+    box-shadow: 0 10px 25px rgba(139, 0, 0, 0.1); /* Sombra ganha um brilho avermelhado subtil */
+}
+
+/* Estilização centralizada e destaque modernizado dos ícones */
+.card-cultura i, 
+.item-diferencial i {
+    font-size: 24px;
+    color: var(--metroform-red);
+    background-color: rgba(139, 0, 0, 0.08); /* Círculo de fundo suave ao redor do ícone */
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Torna o fundo do ícone perfeitamente circular */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Inversão elegante de cores do ícone ao passar o rato no card */
+.card-cultura:hover i, 
+.item-diferencial:hover i {
+    background-color: var(--metroform-red);
+    color: #ffffff;
 }
