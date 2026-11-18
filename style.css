@@ -1,8 +1,14 @@
+/* ========================================== */
 /* CONFIGURAÇÕES GERAIS E VARIÁVEIS DO SITE   */
+/* ========================================== */
 
 /* Torna a rolagem da página suave e animada ao clicar nos links de âncora do menu superior */
-html {
-    scroll-behavior: smooth;
+/* Evita transbordamento horizontal em dispositivos móveis */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 /* Seletor universal (*): Aplica as regras de reset para todos os elementos da página */
@@ -20,20 +26,24 @@ html {
     --metroform-gray: #f8f9fa;  /* Cor de fundo leve: Cinza claro neutro para destacar seções */
 }
 
-/* ESTILOS DO CABEÇALHO (HEADER) */
+/* ========================================== */
+/* ESTILOS DO CABEÇALHO (HEADER)              */
+/* ========================================== */
 
 /* Estilização da barra de cabeçalho superior fixa */
 .header-metroform {
     display: flex; /* Utiliza Flexbox para alinhar os itens horizontalmente */
     justify-content: space-between; /* Separa a logo à esquerda e os botões/links à direita */
     align-items: center; /* Centraliza os elementos verticalmente no cabeçalho */
-    padding: 30px 5%; /* Define o espaçamento interno superior/inferior e lateral (5%) */
+    padding: 20px 5%; /* Define o espaçamento interno superior/inferior e lateral (5%) */
     background-color: #ffffff; /* Fundo totalmente branco */
     box-shadow: 0 4px 12px rgba(0,0,0,0.06); /* Aplica uma sombra suave abaixo do cabeçalho */
     position: sticky; /* Mantém o cabeçalho fixo no topo conforme o usuário rola a página */
     top: 0; /* Posiciona colado no topo absoluto da tela */
     z-index: 1000; /* Garante que o cabeçalho fique sobreposto aos outros elementos da página */
     border-top: 4px solid var(--metroform-red); /* Detalhe visual de uma linha vermelha no topo da barra */
+    flex-wrap: wrap; /* Permite que os itens quebrem linha se o ecrã for muito pequeno */
+    gap: 15px;
 }
 
 /* Estilização da imagem da logo dentro do cabeçalho */
@@ -51,7 +61,8 @@ html {
 /* Container que agrupa os links do menu de navegação */
 .nav-links {
     display: flex; /* Alinha os links lado a lado */
-    gap: 40px; /* Define um espaçamento uniforme entre cada link */
+    gap: 30px; /* Define um espaçamento uniforme entre cada link */
+    flex-wrap: wrap;
 }
 
 /* Estilização visual dos links textuais do menu */
@@ -73,6 +84,7 @@ html {
     display: flex; /* Alinha os botões lado a lado */
     align-items: center; /* Centraliza os botões verticalmente */
     gap: 12px; /* Espaço de 12 pixels entre os botões */
+    flex-wrap: wrap;
 }
 
 /* Estilização base compartilhada entre botões e links de acesso no cabeçalho */
@@ -99,7 +111,9 @@ html {
     color: white; /* Torna o texto interno branco para contrastar */
 }
 
+/* ========================================== */
 /* SEÇÃO PRINCIPAL / BANNER DE DESTAQUE (HERO)*/
+/* ========================================== */
 
 /* Estilização do banner principal de destaque no topo da página */
 .secao-principal {
@@ -172,8 +186,8 @@ html {
 .vaga-destaque-card {
     background-color: #ffffff;
     border-radius: 8px;
-    padding: 25px;            /* Podes ajustar o padding interno se quiseres mais compacto */
-    max-width: 400px;         /* Reduzido de 650px para 500px para ficar mais compacto e elegante */
+    padding: 25px;            
+    max-width: 400px;         
     margin: 0 auto 30px auto; 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     border-top: 4px solid var(--metroform-red);
@@ -279,7 +293,7 @@ html {
 /* Container principal da grelha de vagas para limitar a largura e organizar em colunas */
 .grid-vagas {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Organiza os cards dinamicamente */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Organiza os cards dinamicamente adaptados ao telemóvel */
     gap: 25px;
     max-width: 1200px;
     margin: 30px auto;
@@ -298,6 +312,7 @@ html {
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
+    width: 100%;
 }
 
 /* Estilização do link para o banco geral de talentos */
@@ -341,17 +356,18 @@ html {
     font-weight: 700;
 }
 
-/* Grade Flexbox para organizar os 3 cartões de cultura lado a lado */
+/* Grade Flexbox para organizar os cartões de cultura */
 .grid-cultura {
     display: flex;
     justify-content: space-between; /* Distribui os espaços uniformemente entre os cards */
     gap: 30px; /* Espaço de 30px entre os cartões */
-    flex-wrap: nowrap; /* Impede que os cartões quebrem de linha em telas grandes */
+    flex-wrap: wrap; /* Permite que quebrem linha no telemóvel */
 }
 
 /* Estilização individual de cada cartão cultural */
 .card-cultura {
-    flex: 1; /* Faz com que os três cartões dividam o espaço de forma perfeitamente igual */
+    flex: 1; 
+    min-width: 280px; /* Garante tamanho ideal em ecrãs pequenos */
     background: #fafafa; /* Fundo cinza bem claro */
     padding: 35px 25px; /* Espaçamento interno do cartão */
     border-radius: 8px; /* Arredonda os cantos */
@@ -413,17 +429,18 @@ html {
     font-weight: 700;
 }
 
-/* Grade Flexbox para organizar os 3 itens de diferenciais lado a lado */
+/* Grade Flexbox para organizar os diferenciais */
 .grid-diferenciais {
     display: flex;
     justify-content: space-between;
     gap: 30px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap; /* Permite que quebrem linha no telemóvel */
 }
 
 /* Estilização individual de cada bloco de diferencial */
 .item-diferencial {
-    flex: 1; /* Divide o espaço igualmente em 3 partes */
+    flex: 1; 
+    min-width: 280px;
     background: white; /* Fundo branco em destaque sobre o cinza da seção */
     padding: 35px 25px;
     border-radius: 8px;
@@ -486,6 +503,7 @@ html {
 
 /* ========================================== */
 /* ESTILOS DOS MODAIS E FORMULÁRIOS           */
+/* ========================================== */
 
 /* Camada de fundo escuro translúcido para os modais flutuantes */
 .modal-overlay {
@@ -494,11 +512,12 @@ html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Fundo preto com 60% de opacidade (escuro e translúcido) */
-    display: none; /* Oculto por padrão (o JavaScript altera para flex ao abrir) */
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo preto com 60% de opacidade */
+    display: none; /* Oculto por padrão */
     justify-content: center; /* Centraliza a caixa branca horizontalmente */
     align-items: center; /* Centraliza a caixa branca verticalmente */
-    z-index: 3000; /* Garante que fique acima de todos os outros elementos do site */
+    z-index: 3000; /* Garante que fique acima de todos os outros elementos */
+    padding: 15px;
 }
 
 /* Caixa branca centralizada que abriga o conteúdo e formulários dos modais */
@@ -509,21 +528,21 @@ html {
     width: 100%;
     max-width: 400px; /* Limita a largura máxima da caixa modal */
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); /* Sombra marcante ao redor do modal */
-    border-top: 4px solid var(--metroform-red); /* Detalhe com a linha vermelha corporativa no topo da caixa */
+    border-top: 4px solid var(--metroform-red); /* Detalhe com a linha vermelha corporativa no topo */
     box-sizing: border-box;
-    position: relative; /* Necessário para posicionar o botão de fechar "X" em relação à caixa */
-    max-height: 80vh; /* Altura máxima restrita a 80% da tela para evitar estouro */
-    overflow-y: auto; /* Adiciona barra de rolagem interna caso o conteúdo seja muito longo */
+    position: relative; 
+    max-height: 80vh; /* Altura máxima restrita a 80% da tela */
+    overflow-y: auto; /* Adiciona barra de rolagem interna se necessário */
 }
 
 /* Botão de fechar ("X") posicionado no canto superior direito do modal */
 .modal-close {
-    position: absolute; /* Posicionamento absoluto em relação ao .modal-box */
+    position: absolute; 
     top: 15px;
     right: 15px;
-    background: transparent; /* Sem fundo */
-    border: none; /* Sem bordas */
-    font-size: 1.2rem; /* Tamanho grande para o símbolo "X" */
+    background: transparent; 
+    border: none; 
+    font-size: 1.2rem; 
     cursor: pointer;
     color: #666;
     font-weight: bold; 
@@ -549,10 +568,10 @@ html {
     margin: 0;
 }
 
-/* Container de botões que funcionam como abas de navegação (ex: Entrar vs Criar Conta) */
+/* Container de botões que funcionam como abas de navegação */
 .auth-tabs {
     display: flex;
-    background: #f1f3f5; /* Fundo cinza claro para destacar a barra de abas */
+    background: #f1f3f5; 
     padding: 4px;
     border-radius: 6px;
     margin-bottom: 20px;
@@ -560,7 +579,7 @@ html {
 
 /* Estilo base para os botões de cada aba */
 .auth-tab-btn {
-    flex: 1; /* Divide o espaço igualmente entre as abas */
+    flex: 1; 
     padding: 10px;
     border: none;
     background: transparent;
@@ -573,14 +592,14 @@ html {
 
 /* Estado visual aplicado quando a aba está selecionada e ativa */
 .auth-tab-btn.ativo {
-    background: white; /* Fundo branco para destacar a aba ativa */
-    color: var(--metroform-red); /* Texto na cor vermelha oficial */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra sutil na aba ativa */
+    background: white; 
+    color: var(--metroform-red); 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
 }
 
-/* Bloco que agrupa cada campo de entrada de formulário (label + input) */
+/* Bloco que agrupa cada campo de entrada de formulário */
 .grupo-input {
-    margin-bottom: 15px; /* Espaço inferior entre os campos */
+    margin-bottom: 15px; 
     text-align: left;
 }
 
@@ -593,28 +612,28 @@ html {
     color: #333;
 }
 
-/* Estilização dos campos de digitação (input type text, email, password) */
+/* Estilização dos campos de digitação */
 .grupo-input input {
-    width: 100%; /* Ocupa toda a largura disponível da caixa */
-    padding: 10px; /* Preenchimento interno confortável */
-    border: 1px solid #ccc; /* Borda cinza padrão */
+    width: 100%; 
+    padding: 10px; 
+    border: 1px solid #ccc; 
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 14px;
-    outline: none; /* Remove a linha de foco padrão feia do navegador */
+    outline: none; 
 }
 
 /* Efeito visual ao clicar e focar em um campo de input */
 .grupo-input input:focus {
-    border-color: var(--metroform-red); /* A borda muda para a cor vermelha da marca */
+    border-color: var(--metroform-red); 
 }
 
 /* Botão principal de envio dentro dos modais de autenticação */
 .btn-submit-auth {
-    width: 100%; /* Ocupa 100% da largura do formulário */
+    width: 100%; 
     padding: 12px;
-    background-color: var(--metroform-red); /* Fundo vermelho corporativo */
-    color: white; /* Texto branco */
+    background-color: var(--metroform-red); 
+    color: white; 
     border: none;
     border-radius: 4px;
     font-size: 16px;
@@ -625,12 +644,12 @@ html {
 
 /* Efeito ao passar o mouse sobre o botão de envio de autenticação */
 .btn-submit-auth:hover {
-    background-color: #6b0000; /* Vermelho mais escuro indicando interatividade */
+    background-color: #6b0000; 
 }
 
-/* Alinhamento para links auxiliares (ex: "Esqueceu sua senha?") */
+/* Alinhamento para links auxiliares */
 .acoes-extras {
-    text-align: right; /* Joga o link para o canto direito */
+    text-align: right; 
     margin-bottom: 20px;
 }
 
