@@ -849,3 +849,70 @@ html, body {
     background-color: var(--metroform-red);
     color: #ffffff;
 }
+
+/* ========================================== */
+/* RESPONSIVIDADE PARA TELEMÓVEIS (MOBILE)    */
+/* ========================================== */
+
+@media screen and (max-width: 768px) {
+    
+    /* 1. Ajusta o Cabeçalho para ficar compacto e centrado */
+    .header-metroform {
+        flex-direction: column;
+        padding: 15px 20px;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .nav-links {
+        justify-content: center;
+        gap: 15px;
+        font-size: 12px;
+    }
+
+    .acesso-buttons {
+        justify-content: center;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .acesso-buttons button, .acesso-buttons a {
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+
+    /* 2. Ajusta o Banner Principal (Hero) para mobile */
+    .secao-principal {
+        height: 70vh;
+        padding: 0 15px;
+    }
+
+    .conteudo-principal h1 {
+        font-size: 28px; /* Título menor para caber bem no telemóvel */
+    }
+
+    .conteudo-principal p {
+        font-size: 15px;
+        margin-bottom: 25px;
+    }
+
+    /* 3. Transforma a grelha de Cultura e Diferenciais em cartões mais compactos */
+    .grid-cultura,
+    .grid-diferenciais {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .card-cultura,
+    .item-diferencial {
+        padding: 25px 20px;
+        width: 100%;
+    }
+
+    /* 4. Ajusta os modais para ocuparem bem o ecrã do telemóvel sem cortar */
+    .modal-box {
+        max-width: 90%;
+        padding: 20px;
+        margin: 10px;
+    }
+}
