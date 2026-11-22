@@ -13,7 +13,7 @@
     <!-- Importação da biblioteca FontAwesome para utilização de ícones vetoriais -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Importação da folha de estilos global do projeto Metroform -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
     <!-- Importação da folha de estilos específica para a página de perfil -->
     <link rel="stylesheet" href="perfil.css">
 </head>
@@ -28,11 +28,13 @@
                 <img src="img/logo.jpg" alt="Logo Metroform" width="205" height="48">
             </a>
         </div>
-        
-        <!-- Botão localizado no topo para encerrar a sessão (logout) chamando a função correspondente -->
-        <button type="button" onclick="logout()" class="btn-sair-perfil">
-            <i class="fa-solid fa-right-from-bracket"></i> Sair da Conta
-        </button>
+
+        <!-- Ações de navegação no topo: botão intuitivo para voltar à página inicial -->
+        <div class="acesso-buttons">
+            <a href="index.html" class="btn-voltar-perfil">
+                <i class="fa-solid fa-arrow-left"></i> Voltar
+            </a>
+        </div>
     </header>
 
     <!-- Conteúdo principal estruturado dentro da classe container-perfil -->
@@ -100,6 +102,13 @@
                 <p class="carregando-candidaturas">A carregar candidaturas...</p>
             </div>
         </section>
+
+        <!-- Área final da página destinada ao encerramento da sessão -->
+        <div class="area-sair-perfil">
+            <button type="button" onclick="logout()" class="btn-sair-perfil">
+                <i class="fa-solid fa-right-from-bracket"></i> Sair da Conta
+            </button>
+        </div>
     </main>
 
     <!-- MODAL DE EDIÇÃO DE PERFIL (Oculto por padrão através da classe 'oculto') -->

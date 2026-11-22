@@ -70,8 +70,8 @@ function renderizarGridVagas(vagas, termoExibicao = '') {
 
         card.innerHTML = `
             <h3 class="vaga-titulo">${vaga.titulo}</h3>
-            <span class="setor">Setor: ${vaga.setor}</span>
-            <p class="local">📍 ${vaga.localizacao || "Guarulhos / SP"}</p>
+            <p class="setor"><strong>Setor:</strong> ${vaga.setor}</p>
+            <p class="local"><strong>Localização:</strong> ${vaga.localizacao || "Guarulhos / SP"}</p>
             <p class="requisitos"><strong>Requisitos:</strong> ${vaga.requisitos || ""}</p>
             <div class="vaga-acoes">
                  <button type="button" class="btn-candidatar" onclick="candidatarVaga(${idVagaReal})">Candidatar-se</button>

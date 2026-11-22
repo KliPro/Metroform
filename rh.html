@@ -8,7 +8,7 @@
     <!-- Importação de biblioteca externa de ícones (FontAwesome) para utilização de ícones vetoriais no painel -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Importação da folha de estilos global do projeto -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
     <!-- Importação da folha de estilos específica e dedicada ao painel de Recursos Humanos (RH) -->
     <link rel="stylesheet" href="rh.css">
 </head>
@@ -23,13 +23,13 @@
             </a>
         </div>
 
-        <!-- Área de identificação do perfil logado e botão de saída no topo direito -->
+        <!-- Área de identificação do perfil logado e botão de retorno no topo direito -->
         <div class="rh-perfil-topo">
             <span class="nome-gestor"></span>
-            <!-- Botão de logout que dispara a função JavaScript de encerramento da sessão administrativa -->
-            <button type="button" onclick="logoutGestor()" class="btn-sair">
-                <i class="fa-solid fa-right-from-bracket"></i> Sair
-            </button>
+            <!-- Botão para retornar à página inicial com facilidade -->
+            <a href="index.html" class="btn-voltar-gestor">
+                <i class="fa-solid fa-arrow-left"></i> Voltar
+            </a>
         </div>
     </header>
 
@@ -129,6 +129,14 @@
             <div id="lista-vagas-rh" style="padding: 15px;">
                 <!-- Preenchido automaticamente pelas funções de gestão do rh.js -->
             </div>
+        </div>
+
+        <!-- Área final do painel destinada ao encerramento da sessão administrativa -->
+        <div class="area-sair-gestor">
+            <!-- Botão de logout que dispara a função JavaScript de encerramento da sessão administrativa -->
+            <button type="button" onclick="logoutGestor()" class="btn-sair-gestor">
+                <i class="fa-solid fa-right-from-bracket"></i> Sair da Conta
+            </button>
         </div>
     
     </main>

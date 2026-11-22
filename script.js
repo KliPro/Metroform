@@ -304,7 +304,7 @@ async function carregarVagasNaHome() {
                 card.innerHTML = `
                     <h3 class="vaga-titulo">${vaga.titulo}</h3>
                     <p class="vaga-info"><strong>Setor:</strong> ${vaga.setor}</p>
-                    <p class="vaga-info">📍 ${vaga.localizacao || "Guarulhos / SP"}</p>
+                    <p class="vaga-info"><strong>Localização:</strong> ${vaga.localizacao || "Guarulhos / SP"}</p>
                     <p class="vaga-requisitos"><strong>Requisitos:</strong> ${vaga.requisitos || ""}</p>
                     <div class="vaga-acoes">
                      <button type="button" class="btn-candidatar" onclick="candidatarVaga(${vaga.id_vaga})">Candidatar-se</button>

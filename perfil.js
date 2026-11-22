@@ -155,15 +155,26 @@ async function carregarCandidaturas(idCandidato) {
             const cardItem = document.createElement('div');
             cardItem.className = 'item-candidatura'; // Adiciona a classe de estilo ao cartão
 
+            // Define o texto e a classe de cor do crachá conforme o status da candidatura
+            const statusTexto = String(item.status_candidatura || 'Em Análise').trim();
+            const statusNormalizado = statusTexto.toLowerCase();
+            let classeStatus = 'status-analise'; // Amarelo por padrão (Em Análise)
+
+            if (statusNormalizado === 'aprovado') {
+                classeStatus = 'status-aprovado'; // Verde
+            } else if (statusNormalizado === 'reprovado') {
+                classeStatus = 'status-reprovado'; // Vermelho
+            }
+
             // Injeta o conteúdo HTML estruturado com título da vaga, setor, localização, status e data
             cardItem.innerHTML = `
                 <div>
-                    <h4>${item.titulo}</h4>
-                    <span class="tag-setor">Setor: ${item.setor}</span>
-                    <p class="local-candidatura"><i class="fa-solid fa-location-dot" style="color: #7A0000;"></i> ${item.localizacao || 'Guarulhos / SP'}</p>
+                    <h4>${escaparHtml(item.titulo)}</h4>
+                    <span class="tag-setor">Setor: ${escaparHtml(item.setor)}</span>
+                    <p class="local-candidatura"><i class="fa-solid fa-location-dot" style="color: #7A0000;"></i> ${escaparHtml(item.localizacao || 'Guarulhos / SP')}</p>
                 </div>
                 <div style="text-align: right;">
-                    <span class="status-badge">${item.status_candidatura || 'Em Análise'}</span>
+                    <span class="status-badge ${classeStatus}">${escaparHtml(statusTexto)}</span>
                     <br><small class="data-candidatura">Data: ${item.data_candidatura ? new Date(item.data_candidatura).toLocaleDateString('pt-BR') : 'Recente'}</small>
                 </div>
             `;

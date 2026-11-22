@@ -186,23 +186,25 @@ html, body {
 .vaga-destaque-card {
     background-color: #ffffff;
     border-radius: 8px;
-    padding: 25px;            
-    max-width: 400px;         
-    margin: 0 auto 30px auto; 
+    padding: 22px;            
+    margin: 0; 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     border-top: 4px solid var(--metroform-red);
     display: flex;
     flex-direction: column;
-    gap: 12px; 
+    justify-content: flex-start;
+    gap: 10px; 
     box-sizing: border-box;
+    width: 100%;
 }
 
 /* Estilização do título da vaga em destaque */
 .vaga-destaque-card .vaga-titulo {
-    font-size: 22px;
+    font-size: 19px;
     font-weight: bold;
     color: var(--metroform-dark);
-    margin-bottom: 4px;
+    margin: 0 0 6px 0;
+    text-align: center;
 }
 
 /* Estilização das informações e requisitos do card de destaque */
@@ -211,13 +213,16 @@ html, body {
     font-size: 14px;
     color: #444444;
     line-height: 1.5;
+    margin: 0;
+    text-align: left;
 }
 
 /* Container para alinhar e centralizar o botão de candidatura no card */
 .vaga-acoes {
     display: flex;
     justify-content: center; /* Centraliza o botão perfeitamente no rodapé do card */
-    margin-top: 15px;
+    margin-top: auto;
+    padding-top: 12px;
 }
 
 /* Estilização do botão "Candidatar-se" exclusivo do destaque */
@@ -284,50 +289,106 @@ html, body {
     background-color: #6b0000;
 }
 
-/* Container centralizado para o link de envio de currículo espontâneo */
 .centro-banco-talentos {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 80px;
+    margin-bottom: 12px;
 }
 
 /* Container principal da grelha de vagas para limitar a largura e organizar em colunas */
 .grid-vagas {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Organiza os cards dinamicamente adaptados ao telemóvel */
-    gap: 25px;
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 colunas alinhadas no desktop */
+    gap: 20px;
     max-width: 1200px;
     margin: 30px auto;
     padding: 0 20px;
     width: 100%;
+    align-items: stretch;
+}
+
+@media (max-width: 960px) {
+    .grid-vagas {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .grid-vagas {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Estilização individual de cada card de vaga para que não estiquem */
 .grid-vagas > div {
     background: white;
-    padding: 25px;
+    padding: 22px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    border-left: 4px solid #8B0000;
+    border-top: 4px solid var(--metroform-red);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 10px;
     box-sizing: border-box;
     width: 100%;
 }
 
-/* Estilização do link para o banco geral de talentos */
-.link-banco {
-    color: var(--metroform-red); /* Cor vermelha oficial */
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 15px;
-    transition: color 0.3s;
+/* Centraliza o título da vaga no topo do card */
+.grid-vagas > div h3,
+.grid-vagas > div h4,
+.grid-vagas > div .vaga-titulo {
+    text-align: center;
+    margin: 0 0 6px 0;
 }
 
-/* Efeito ao passar o mouse sobre o link do banco de talentos */
+/* Mantém a fonte original e dá respiro entre as linhas dentro do card */
+.grid-vagas > div p,
+.grid-vagas > div .vaga-info,
+.grid-vagas > div .vaga-requisitos {
+    margin: 0;
+    line-height: 1.5;
+    text-align: left;
+}
+
+/* Garante o negrito nos rótulos (Setor, Localização, Requisitos) */
+.grid-vagas > div strong,
+.grid-vagas > div b {
+    font-weight: 700;
+}
+
+/* Mantém o botão alinhado na parte inferior do card */
+.grid-vagas > div .vaga-acoes,
+.grid-vagas > div button,
+.grid-vagas > div .btn-candidatar {
+    margin-top: auto;
+    padding-top: 12px;
+    align-self: center;
+}
+
+/* Estilização em formato de botão para o banco geral de talentos */
+.link-banco {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--metroform-red); /* Cor vermelha oficial */
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 11px 22px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.16);
+    transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+/* Efeito ao passar o mouse sobre o botão do banco de talentos */
 .link-banco:hover {
-    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
-    color: #6b0000; /* Tom de vermelho mais escuro */
+    background-color: #6b0000; /* Tom de vermelho mais escuro */
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(139, 0, 0, 0.24);
 }
 
 /* ========================================== */

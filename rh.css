@@ -21,7 +21,7 @@
 }
 
 .rh-perfil-topo {
-    /* Ativa o flexbox para alinhar o texto do gestor e o botão de sair em linha */
+    /* Ativa o flexbox para alinhar o texto do gestor e o botão de voltar em linha */
     display: flex;
     /* Alinha os itens verticalmente ao centro */
     align-items: center;
@@ -36,6 +36,78 @@
     color: #333;
     /* Define o tamanho da fonte para 14px */
     font-size: 14px;
+}
+
+/* Botão Voltar no topo do Painel RH */
+.btn-voltar-gestor {
+    /* Define fundo transparente e borda vermelha institucional para destacar a navegação de retorno */
+    background-color: transparent;
+    color: #8B0000;
+    border: 1px solid #8B0000;
+    /* Aplica espaçamento interno (8px vertical e 16px horizontal) */
+    padding: 8px 16px;
+    /* Arredonda as pontas do botão em 6px */
+    border-radius: 6px;
+    /* Remove o sublinhado padrão de links */
+    text-decoration: none;
+    /* Deixa o texto do botão em negrito */
+    font-weight: bold;
+    /* Define o tamanho da fonte para 13px */
+    font-size: 13px;
+    /* Adiciona transições suaves para cor de fundo e texto */
+    transition: background 0.2s, color 0.2s;
+    /* Exibe como flexbox em linha para alinhar o ícone e o texto perfeitamente */
+    display: inline-flex;
+    /* Alinha os itens internos ao centro */
+    align-items: center;
+    /* Define um espaçamento de 6px entre o ícone e o texto */
+    gap: 6px;
+}
+
+.btn-voltar-gestor:hover {
+    /* Preenche com vermelho institucional e texto branco ao passar o cursor */
+    background-color: #8B0000;
+    color: white;
+}
+
+/* Container do botão Sair no final do Painel RH, alinhado no canto direito */
+.area-sair-gestor {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+.btn-sair-gestor {
+    /* Define o fundo vermelho institucional para o botão de sair */
+    background-color: #8B0000;
+    /* Define a cor do texto como branco */
+    color: white;
+    /* Remove borda padrão */
+    border: none;
+    /* Aplica espaçamento interno (10px vertical e 20px horizontal) */
+    padding: 10px 20px;
+    /* Arredonda as pontas do botão em 6px */
+    border-radius: 6px;
+    /* Altera o cursor para o formato de ponteiro (clicável) */
+    cursor: pointer;
+    /* Deixa o texto do botão em negrito */
+    font-weight: bold;
+    /* Define o tamanho da fonte para 14px */
+    font-size: 14px;
+    /* Adiciona uma transição suave para efeitos de cor */
+    transition: background 0.2s;
+    /* Exibe como flexbox em linha para alinhar o ícone e o texto perfeitamente */
+    display: inline-flex;
+    /* Alinha os itens internos ao centro */
+    align-items: center;
+    /* Define um espaçamento de 8px entre o ícone e o texto */
+    gap: 8px;
+}
+
+.btn-sair-gestor:hover {
+    /* Altera a cor de fundo para um tom de vermelho mais escuro ao passar o cursor */
+    background-color: #6b0000;
 }
 
 .btn-sair {
