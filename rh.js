@@ -214,6 +214,7 @@ async function carregarCandidaturasRH() {
         }
 
         candidaturas.forEach(item => {
+            const idCandidaturaReal = item.id_candidatura || item.id;
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>${item.candidato_nome}</td>
@@ -221,13 +222,45 @@ async function carregarCandidaturasRH() {
                 <td>${item.vaga_setor}</td>
                 <td><span class="status-badge">${item.status_candidatura || 'Em Análise'}</span></td>
                 <td>
-                    <button onclick='abrirDetalhesCandidato(${JSON.stringify(item)})' class="btn-profissional" style="padding: 5px 10px; font-size: 12px;">Ver Detalhes</button>
+                    <div class="acoes-candidatura">
+                        <button type="button" onclick='abrirDetalhesCandidato(${JSON.stringify(item)})' class="btn-profissional" style="padding: 5px 10px; font-size: 12px;">Ver Detalhes</button>
+                        <button type="button" onclick="excluirCandidaturaRH(${idCandidaturaReal})" class="btn-excluir-tabela">
+                            <i class="fa-solid fa-trash"></i> Excluir
+                        </button>
+                    </div>
                 </td>
             `;
             tbody.appendChild(tr);
         });
     } catch (erro) {
         console.error('Erro ao carregar candidaturas do RH:', erro);
+    }
+}
+
+async function excluirCandidaturaRH(idCandidatura) {
+    if (!idCandidatura) return;
+
+    try {
+        const resposta = await fetch(`https://metroform.onrender.com/api/candidaturas/${idCandidatura}`, {
+            method: 'DELETE'
+        });
+
+        const resultado = await resposta.json();
+
+        if (resposta.ok) {
+            mostrarToast(resultado.mensagem || 'Candidatura excluída com sucesso!', 'sucesso');
+            if (candidaturaSelecionadaId === idCandidatura) {
+                fecharModal();
+                candidaturaSelecionadaId = null;
+            }
+            carregarCandidaturasRH();
+            carregarEstatisticasRH();
+        } else {
+            mostrarToast(resultado.erro || 'Erro ao excluir a candidatura.', 'erro');
+        }
+    } catch (erro) {
+        console.error('Erro de conexão ao excluir candidatura:', erro);
+        mostrarToast('Não foi possível conectar ao servidor para excluir a candidatura.', 'erro');
     }
 }
 

@@ -321,6 +321,33 @@ body.pagina-rh {
     font-weight: bold;
 }
 
+/* Alinhamento dos botões de ação na linha da candidatura */
+.acoes-candidatura {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-excluir-tabela {
+    background-color: #d9534f;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-excluir-tabela:hover {
+    background-color: #c9302c;
+}
+
 /* Botão de cadastrar vaga */
 .btn-nova-vaga {
     /* Define o fundo vermelho institucional para o botão */
