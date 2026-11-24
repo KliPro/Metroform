@@ -335,7 +335,6 @@ function abrirDetalhesCandidato(item) {
     document.getElementById('modal-formacao').textContent = item.candidato_formacao || 'Não informada';
     document.getElementById('modal-vaga').textContent = item.vaga_titulo || '---';
     document.getElementById('modal-setor').textContent = item.vaga_setor || '---';
-    document.getElementById('modal-match').textContent = '85%';
     document.getElementById('modal-resumo').textContent = item.candidato_resumo || 'Nenhum resumo informado.';
 
     const pdfContainer = document.getElementById('modal-pdf-container');
